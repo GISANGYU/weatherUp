@@ -1,4 +1,6 @@
-/* 날씨별 그라디언트 풀 — 아이템 id를 해시해서 결정론적으로 선택 */
+import CARD_PHOTOS from './cardPhotos';
+
+/* 날씨별 그라디언트 풀 — 사진 없을 때 폴백 */
 const GRADS = {
   sunny: [
     'linear-gradient(135deg, #FFD89B 0%, #F4623A 100%)',
@@ -52,8 +54,12 @@ const HEIGHTS = [200, 160, 240, 180, 220, 160, 200, 180, 240, 160];
 export function getCardVisuals(id = '', weatherMode = 'sunny') {
   const hash = id.split('').reduce((acc, c) => acc + c.charCodeAt(0), 0);
   const pool = GRADS[weatherMode] ?? GRADS.sunny;
+
+  // 사진이 있으면 사진 사용, 없으면 그라디언트 폴백
+  const grad = CARD_PHOTOS[id] ?? pool[hash % pool.length];
+
   return {
-    grad:  pool[hash % pool.length],
-    imgH:  HEIGHTS[hash % HEIGHTS.length],
+    grad,
+    imgH: HEIGHTS[hash % HEIGHTS.length],
   };
 }
