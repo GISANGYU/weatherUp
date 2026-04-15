@@ -33,7 +33,7 @@ function App() {
   }, [weatherMode]);
 
   return (
-    <Router>
+    <Router basename={process.env.PUBLIC_URL}>
       {/* 로딩 스크린 — 첫 진입 시 3초, Phase 2에서는 API 완료까지 */}
       {showLoader && <LoadingScreen visible={isLoading} />}
 
