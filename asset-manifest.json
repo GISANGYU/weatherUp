@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/weatherUp/static/css/main.8464d818.css",
+    "main.js": "/weatherUp/static/js/main.6d966c7b.js",
+    "static/js/453.18e1a2b4.chunk.js": "/weatherUp/static/js/453.18e1a2b4.chunk.js",
+    "index.html": "/weatherUp/index.html",
+    "main.8464d818.css.map": "/weatherUp/static/css/main.8464d818.css.map",
+    "main.6d966c7b.js.map": "/weatherUp/static/js/main.6d966c7b.js.map",
+    "453.18e1a2b4.chunk.js.map": "/weatherUp/static/js/453.18e1a2b4.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8464d818.css",
+    "static/js/main.6d966c7b.js"
+  ]
+}
