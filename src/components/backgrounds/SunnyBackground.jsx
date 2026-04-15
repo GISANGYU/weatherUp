@@ -3,8 +3,6 @@ import styles from './SunnyBackground.module.css';
 
 export default function SunnyBackground() {
   const canvasRef = useRef(null);
-  const mouseRef  = useRef({ x: -9999, y: -9999 });
-  const flaresRef = useRef([]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -16,95 +14,67 @@ export default function SunnyBackground() {
       canvas.height = window.innerHeight;
     };
     resize();
-
-    // Floating dust / pollen particles
-    const particles = Array.from({ length: 90 }, () => ({
-      x:       Math.random() * window.innerWidth,
-      y:       Math.random() * window.innerHeight,
-      r:       Math.random() * 2.2 + 0.5,
-      vx:      (Math.random() - 0.5) * 0.25,
-      vy:      -(Math.random() * 0.35 + 0.08),
-      opacity: Math.random() * 0.35 + 0.10,
-    }));
-
-    const onMouseMove = (e) => {
-      mouseRef.current = { x: e.clientX, y: e.clientY };
-    };
-    const onClick = (e) => {
-      // Create light burst on click
-      for (let i = 0; i < 3; i++) {
-        flaresRef.current.push({
-          x: e.clientX, y: e.clientY,
-          r: 0, maxR: 100 + Math.random() * 80,
-          opacity: 0.65,
-        });
-      }
-    };
-    window.addEventListener('mousemove', onMouseMove);
-    window.addEventListener('click', onClick);
     window.addEventListener('resize', resize);
 
+    // 빛 먼지 파티클 — 크기·속도·투명도 다양하게
+    const particles = Array.from({ length: 55 }, () => ({
+      x:       Math.random() * window.innerWidth,
+      y:       Math.random() * window.innerHeight,
+      r:       Math.random() * 1.8 + 0.3,
+      vx:      (Math.random() - 0.5) * 0.15,
+      vy:      -(Math.random() * 0.22 + 0.04),
+      opacity: Math.random() * 0.22 + 0.06,
+      phase:   Math.random() * Math.PI * 2, // 반짝임 위상
+    }));
+
+    // 부드러운 보케 원 (흐릿하고 큰)
+    const bokeh = Array.from({ length: 6 }, () => ({
+      x:    Math.random() * window.innerWidth,
+      y:    Math.random() * window.innerHeight,
+      r:    Math.random() * 40 + 20,
+      vy:   -(Math.random() * 0.08 + 0.02),
+      opacity: Math.random() * 0.06 + 0.02,
+    }));
+
+    let tick = 0;
+
     function animate() {
+      tick++;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      const { x: mx, y: my } = mouseRef.current;
+      // 보케
+      bokeh.forEach(b => {
+        b.y += b.vy;
+        if (b.y + b.r < -10) { b.y = canvas.height + b.r; b.x = Math.random() * canvas.width; }
+        const grad = ctx.createRadialGradient(b.x, b.y, 0, b.x, b.y, b.r);
+        grad.addColorStop(0, `rgba(255, 220, 100, ${b.opacity})`);
+        grad.addColorStop(1, 'transparent');
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
+        ctx.fill();
+      });
 
-      // Cursor lens-flare glow (follows mouse)
-      if (mx > 0) {
-        const lg = ctx.createRadialGradient(mx, my, 0, mx, my, 180);
-        lg.addColorStop(0, 'rgba(255, 225, 80, 0.13)');
-        lg.addColorStop(1, 'transparent');
-        ctx.fillStyle = lg;
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-      }
-
-      // Floating particles
+      // 먼지 파티클
       particles.forEach(p => {
-        const dx   = mx - p.x;
-        const dy   = my - p.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-
-        if (dist < 200) {
-          const pull = (200 - dist) / 200;
-          p.vx += (dx / dist) * pull * 0.007;
-          p.vy += (dy / dist) * pull * 0.007;
-        }
-
-        p.vx *= 0.98;
-        p.vy  = p.vy * 0.98 - 0.004;
         p.x  += p.vx;
         p.y  += p.vy;
+        if (p.y < -6)              { p.y = canvas.height + 6; p.x = Math.random() * canvas.width; }
+        if (p.x < -6)              { p.x = canvas.width + 6; }
+        if (p.x > canvas.width + 6){ p.x = -6; }
 
-        if (p.y < -10)                   { p.y = canvas.height + 10; p.x = Math.random() * canvas.width; }
-        if (p.x < -10)                   { p.x = canvas.width + 10; }
-        if (p.x > canvas.width + 10)     { p.x = -10; }
-        if (p.y > canvas.height + 10)    { p.y = -10; }
+        // 위상별 반짝임
+        const twinkle = 0.6 + 0.4 * Math.sin(tick * 0.018 + p.phase);
+        const alpha   = p.opacity * twinkle;
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle    = `rgba(255, 195, 60, ${p.opacity})`;
-        ctx.shadowColor  = 'rgba(255, 160, 0, 0.55)';
-        ctx.shadowBlur   = 5;
+        ctx.fillStyle   = `rgba(255, 210, 80, ${alpha})`;
+        ctx.shadowColor = `rgba(255, 180, 0, ${alpha * 0.5})`;
+        ctx.shadowBlur  = 4;
         ctx.fill();
-        ctx.shadowBlur   = 0;
+        ctx.shadowBlur  = 0;
       });
-
-      // Click burst flares
-      const flares = flaresRef.current;
-      for (let i = flares.length - 1; i >= 0; i--) {
-        const f = flares[i];
-        f.r       += 6;
-        f.opacity -= 0.028;
-        if (f.opacity <= 0) { flares.splice(i, 1); continue; }
-        const fg = ctx.createRadialGradient(f.x, f.y, 0, f.x, f.y, f.r);
-        fg.addColorStop(0, `rgba(255, 220, 80, ${f.opacity})`);
-        fg.addColorStop(0.4, `rgba(255, 180, 0, ${f.opacity * 0.4})`);
-        fg.addColorStop(1, 'transparent');
-        ctx.fillStyle = fg;
-        ctx.beginPath();
-        ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
-        ctx.fill();
-      }
 
       animId = requestAnimationFrame(animate);
     }
@@ -113,8 +83,6 @@ export default function SunnyBackground() {
 
     return () => {
       cancelAnimationFrame(animId);
-      window.removeEventListener('mousemove', onMouseMove);
-      window.removeEventListener('click', onClick);
       window.removeEventListener('resize', resize);
     };
   }, []);
@@ -123,6 +91,7 @@ export default function SunnyBackground() {
     <div className={styles.wrapper}>
       <div className={styles.sunOrb} />
       <div className={styles.sunRays} />
+      <div className={styles.glowLeft} />
       <div className={styles.haze} />
       <canvas ref={canvasRef} className={styles.canvas} />
     </div>

@@ -1,82 +1,105 @@
+/* ── 배경 전체 래퍼 ── */
 .wrapper {
   position: fixed;
   inset: 0;
-  background: linear-gradient(175deg, #EEF6FF 0%, #FFF9E8 55%, #FFF0CC 100%);
+  background: linear-gradient(
+    160deg,
+    #D4EEFF 0%,
+    #EAF5F0 30%,
+    #FFF8EC 65%,
+    #FFF0CC 100%
+  );
   overflow: hidden;
   pointer-events: none;
 }
 
-/* Sun disk */
+/* ── 태양 — 우상단 모서리에 걸쳐 있는 부드러운 빛덩어리 ── */
 .sunOrb {
   position: absolute;
-  top: -130px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 320px;
-  height: 320px;
+  top: -180px;
+  right: -120px;
+  width: 480px;
+  height: 480px;
   border-radius: 50%;
-  background: radial-gradient(circle at 40% 40%, #FFE566 0%, #FFB800 45%, rgba(255, 160, 0, 0) 72%);
-  filter: blur(3px);
-  box-shadow:
-    0 0 60px rgba(255, 184, 0, 0.50),
-    0 0 140px rgba(255, 184, 0, 0.22),
-    0 0 260px rgba(255, 184, 0, 0.10);
-  animation: sunPulse 5s ease-in-out infinite;
+  background: radial-gradient(
+    circle at 38% 38%,
+    rgba(255, 250, 180, 1)    0%,
+    rgba(255, 215,  60, 0.85) 28%,
+    rgba(255, 170,   0, 0.40) 52%,
+    rgba(255, 140,   0, 0.10) 68%,
+    transparent               80%
+  );
+  filter: blur(10px);
+  animation: sunPulse 7s ease-in-out infinite;
 }
 
 @keyframes sunPulse {
-  0%, 100% { transform: translateX(-50%) scale(1); filter: blur(3px) brightness(1); }
-  50%       { transform: translateX(-50%) scale(1.04); filter: blur(2px) brightness(1.08); }
+  0%, 100% { transform: scale(1);    filter: blur(10px) brightness(1);    }
+  50%       { transform: scale(1.05); filter: blur(8px)  brightness(1.10); }
 }
 
-/* Rotating rays */
+/* ── 햇살 — 고정 대각선 빛줄기 (회전 없음) ── */
 .sunRays {
   position: absolute;
-  top: -210px;
-  left: 50%;
-  width: 960px;
-  height: 960px;
-  transform: translateX(-50%);
-  background: conic-gradient(
-    rgba(255, 200, 50, 0.20) 0deg   10deg,  transparent 10deg   28deg,
-    rgba(255, 200, 50, 0.14) 28deg  38deg,  transparent 38deg   55deg,
-    rgba(255, 200, 50, 0.18) 55deg  65deg,  transparent 65deg   82deg,
-    rgba(255, 200, 50, 0.16) 82deg  92deg,  transparent 92deg  110deg,
-    rgba(255, 200, 50, 0.20) 110deg 120deg, transparent 120deg 138deg,
-    rgba(255, 200, 50, 0.14) 138deg 148deg, transparent 148deg 165deg,
-    rgba(255, 200, 50, 0.18) 165deg 175deg, transparent 175deg 192deg,
-    rgba(255, 200, 50, 0.16) 192deg 202deg, transparent 202deg 220deg,
-    rgba(255, 200, 50, 0.20) 220deg 230deg, transparent 230deg 248deg,
-    rgba(255, 200, 50, 0.14) 248deg 258deg, transparent 258deg 275deg,
-    rgba(255, 200, 50, 0.18) 275deg 285deg, transparent 285deg 302deg,
-    rgba(255, 200, 50, 0.16) 302deg 312deg, transparent 312deg 330deg,
-    rgba(255, 200, 50, 0.20) 330deg 340deg, transparent 340deg 360deg
-  );
-  border-radius: 50%;
-  animation: rotateSun 22s linear infinite;
+  inset: 0;
+  /* 우상단에서 뻗어나오는 서로 다른 각도의 빛줄기 3개 */
+  background:
+    linear-gradient(205deg, rgba(255, 230, 90, 0.14) 0%, transparent 42%),
+    linear-gradient(222deg, rgba(255, 210, 50, 0.09) 0%, transparent 50%),
+    linear-gradient(190deg, rgba(255, 245, 130, 0.08) 0%, transparent 38%);
+  animation: rayBreath 10s ease-in-out infinite;
 }
 
-@keyframes rotateSun {
-  from { transform: translateX(-50%) rotate(0deg); }
-  to   { transform: translateX(-50%) rotate(360deg); }
+@keyframes rayBreath {
+  0%, 100% { opacity: 0.75; }
+  40%       { opacity: 1; }
+  70%       { opacity: 0.85; }
 }
 
-/* Heat haze at bottom */
+/* ── 공기감 — 화면 중앙에 떠도는 따뜻한 헤이즈 ── */
 .haze {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  height: 120px;
-  background: linear-gradient(to top, rgba(255, 200, 80, 0.10), transparent);
-  animation: haze 3.5s ease-in-out infinite;
+  height: 220px;
+  background: linear-gradient(
+    to top,
+    rgba(255, 195, 60, 0.10) 0%,
+    rgba(255, 220, 100, 0.04) 55%,
+    transparent 100%
+  );
+  animation: hazeBreath 6s ease-in-out infinite;
 }
 
-@keyframes haze {
-  0%, 100% { opacity: 0.6; transform: scaleY(1); }
-  50%       { opacity: 1;   transform: scaleY(1.1); }
+@keyframes hazeBreath {
+  0%, 100% { opacity: 0.65; }
+  50%       { opacity: 1; }
 }
 
+/* ── 보조 글로우 — 화면 왼쪽 하단 반사광 ── */
+.glowLeft {
+  position: absolute;
+  bottom: -80px;
+  left: -60px;
+  width: 360px;
+  height: 360px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 220, 100, 0.10) 0%,
+    transparent 65%
+  );
+  animation: glowFloat 11s ease-in-out infinite;
+}
+
+@keyframes glowFloat {
+  0%, 100% { transform: translate(0, 0);        opacity: 0.7; }
+  33%       { transform: translate(18px, -14px); opacity: 1;   }
+  66%       { transform: translate(-10px, -8px); opacity: 0.8; }
+}
+
+/* ── 캔버스 (파티클) ── */
 .canvas {
   position: absolute;
   inset: 0;
