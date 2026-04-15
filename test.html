@@ -1,0 +1,632 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather Mode 기획서</title>
+    <style>
+      :root {
+        --bg: #f5f7fb;
+        --paper: #ffffff;
+        --line: #d9dfeb;
+        --text: #1f2a44;
+        --sub: #5f6b85;
+        --accent: #4a7cff;
+        --accent-soft: #eef4ff;
+        --shadow: 0 12px 40px rgba(28, 39, 71, 0.08);
+        --radius: 20px;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family:
+          'Pretendard', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+        background: linear-gradient(180deg, #eef3fb 0%, #f7f9fc 100%);
+        color: var(--text);
+        line-height: 1.7;
+        padding: 40px 20px 80px;
+      }
+
+      .wrap {
+        max-width: 1100px;
+        margin: 0 auto;
+      }
+
+      .hero {
+        background: linear-gradient(135deg, #4a7cff 0%, #82b1ff 100%);
+        color: #fff;
+        border-radius: 28px;
+        padding: 44px;
+        box-shadow: var(--shadow);
+        margin-bottom: 24px;
+      }
+
+      .hero .eyebrow {
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        opacity: 0.88;
+        margin-bottom: 10px;
+      }
+
+      .hero h1 {
+        font-size: clamp(32px, 5vw, 52px);
+        line-height: 1.12;
+        margin-bottom: 14px;
+      }
+
+      .hero p {
+        font-size: 17px;
+        max-width: 780px;
+        opacity: 0.95;
+      }
+
+      .quote {
+        margin-top: 22px;
+        display: inline-block;
+        padding: 12px 18px;
+        background: rgba(255, 255, 255, 0.16);
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        border-radius: 999px;
+        font-weight: 600;
+        backdrop-filter: blur(8px);
+      }
+
+      .grid {
+        display: grid;
+        gap: 20px;
+      }
+
+      .grid.two {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .card {
+        background: var(--paper);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        padding: 28px;
+        box-shadow: var(--shadow);
+      }
+
+      .section {
+        margin-top: 20px;
+      }
+
+      h2 {
+        font-size: 28px;
+        margin-bottom: 18px;
+      }
+
+      h3 {
+        font-size: 20px;
+        margin-bottom: 10px;
+      }
+
+      h4 {
+        font-size: 17px;
+        margin-bottom: 8px;
+      }
+
+      p + p,
+      ul + p,
+      p + ul,
+      table + p {
+        margin-top: 10px;
+      }
+
+      .sub {
+        color: var(--sub);
+      }
+
+      .pill-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 14px;
+      }
+
+      .pill {
+        padding: 8px 14px;
+        border-radius: 999px;
+        background: var(--accent-soft);
+        color: var(--accent);
+        font-weight: 700;
+        font-size: 14px;
+        border: 1px solid #d9e7ff;
+      }
+
+      .number-list {
+        display: grid;
+        gap: 14px;
+        margin-top: 10px;
+      }
+
+      .number-item {
+        display: flex;
+        gap: 14px;
+        align-items: flex-start;
+        padding: 16px 18px;
+        border-radius: 16px;
+        background: #fafcff;
+        border: 1px solid #e7edf7;
+      }
+
+      .number {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: var(--accent);
+        color: #fff;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        flex-shrink: 0;
+        margin-top: 2px;
+      }
+
+      ul {
+        padding-left: 18px;
+      }
+
+      li + li {
+        margin-top: 6px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 12px;
+        overflow: hidden;
+        border-radius: 16px;
+      }
+
+      th,
+      td {
+        border: 1px solid var(--line);
+        padding: 14px 16px;
+        text-align: left;
+        vertical-align: top;
+      }
+
+      th {
+        background: #f3f7ff;
+        font-weight: 700;
+      }
+
+      .highlight {
+        background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+        border: 1px solid #dce8ff;
+      }
+
+      .site-map,
+      .component-tree,
+      .code-block {
+        background: #0f172a;
+        color: #dbe6ff;
+        border-radius: 18px;
+        padding: 20px;
+        overflow-x: auto;
+        font-family: 'SFMono-Regular', Consolas, Menlo, monospace;
+        font-size: 14px;
+        line-height: 1.7;
+        margin-top: 12px;
+      }
+
+      .footer-note {
+        margin-top: 24px;
+        padding: 22px;
+        border-radius: 18px;
+        background: #1f2a44;
+        color: #fff;
+        font-size: 16px;
+        font-weight: 600;
+        box-shadow: var(--shadow);
+      }
+
+      .small {
+        font-size: 14px;
+      }
+
+      @media (max-width: 900px) {
+        .grid.two {
+          grid-template-columns: 1fr;
+        }
+
+        .hero {
+          padding: 32px 24px;
+        }
+
+        .card {
+          padding: 22px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="hero">
+        <div class="eyebrow">FINAL PROJECT PLAN</div>
+        <h1>Weather Mode</h1>
+        <p>
+          날씨 데이터를 기반으로 웹사이트의 테마와 패션, 음식, 액티비티 추천이
+          함께 변화하는 라이프스타일 큐레이션 웹 서비스
+        </p>
+        <div class="quote">
+          “날씨를 UI 모드로 활용해 하루의 라이프스타일을 큐레이션하는 인터랙티브
+          웹 서비스”
+        </div>
+      </header>
+
+      <section class="grid two">
+        <article class="card highlight">
+          <h2>1. 프로젝트 개요</h2>
+          <h3>프로젝트명</h3>
+          <p><strong>Weather Mode</strong></p>
+          <h3>한 줄 소개</h3>
+          <p>
+            사용자의 지역과 선택한 날짜의 날씨 데이터를 기반으로 웹사이트의
+            테마와 패션, 음식, 액티비티 추천 콘텐츠가 함께 변화하는 라이프스타일
+            큐레이션 서비스
+          </p>
+        </article>
+
+        <article class="card">
+          <h2>2. 프로젝트 목적</h2>
+          <p>
+            기존 날씨 서비스는 주로 기온과 날씨 상태를 전달하는 데 집중되어
+            있다. 하지만 실제 사용자의 하루는 날씨에 따라 옷차림, 식사, 활동
+            방식까지 크게 달라진다.
+          </p>
+          <p>
+            본 프로젝트는 날씨를 단순 정보가 아니라
+            <strong>사용자의 하루를 구성하는 기준 데이터</strong>로 활용하여, 더
+            실질적인 라이프스타일 큐레이션 경험을 제공하는 것을 목표로 한다.
+          </p>
+        </article>
+      </section>
+
+      <section class="section card">
+        <h2>3. 기획 의도</h2>
+        <div class="grid two">
+          <div>
+            <h3>문제 정의</h3>
+            <ul>
+              <li>기존 날씨 앱은 정보 제공 중심으로 끝나는 경우가 많다.</li>
+              <li>날씨와 실제 행동 선택 사이의 연결이 약하다.</li>
+              <li>
+                사용자는 날씨를 본 뒤 다시 별도로 옷, 음식, 활동을 고민해야
+                한다.
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3>해결 방향</h3>
+            <ul>
+              <li>날씨를 기준으로 하루를 제안하는 구조 설계</li>
+              <li>정보 제공을 넘어 행동과 감성까지 연결</li>
+              <li>UI 자체를 날씨 기반으로 변화시키는 시스템 도입</li>
+            </ul>
+          </div>
+        </div>
+        <div class="pill-row">
+          <span class="pill">Weather-based Theme Switching</span>
+          <span class="pill">Lifestyle Curation</span>
+          <span class="pill">Interactive UI</span>
+          <span class="pill">API-driven Content</span>
+          <span class="pill">Component-based Design</span>
+        </div>
+      </section>
+
+      <section class="section card">
+        <h2>4. 핵심 컨셉</h2>
+        <h3>서비스 개념</h3>
+        <p>
+          사용자가 상단의 7일 예보 중 특정 날짜를 선택하면, 해당 날짜의 날씨
+          상태에 따라 웹사이트 전체의 시각적 테마와 라이프스타일 추천 콘텐츠가
+          동시에 변화한다.
+        </p>
+        <div class="number-list">
+          <div class="number-item">
+            <div class="number">1</div>
+            <div>
+              <h4>날씨 데이터 수집</h4>
+              <p class="sub">
+                현재 위치 또는 검색한 지역을 기준으로 날씨 데이터를 불러온다.
+              </p>
+            </div>
+          </div>
+          <div class="number-item">
+            <div class="number">2</div>
+            <div>
+              <h4>날짜 선택</h4>
+              <p class="sub">사용자가 일주일 예보 중 원하는 날짜를 선택한다.</p>
+            </div>
+          </div>
+          <div class="number-item">
+            <div class="number">3</div>
+            <div>
+              <h4>테마 전환</h4>
+              <p class="sub">
+                맑음, 흐림, 비, 눈 등 날씨 상태를 기준으로 웹사이트의 모드가
+                바뀐다.
+              </p>
+            </div>
+          </div>
+          <div class="number-item">
+            <div class="number">4</div>
+            <div>
+              <h4>콘텐츠 큐레이션</h4>
+              <p class="sub">
+                패션, 음식, 액티비티 섹션이 해당 날씨에 맞게 갱신된다.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="grid two section">
+        <article class="card">
+          <h2>5. 주요 기능</h2>
+          <h3>0. 오늘의 날씨</h3>
+          <ul>
+            <li>사용자 위치 기반 현재 지역 날씨 표시</li>
+            <li>위치 허용이 어려운 경우 지역 검색 기능 제공</li>
+            <li>7일 예보 버튼 제공</li>
+            <li>날짜 선택 시 전체 섹션 동기화</li>
+          </ul>
+
+          <h3 style="margin-top: 18px">1. 패션 섹션</h3>
+          <ul>
+            <li>오늘 뭐 입을지 제안하는 한 줄 문구</li>
+            <li>추천 스타일 키워드 및 준비물 표시</li>
+            <li>우산, 아우터, 선글라스 등 상황형 배지 제공</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h2 style="opacity: 0; height: 0; margin: 0">기능 계속</h2>
+          <h3>2. 음식 섹션</h3>
+          <ul>
+            <li>날씨와 지역을 함께 고려한 음식 추천</li>
+            <li>현재 위치 또는 검색 지역 기준 맛집 리스트 제공</li>
+            <li>비 오는 날 파전, 추운 날 국물요리 등 직관적 큐레이션</li>
+          </ul>
+
+          <h3 style="margin-top: 18px">3. 액티비티 섹션</h3>
+          <ul>
+            <li>실내/실외 활동 제안</li>
+            <li>날씨에 따른 콘텐츠 및 장소 추천</li>
+            <li>한 줄 감성 카피를 통한 경험 강화</li>
+          </ul>
+        </article>
+      </section>
+
+      <section class="section card">
+        <h2>6. 페이지 구성</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>페이지</th>
+              <th>주요 내용</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Home</strong></td>
+              <td>오늘의 날씨, 7일 예보, 패션/음식/액티비티 프리뷰 카드</td>
+            </tr>
+            <tr>
+              <td><strong>OOTD</strong></td>
+              <td>날씨 기반 스타일 추천, 준비물, 코디 카드 리스트</td>
+            </tr>
+            <tr>
+              <td><strong>Food</strong></td>
+              <td>지역 검색, 현재 위치 기반 맛집 추천, 음식 키워드 큐레이션</td>
+            </tr>
+            <tr>
+              <td><strong>Activity</strong></td>
+              <td>실내/실외 활동 추천, 활동 카드, 오늘의 제안 메시지</td>
+            </tr>
+            <tr>
+              <td><strong>About</strong></td>
+              <td>프로젝트 소개, 사용 API, 사용 라이브러리, 기술 흐름 설명</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="section card">
+        <h2>7. 헤더 및 내비게이션 구조</h2>
+        <ul>
+          <li><strong>로고</strong> : 메인 페이지 이동</li>
+          <li><strong>Food</strong> : 음식 추천 페이지 이동</li>
+          <li><strong>OOTD</strong> : 패션 추천 페이지 이동</li>
+          <li><strong>Activity</strong> : 액티비티 추천 페이지 이동</li>
+          <li><strong>햄버거 메뉴</strong> : About 페이지 포함</li>
+        </ul>
+      </section>
+
+      <section class="section card">
+        <h2>8. 날씨 모드 시스템</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>날씨 상태</th>
+              <th>UI 특징</th>
+              <th>콘텐츠 분위기</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>맑음</td>
+              <td>하늘색, 밝은 카드, 가벼운 그림자</td>
+              <td>산뜻하고 활기찬 제안</td>
+            </tr>
+            <tr>
+              <td>흐림</td>
+              <td>저채도 회색, 차분한 대비</td>
+              <td>편안하고 안정적인 제안</td>
+            </tr>
+            <tr>
+              <td>비</td>
+              <td>짙은 블루/그레이, blur, glassmorphism</td>
+              <td>실내 중심, 따뜻한 음식, 우산 준비</td>
+            </tr>
+            <tr>
+              <td>눈</td>
+              <td>화이트/연블루, 소프트 glow</td>
+              <td>포근하고 겨울 감성 중심</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="section card">
+        <h2>9. 사용자 경험 흐름</h2>
+        <div class="number-list">
+          <div class="number-item">
+            <div class="number">1</div>
+            <div>웹사이트 접속</div>
+          </div>
+          <div class="number-item">
+            <div class="number">2</div>
+            <div>현재 위치 허용 또는 지역 검색</div>
+          </div>
+          <div class="number-item">
+            <div class="number">3</div>
+            <div>날씨 데이터 로드 및 기본 날짜 선택</div>
+          </div>
+          <div class="number-item">
+            <div class="number">4</div>
+            <div>7일 예보 중 특정 날짜 클릭</div>
+          </div>
+          <div class="number-item">
+            <div class="number">5</div>
+            <div>날씨에 따라 테마 및 각 섹션 콘텐츠 변화</div>
+          </div>
+          <div class="number-item">
+            <div class="number">6</div>
+            <div>원하는 섹션 클릭 후 서브페이지에서 자세한 정보 확인</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section card">
+        <h2>10. 정보 구조(IA)</h2>
+        <div class="site-map">
+          Home ├─ Weather Section ├─ Weekly Forecast Tabs ├─ OOTD Preview ├─
+          Food Preview └─ Activity Preview OOTD ├─ Weather Summary ├─ Style
+          Keywords ├─ Outfit Cards └─ Prep Items Food ├─ Current Location Button
+          ├─ Region Search ├─ Food Keywords └─ Restaurant Cards Activity ├─
+          Activity Banner ├─ Indoor / Outdoor Filter └─ Activity Cards About ├─
+          Project Intro ├─ API List ├─ Library List └─ Tech Flow
+        </div>
+      </section>
+
+      <section class="section card">
+        <h2>11. 컴포넌트 구조</h2>
+        <div class="component-tree">
+          App ├─ Layout │ ├─ Header │ ├─ HamburgerMenu │ └─ Footer ├─ HomePage │
+          ├─ WeatherHero │ ├─ WeeklyWeatherTabs │ ├─ ThemeBackground │ ├─
+          SectionPreviewCard(OOTD) │ ├─ SectionPreviewCard(Food) │ └─
+          SectionPreviewCard(Activity) ├─ OOTDPage │ ├─ PageWeatherSummary │ ├─
+          StyleKeywordTags │ ├─ OutfitCardList │ └─ PrepItemBadges ├─ FoodPage │
+          ├─ LocationControls │ ├─ FoodMoodBanner │ ├─ RestaurantCardList │ └─
+          RegionSearchBar ├─ ActivityPage │ ├─ ActivityBanner │ ├─
+          ActivityFilter │ └─ ActivityCardList └─ AboutPage ├─ ProjectIntro ├─
+          ApiList ├─ LibraryList └─ TechFlow
+        </div>
+      </section>
+
+      <section class="grid two section">
+        <article class="card">
+          <h2>12. 기술 설계</h2>
+          <h3>Frontend</h3>
+          <ul>
+            <li>React</li>
+            <li>React Router</li>
+            <li>CSS Modules 또는 Styled Components</li>
+          </ul>
+
+          <h3 style="margin-top: 16px">API</h3>
+          <ul>
+            <li>날씨 API</li>
+            <li>지도/장소 API</li>
+            <li>위치 기반 검색 API</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h2>13. 라이브러리</h2>
+          <ul>
+            <li>Axios 또는 fetch</li>
+            <li>Motion / Framer Motion</li>
+            <li>React Icons</li>
+            <li>Zustand 또는 Context API</li>
+            <li>Masonry 레이아웃 라이브러리</li>
+          </ul>
+        </article>
+      </section>
+
+      <section class="section card">
+        <h2>14. 데이터 구조 예시</h2>
+        <div class="code-block">
+          { weather: "rainy", fashion: { message: "비 소식이 있으니 우산과
+          가벼운 아우터를 챙겨보세요.", keywords: ["우산", "방수 자켓",
+          "긴바지"] }, food: { message: "비 오는 날엔 따뜻하고 바삭한 음식이 잘
+          어울려요.", keywords: ["파전", "칼국수", "국밥"] }, activity: {
+          message: "오늘은 실내에서 보내는 차분한 시간이 잘 어울리는 날이에요.",
+          keywords: ["카페", "영화관", "전시"] } }
+        </div>
+      </section>
+
+      <section class="grid two section">
+        <article class="card">
+          <h2>15. 차별성</h2>
+          <ul>
+            <li>단순 날씨 정보 제공이 아닌 행동 기반 추천 제공</li>
+            <li>날씨에 따라 UI 자체가 변하는 테마 시스템</li>
+            <li>패션, 음식, 액티비티를 통합한 라이프스타일 큐레이션</li>
+            <li>컴포넌트 중심 구조로 확장성 확보</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h2>16. 기대 효과</h2>
+          <ul>
+            <li>데이터 기반 UI 설계 경험 확보</li>
+            <li>API 연동 능력과 컴포넌트 설계 능력 강화</li>
+            <li>사용자 중심 UX 기획 능력 증명</li>
+            <li>시각적 전환과 정보 구조를 동시에 보여주는 결과물 제작</li>
+          </ul>
+        </article>
+      </section>
+
+      <section class="section card highlight">
+        <h2>17. 결론</h2>
+        <p>
+          Weather Mode는 날씨를 단순한 정보가 아니라 사용자의 하루를 구성하는
+          핵심 기준으로 바라보는 웹 서비스이다. 사용자는 날씨를 확인하는 데서
+          끝나지 않고, 그날의 스타일, 음식, 활동까지 한 번에 제안받을 수 있다.
+        </p>
+        <p>
+          이를 통해 본 프로젝트는
+          <strong>날씨 정보 + 시각적 테마 전환 + 라이프스타일 큐레이션</strong
+          >을 결합한 경험 중심 인터페이스를 구현하고자 한다.
+        </p>
+      </section>
+
+      <div class="footer-note">
+        교수 발표용 핵심 문장: 날씨를 UI 모드로 활용해 하루의 라이프스타일을
+        큐레이션하는 인터랙티브 웹 서비스입니다.
+      </div>
+    </div>
+  </body>
+</html>

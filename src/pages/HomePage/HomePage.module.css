@@ -1,0 +1,534 @@
+/* ══ HERO ═══════════════════════════════════════════════ */
+.hero {
+  min-height: 82vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--sp-xl) var(--sp-lg);
+}
+
+.heroInner {
+  max-width: 680px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-md);
+}
+
+.heroEyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.heroTitle {
+  font-size: clamp(32px, 6vw, 60px);
+  font-weight: 900;
+  color: var(--text);
+  letter-spacing: -1.5px;
+  line-height: 1.1;
+  animation: fadeUp 0.7s ease both;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.heroSub {
+  font-size: clamp(15px, 2vw, 18px);
+  color: var(--text-muted);
+  line-height: 1.7;
+  animation: fadeUp 0.7s 0.14s ease both;
+}
+
+.heroSelector {
+  margin-top: var(--sp-sm);
+}
+
+/* ══ SECTIONS WRAPPER ═══════════════════════════════════ */
+.sections {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--sp-lg) var(--sp-2xl);
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+}
+
+/* ── Section header ── */
+.sectionHead {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.sectionEye {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 5px;
+}
+
+.sectionTitle {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.6px;
+}
+
+.seeAll {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
+  transition: letter-spacing var(--transition);
+  white-space: nowrap;
+  margin-bottom: 2px;
+}
+.seeAll:hover { letter-spacing: 0.4px; }
+
+/* ══ SECTION 1 — 에디토리얼 코디 ════════════════════════ */
+.editGrid {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 20px;
+  height: 500px;
+}
+
+/* 메인 피처드 카드 */
+.editMain {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.editMainImg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+  transition: transform 0.55s ease;
+}
+.editMain:hover .editMainImg { transform: scale(1.03); }
+
+.editBgEmoji {
+  position: absolute;
+  font-size: 200px;
+  opacity: 0.18;
+  filter: blur(4px);
+  bottom: 30px;
+  right: -20px;
+  line-height: 1;
+  transform: rotate(-15deg);
+  pointer-events: none;
+  user-select: none;
+}
+
+.editShimmer {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.18) 0%, transparent 55%);
+  pointer-events: none;
+}
+
+.editOverlay {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 32px 28px 26px;
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.75) 0%,
+    rgba(0,0,0,0.35) 55%,
+    transparent 100%
+  );
+  color: #fff;
+  z-index: 1;
+}
+:global(body.theme-rainy) .editOverlay {
+  background: linear-gradient(to top, rgba(10,20,35,0.88) 0%, rgba(10,20,35,0.25) 65%, transparent 100%);
+}
+
+.editMainTitle {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  margin-bottom: 6px;
+  color: #fff;
+  line-height: 1.25;
+}
+
+.editMainDesc {
+  font-size: 13px;
+  color: rgba(255,255,255,0.82);
+  line-height: 1.55;
+  margin-bottom: 12px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.editMainKws {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.editMainKws span {
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.70);
+}
+
+.editTopBadge {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.22);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.35);
+  color: #fff;
+  letter-spacing: 0.3px;
+  z-index: 2;
+}
+
+/* 사이드 카드 스택 */
+.editSide {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.editSideCard {
+  flex: 1;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--transition), box-shadow var(--transition);
+  cursor: pointer;
+  box-shadow: var(--shadow-accent);
+  min-height: 0;
+}
+.editSideCard:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+}
+:global(body.theme-rainy) .editSideCard {
+  background: var(--card-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.10);
+}
+:global(body.theme-snowy) .editSideCard {
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 20px rgba(168,200,255,0.26), inset 0 1px 0 rgba(255,255,255,0.70);
+}
+
+.editSideImg {
+  height: 130px;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+  transition: filter var(--transition);
+}
+.editSideCard:hover .editSideImg { filter: brightness(1.06); }
+
+.sideEmoji {
+  position: absolute;
+  font-size: 70px;
+  opacity: 0.20;
+  filter: blur(1.5px);
+  bottom: -10px;
+  right: -6px;
+  transform: rotate(-10deg);
+  line-height: 1;
+  pointer-events: none;
+}
+
+.sideEmojiBadge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 18px;
+  background: rgba(255,255,255,0.22);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.38);
+  border-radius: var(--radius-sm);
+  padding: 5px 7px;
+  line-height: 1;
+  z-index: 1;
+}
+
+.editSideBody {
+  padding: 14px 16px 16px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.editSideTitle {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.2px;
+  line-height: 1.3;
+}
+
+.editSideDesc {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.55;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.editSideKws {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 4px;
+}
+.editSideKws span { font-size: 11px; color: var(--accent); font-weight: 500; }
+
+/* ══ SECTION 2 — 음식 4열 ════════════════════════════════ */
+.foodRow {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.foodCard {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: transform var(--transition), box-shadow var(--transition);
+  box-shadow: var(--shadow-accent);
+  cursor: pointer;
+}
+.foodCard:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); }
+
+:global(body.theme-rainy) .foodCard {
+  background: var(--card-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.10);
+}
+:global(body.theme-snowy) .foodCard {
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 20px rgba(168,200,255,0.26), inset 0 1px 0 rgba(255,255,255,0.70);
+}
+
+.foodImg {
+  height: 196px;
+  position: relative;
+  overflow: hidden;
+  transition: filter var(--transition);
+}
+.foodCard:hover .foodImg { filter: brightness(1.06); }
+
+.foodBgEmoji {
+  position: absolute;
+  font-size: 90px;
+  opacity: 0.22;
+  filter: blur(2px);
+  bottom: -12px;
+  right: -8px;
+  transform: rotate(-12deg);
+  line-height: 1;
+  pointer-events: none;
+}
+
+.foodEmojiBadge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  font-size: 20px;
+  background: rgba(255,255,255,0.22);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.38);
+  border-radius: var(--radius-sm);
+  padding: 6px 8px;
+  line-height: 1;
+  z-index: 1;
+}
+
+.foodBody {
+  padding: 14px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.foodTitle {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.2px;
+  display: block;
+}
+
+.foodMeta {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.foodBadge {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--badge-text);
+  background: var(--badge-bg);
+  padding: 2px 8px;
+  border-radius: 999px;
+  align-self: flex-start;
+  margin-top: 4px;
+  border: 1px solid var(--card-border);
+}
+
+/* ══ SECTION 3 — 액티비티 2열 ═══════════════════════════ */
+.actRow {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.actCard {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: transform var(--transition), box-shadow var(--transition);
+  box-shadow: var(--shadow-accent);
+  cursor: pointer;
+}
+.actCard:hover { transform: translateY(-6px); box-shadow: var(--shadow-hover); }
+
+:global(body.theme-rainy) .actCard {
+  background: var(--card-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.10);
+}
+:global(body.theme-snowy) .actCard {
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 20px rgba(168,200,255,0.26), inset 0 1px 0 rgba(255,255,255,0.70);
+}
+
+.actImg {
+  height: 260px;
+  position: relative;
+  overflow: hidden;
+  transition: filter var(--transition);
+}
+.actCard:hover .actImg { filter: brightness(1.05); }
+
+.actBgEmoji {
+  position: absolute;
+  font-size: 130px;
+  opacity: 0.20;
+  filter: blur(2px);
+  bottom: -22px;
+  right: -12px;
+  transform: rotate(-10deg);
+  line-height: 1;
+  pointer-events: none;
+}
+
+.actEmojiBadge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  font-size: 24px;
+  background: rgba(255,255,255,0.22);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.38);
+  border-radius: var(--radius-md);
+  padding: 8px 12px;
+  line-height: 1;
+  z-index: 1;
+}
+
+.actBody {
+  padding: 22px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.actTitle {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.4px;
+}
+
+.actDesc {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+.actTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.actTag {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: var(--badge-bg);
+  color: var(--badge-text);
+  border: 1px solid var(--card-border);
+}
+
+.actKws {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.actKws span { font-size: 12px; color: var(--accent); font-weight: 500; }
+
+/* ══ RESPONSIVE ══════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .editGrid {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+  .editMain  { height: 400px; }
+  .editSide  { flex-direction: row; }
+  .editSideImg { height: 110px; }
+}
+
+@media (max-width: 768px) {
+  .foodRow { grid-template-columns: repeat(2, 1fr); }
+  .actRow  { grid-template-columns: 1fr; }
+  .editSide { flex-direction: column; }
+}
+
+@media (max-width: 480px) {
+  .foodRow { grid-template-columns: 1fr; }
+  .sections { gap: 56px; padding: 0 var(--sp-md) var(--sp-xl); }
+}

@@ -1,0 +1,95 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: transform var(--transition), box-shadow var(--transition);
+  box-shadow: var(--shadow-accent);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-hover);
+}
+
+/* Rainy — glass */
+:global(body.theme-rainy) .card {
+  background: var(--card-bg);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.10);
+}
+:global(body.theme-rainy) .card:hover {
+  box-shadow: 0 16px 48px rgba(0,0,0,0.50), inset 0 1px 0 rgba(255,255,255,0.15);
+}
+
+/* Snowy — soft glass */
+:global(body.theme-snowy) .card {
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 24px rgba(168,200,255,0.25), inset 0 1px 0 #fff;
+}
+
+.top {
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent-soft);
+  position: relative;
+  overflow: hidden;
+}
+
+.top::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--accent-soft), transparent);
+}
+
+.emoji {
+  font-size: 64px;
+  line-height: 1;
+  z-index: 1;
+  filter: drop-shadow(0 6px 14px rgba(0,0,0,0.22));
+  transition: transform var(--transition);
+}
+
+.card:hover .emoji {
+  transform: scale(1.12) translateY(-4px);
+}
+
+.body {
+  padding: var(--sp-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-sm);
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.3px;
+}
+
+.sub {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+.cta {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
+  margin-top: var(--sp-sm);
+  transition: letter-spacing var(--transition);
+}
+
+.card:hover .cta {
+  letter-spacing: 0.5px;
+}

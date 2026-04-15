@@ -1,0 +1,110 @@
+.hero {
+  padding: var(--sp-xl) 0 var(--sp-lg);
+  text-align: center;
+}
+
+.title {
+  font-size: clamp(32px, 5vw, 52px);
+  font-weight: 900;
+  color: var(--text);
+  letter-spacing: -1.2px;
+  margin-bottom: var(--sp-md);
+}
+
+.sub {
+  font-size: 18px;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.section {
+  margin-bottom: var(--sp-xl);
+}
+
+.sectionTitle {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.4px;
+  margin-bottom: var(--sp-md);
+  padding-bottom: var(--sp-sm);
+  border-bottom: 1px solid var(--divider);
+}
+
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-lg);
+  font-size: 15px;
+  color: var(--text-muted);
+  line-height: 1.7;
+  box-shadow: var(--shadow-accent);
+}
+
+:global(body.theme-rainy) .card {
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.techGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-sm);
+}
+
+.tech {
+  padding: 8px 18px;
+  background: var(--accent-soft);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.themeGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--sp-md);
+}
+
+.themeCard {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-sm);
+  box-shadow: var(--shadow-accent);
+}
+
+:global(body.theme-rainy) .themeCard {
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.themeIcon {
+  font-size: 36px;
+  line-height: 1;
+}
+
+.themeCard strong {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.themeCard p {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+@media (max-width: 900px) {
+  .themeGrid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .themeGrid { grid-template-columns: 1fr; }
+}

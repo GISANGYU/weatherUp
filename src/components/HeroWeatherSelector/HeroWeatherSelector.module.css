@@ -1,0 +1,126 @@
+/* ══ 전체 래퍼 (pill 컨테이너) ══════════════════════════ */
+.wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  background: rgba(255, 255, 255, 0.13);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.30);
+  border-radius: 999px;
+  padding: 5px;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.40);
+  animation: fadeUp 0.7s 0.26s ease both;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+
+/* ══ 슬라이딩 인디케이터 ══════════════════════════════ */
+.slider {
+  position: absolute;
+  top: 5px;
+  bottom: 5px;
+  left: 0;                     /* transform으로 이동 */
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow:
+    0 2px 16px rgba(0, 0, 0, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.60);
+  pointer-events: none;
+  z-index: 0;
+  transition:
+    transform 0.42s cubic-bezier(0.34, 1.45, 0.64, 1),
+    width     0.42s cubic-bezier(0.34, 1.45, 0.64, 1);
+}
+
+/* 테마별 슬라이더 색상 */
+:global(body.theme-sunny)  .slider { background: rgba(255, 220, 120, 0.55); }
+:global(body.theme-cloudy) .slider { background: rgba(180, 200, 230, 0.45); }
+:global(body.theme-rainy)  .slider { background: rgba(100, 170, 255, 0.38); }
+:global(body.theme-snowy)  .slider { background: rgba(220, 240, 255, 0.55); }
+
+/* ══ 버튼 ══════════════════════════════════════════════ */
+.btn {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 26px;
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.72);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.28s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn:hover {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.btn.active {
+  color: var(--text);
+  font-weight: 700;
+}
+
+/* ══ 아이콘 ═══════════════════════════════════════════ */
+.icon {
+  font-size: 22px;
+  display: inline-block;
+  line-height: 1;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.22));
+  transition: transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.btn:hover .icon {
+  transform: translateY(-2px) scale(1.10);
+}
+
+/* active 시 key animation (iconActive 클래스로 분리) */
+.iconActive {
+  animation: iconBounce 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  transform: translateY(-2px) scale(1.14);
+}
+
+@keyframes iconBounce {
+  0%   { transform: scale(1)    translateY(0);    }
+  40%  { transform: scale(1.30) translateY(-6px); }
+  70%  { transform: scale(0.94) translateY(-1px); }
+  100% { transform: scale(1.14) translateY(-2px); }
+}
+
+/* ══ 레이블 ═══════════════════════════════════════════ */
+.label {
+  font-size: 14px;
+  letter-spacing: -0.1px;
+}
+
+/* ══ 테마별 active 텍스트 색상 ═══════════════════════ */
+:global(body.theme-sunny)  .btn.active { color: #8B4513; }
+:global(body.theme-cloudy) .btn.active { color: #2C3E50; }
+:global(body.theme-rainy)  .btn.active { color: #0D324D; }
+:global(body.theme-snowy)  .btn.active { color: #3A4A6B; }
+
+/* ══ 반응형 ═══════════════════════════════════════════ */
+@media (max-width: 560px) {
+  .btn    { padding: 12px 18px; gap: 6px; }
+  .label  { display: none; }
+  .icon   { font-size: 20px; }
+}
+
+@media (max-width: 380px) {
+  .btn  { padding: 11px 14px; }
+}

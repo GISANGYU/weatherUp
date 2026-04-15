@@ -1,0 +1,85 @@
+.wrapper {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(175deg, #EEF6FF 0%, #FFF9E8 55%, #FFF0CC 100%);
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* Sun disk */
+.sunOrb {
+  position: absolute;
+  top: -130px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 40%, #FFE566 0%, #FFB800 45%, rgba(255, 160, 0, 0) 72%);
+  filter: blur(3px);
+  box-shadow:
+    0 0 60px rgba(255, 184, 0, 0.50),
+    0 0 140px rgba(255, 184, 0, 0.22),
+    0 0 260px rgba(255, 184, 0, 0.10);
+  animation: sunPulse 5s ease-in-out infinite;
+}
+
+@keyframes sunPulse {
+  0%, 100% { transform: translateX(-50%) scale(1); filter: blur(3px) brightness(1); }
+  50%       { transform: translateX(-50%) scale(1.04); filter: blur(2px) brightness(1.08); }
+}
+
+/* Rotating rays */
+.sunRays {
+  position: absolute;
+  top: -210px;
+  left: 50%;
+  width: 960px;
+  height: 960px;
+  transform: translateX(-50%);
+  background: conic-gradient(
+    rgba(255, 200, 50, 0.20) 0deg   10deg,  transparent 10deg   28deg,
+    rgba(255, 200, 50, 0.14) 28deg  38deg,  transparent 38deg   55deg,
+    rgba(255, 200, 50, 0.18) 55deg  65deg,  transparent 65deg   82deg,
+    rgba(255, 200, 50, 0.16) 82deg  92deg,  transparent 92deg  110deg,
+    rgba(255, 200, 50, 0.20) 110deg 120deg, transparent 120deg 138deg,
+    rgba(255, 200, 50, 0.14) 138deg 148deg, transparent 148deg 165deg,
+    rgba(255, 200, 50, 0.18) 165deg 175deg, transparent 175deg 192deg,
+    rgba(255, 200, 50, 0.16) 192deg 202deg, transparent 202deg 220deg,
+    rgba(255, 200, 50, 0.20) 220deg 230deg, transparent 230deg 248deg,
+    rgba(255, 200, 50, 0.14) 248deg 258deg, transparent 258deg 275deg,
+    rgba(255, 200, 50, 0.18) 275deg 285deg, transparent 285deg 302deg,
+    rgba(255, 200, 50, 0.16) 302deg 312deg, transparent 312deg 330deg,
+    rgba(255, 200, 50, 0.20) 330deg 340deg, transparent 340deg 360deg
+  );
+  border-radius: 50%;
+  animation: rotateSun 22s linear infinite;
+}
+
+@keyframes rotateSun {
+  from { transform: translateX(-50%) rotate(0deg); }
+  to   { transform: translateX(-50%) rotate(360deg); }
+}
+
+/* Heat haze at bottom */
+.haze {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  background: linear-gradient(to top, rgba(255, 200, 80, 0.10), transparent);
+  animation: haze 3.5s ease-in-out infinite;
+}
+
+@keyframes haze {
+  0%, 100% { opacity: 0.6; transform: scaleY(1); }
+  50%       { opacity: 1;   transform: scaleY(1.1); }
+}
+
+.canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}

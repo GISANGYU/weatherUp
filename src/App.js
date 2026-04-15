@@ -1,24 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+import WeatherBackground from './components/backgrounds/WeatherBackground';
+import Header            from './components/Header';
+import HomePage          from './pages/HomePage';
+import OOTDPage          from './pages/OOTDPage';
+import FoodPage          from './pages/FoodPage';
+import ActivityPage      from './pages/ActivityPage';
+import AboutPage         from './pages/AboutPage';
+
+const THEMES = ['theme-sunny', 'theme-cloudy', 'theme-rainy', 'theme-snowy'];
 
 function App() {
+  const [weatherMode, setWeatherMode] = useState('sunny');
+
+  useEffect(() => {
+    document.body.classList.remove(...THEMES);
+    document.body.classList.add(`theme-${weatherMode}`);
+  }, [weatherMode]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      {/* Fixed background behind everything */}
+      <WeatherBackground weatherMode={weatherMode} />
+
+      {/* Sticky header */}
+      <Header weatherMode={weatherMode} setWeatherMode={setWeatherMode} />
+
+      {/* Scrollable content */}
+      <main className="main-content">
+        <Routes>
+          <Route path="/"         element={<HomePage     weatherMode={weatherMode} setWeatherMode={setWeatherMode} />} />
+          <Route path="/ootd"     element={<OOTDPage     weatherMode={weatherMode} />} />
+          <Route path="/food"     element={<FoodPage     weatherMode={weatherMode} />} />
+          <Route path="/activity" element={<ActivityPage weatherMode={weatherMode} />} />
+          <Route path="/about"    element={<AboutPage    weatherMode={weatherMode} />} />
+        </Routes>
+      </main>
+    </Router>
   );
 }
 
