@@ -4,7 +4,6 @@ import AboutPanel from '../AboutPanel';
 import styles from './Header.module.css';
 
 const NAV = [
-  { to: '/',         label: 'Home'     },
   { to: '/ootd',     label: 'OOTD'     },
   { to: '/food',     label: 'Food'     },
   { to: '/activity', label: 'Activity' },
