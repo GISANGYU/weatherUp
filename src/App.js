@@ -55,7 +55,7 @@ function App() {
         </Routes>
       </main>
 
-      <Footer weatherMode={weatherMode} setWeatherMode={setWeatherMode} />
+      <Footer />
     </Router>
   );
 }
