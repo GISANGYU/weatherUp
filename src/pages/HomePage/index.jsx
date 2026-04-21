@@ -84,7 +84,7 @@ function HomePage({ weatherMode, setWeatherMode }) {
         <section className={styles.section}>
           <div className={styles.sectionHead}>
             <div className={styles.sectionLabel}>Cuisine</div>
-            <h2 className={styles.sectionTitle}>오늘의 맛</h2>
+            <h2 className={styles.sectionTitle}>오늘의 음식</h2>
             <Link to="/food" className={styles.seeAll}>전체보기 →</Link>
           </div>
 
