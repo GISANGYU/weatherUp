@@ -1,0 +1,110 @@
+.wrap {
+  padding: var(--sp-xl) var(--sp-lg);
+  max-width: 1200px;
+  margin: 0 auto var(--sp-xl);
+}
+
+.header {
+  margin-bottom: var(--sp-lg);
+}
+
+.eyebrow {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: var(--sp-xs);
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* ── 스와치 행 ── */
+.swatches {
+  display: flex;
+  gap: var(--sp-md);
+  flex-wrap: wrap;
+}
+
+.swatch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--sp-sm) var(--sp-md);
+  border-radius: var(--radius-md);
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.swatch:hover {
+  transform: translateY(-4px);
+  background: var(--card-bg);
+}
+
+.circle {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  display: block;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.swatch:hover .circle {
+  transform: scale(1.08);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.colorName {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text);
+  text-align: center;
+}
+
+.hex {
+  font-size: 0.7rem;
+  color: var(--text-sub);
+  font-family: 'Courier New', monospace;
+  letter-spacing: 0.04em;
+}
+
+/* ── 복사 토스트 ── */
+.toast {
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--text);
+  color: var(--bg);
+  padding: 10px 20px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  z-index: 9999;
+  animation: toastIn 0.25s ease;
+  white-space: nowrap;
+}
+
+@keyframes toastIn {
+  from { opacity: 0; transform: translateX(-50%) translateY(10px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+/* ── 반응형 ── */
+@media (max-width: 560px) {
+  .swatches {
+    gap: var(--sp-sm);
+  }
+  .circle {
+    width: 48px;
+    height: 48px;
+  }
+}

@@ -1,20 +1,26 @@
 import { Link } from 'react-router-dom';
-import weatherData           from '../../data/weatherData';
-import { getCardVisuals }    from '../../data/cardVisuals';
-import HeroWeatherSelector   from '../../components/HeroWeatherSelector';
+import weatherData         from '../../data/weatherData';
+import { getCardVisuals }  from '../../data/cardVisuals';
+import HeroWeatherSelector from '../../components/HeroWeatherSelector';
+import MusicSection        from '../../components/MusicSection';
+import WeatherIcon         from '../../components/WeatherIcon';
 import styles from './HomePage.module.css';
 
 function HomePage({ weatherMode, setWeatherMode }) {
-  const { messages, ootd, food, activity } = weatherData[weatherMode];
+  const { messages, ootd, food, activity, music } = weatherData[weatherMode];
 
   return (
     <div>
+
       {/* ══ HERO ══════════════════════════════════════════ */}
       <section className={styles.hero}>
         <div className={styles.heroInner}>
-          <p className={styles.heroEyebrow}>오늘의 날씨</p>
+          <p className={styles.heroEyebrow}>Today's Weather</p>
+          <div className={`${styles.heroIcon} ${styles[`heroIcon_${weatherMode}`]}`}>
+            <WeatherIcon mode={weatherMode} size={96} />
+          </div>
           <h1 className={styles.heroTitle}>{messages.home.title}</h1>
-          <p  className={styles.heroSub}>{messages.home.subtitle}</p>
+          <p className={styles.heroSub}>{messages.home.subtitle}</p>
           <HeroWeatherSelector
             weatherMode={weatherMode}
             setWeatherMode={setWeatherMode}
@@ -22,148 +28,130 @@ function HomePage({ weatherMode, setWeatherMode }) {
         </div>
       </section>
 
-      {/* ══ CONTENT SECTIONS ══════════════════════════════ */}
+      {/* ══ SECTIONS ══════════════════════════════════════ */}
       <div className={styles.sections}>
 
-        {/* ── Section 1: 오늘의 코디 ── */}
+        {/* ── OOTD ── */}
         <section className={styles.section}>
           <div className={styles.sectionHead}>
-            <div>
-              <p className={styles.sectionEye}>Style</p>
-              <h2 className={styles.sectionTitle}>오늘의 코디</h2>
-            </div>
-            <Link to="/ootd" className={styles.seeAll}>전체보기 →</Link>
+            <div className={styles.sectionLabel}>Style</div>
+            <h2 className={styles.sectionTitle}>오늘의 코디</h2>
           </div>
 
-          <div className={styles.editGrid}>
-            {/* 피처드 메인 카드 */}
-            <div className={styles.editMain}>
-              <div
-                className={styles.editMainImg}
-                style={{ background: getCardVisuals(ootd[0].id, weatherMode).grad }}
-              >
-                <span className={styles.editBgEmoji}>{ootd[0].emoji}</span>
-                <div className={styles.editShimmer} />
-              </div>
-              <div className={styles.editOverlay}>
-                <h3 className={styles.editMainTitle}>{ootd[0].title}</h3>
-                <p  className={styles.editMainDesc}>{ootd[0].desc}</p>
-                <div className={styles.editMainKws}>
-                  {ootd[0].keywords.map(kw => (
-                    <span key={kw}>#{kw}</span>
-                  ))}
-                </div>
-              </div>
-              {ootd[0].badges?.[0] && (
-                <span className={styles.editTopBadge}>{ootd[0].badges[0]}</span>
-              )}
-            </div>
+          <div className={styles.ootdGrid}>
+            {/* 피처드 카드 */}
+            {(() => {
+              const item = ootd[0];
+              const { grad } = getCardVisuals(item.id, weatherMode);
+              return (
+                <Link to="/ootd" className={styles.featuredCard} style={{ background: grad }}>
+                  <div className={styles.featuredOverlay}>
+                    <span className={styles.featuredEye}>Featured Look</span>
+                    <h3 className={styles.featuredTitle}>{item.title}</h3>
+                    <p className={styles.featuredDesc}>{item.desc}</p>
+                    <div className={styles.featuredKws}>
+                      {item.keywords.slice(0, 3).map(kw => (
+                        <span key={kw} className={styles.featuredKw}>{kw}</span>
+                      ))}
+                    </div>
+                  </div>
+                </Link>
+              );
+            })()}
 
-            {/* 사이드 카드 2장 */}
-            <div className={styles.editSide}>
-              {ootd.slice(1, 3).map(item => {
+            {/* 서브 카드 3장 */}
+            <div className={styles.ootdSubs}>
+              {ootd.slice(1, 4).map(item => {
                 const { grad } = getCardVisuals(item.id, weatherMode);
                 return (
-                  <div key={item.id} className={styles.editSideCard}>
-                    <div className={styles.editSideImg} style={{ background: grad }}>
-                      <span className={styles.sideEmoji}>{item.emoji}</span>
-                      <div className={styles.editShimmer} />
-                      <span className={styles.sideEmojiBadge}>{item.emoji}</span>
-                    </div>
-                    <div className={styles.editSideBody}>
-                      <h4 className={styles.editSideTitle}>{item.title}</h4>
-                      <p  className={styles.editSideDesc}>{item.desc}</p>
-                      <div className={styles.editSideKws}>
-                        {item.keywords.slice(0, 3).map(kw => (
-                          <span key={kw}>#{kw}</span>
+                  <Link key={item.id} to="/ootd" className={styles.subCard} style={{ background: grad }}>
+                    <div className={styles.subOverlay}>
+                      <span className={styles.subTitle}>{item.title}</span>
+                      <div className={styles.subKws}>
+                        {item.keywords.slice(0, 2).map(kw => (
+                          <span key={kw}>{kw}</span>
                         ))}
                       </div>
                     </div>
-                  </div>
+                  </Link>
                 );
               })}
             </div>
           </div>
         </section>
 
-        {/* ── Section 2: 오늘의 맛 ── */}
+        {/* ── FOOD ── */}
         <section className={styles.section}>
           <div className={styles.sectionHead}>
-            <div>
-              <p className={styles.sectionEye}>Cuisine</p>
-              <h2 className={styles.sectionTitle}>오늘의 맛</h2>
-            </div>
+            <div className={styles.sectionLabel}>Cuisine</div>
+            <h2 className={styles.sectionTitle}>오늘의 맛</h2>
             <Link to="/food" className={styles.seeAll}>전체보기 →</Link>
           </div>
 
-          <div className={styles.foodRow}>
+          <div className={styles.foodGrid}>
             {food.slice(0, 4).map(item => {
               const { grad } = getCardVisuals(item.id, weatherMode);
+              const bg = item.imageUrl
+                ? `url(${item.imageUrl}) center/cover no-repeat`
+                : grad;
               return (
-                <div key={item.id} className={styles.foodCard}>
-                  <div className={styles.foodImg} style={{ background: grad }}>
-                    <span className={styles.foodBgEmoji}>{item.emoji}</span>
-                    <div className={styles.editShimmer} />
-                    <span className={styles.foodEmojiBadge}>{item.emoji}</span>
-                  </div>
-                  <div className={styles.foodBody}>
+                <Link key={item.id} to="/food" className={styles.foodCard} style={{ background: bg }}>
+                  <div className={styles.foodOverlay}>
                     <strong className={styles.foodTitle}>{item.title}</strong>
-                    <p className={styles.foodMeta}>
-                      {item.keywords.slice(0, 2).join(' · ')}
-                    </p>
-                    {item.badges?.[0] && (
-                      <span className={styles.foodBadge}>{item.badges[0]}</span>
-                    )}
+                    <p className={styles.foodSub}>{item.keywords.slice(0, 2).join(' · ')}</p>
                   </div>
-                </div>
+                </Link>
               );
             })}
           </div>
         </section>
 
-        {/* ── Section 3: 오늘 뭐할까? ── */}
+        {/* ── ACTIVITY ── */}
         <section className={styles.section}>
           <div className={styles.sectionHead}>
-            <div>
-              <p className={styles.sectionEye}>Activity</p>
-              <h2 className={styles.sectionTitle}>오늘 뭐할까?</h2>
-            </div>
+            <div className={styles.sectionLabel}>Activity</div>
+            <h2 className={styles.sectionTitle}>오늘 뭐할까?</h2>
             <Link to="/activity" className={styles.seeAll}>전체보기 →</Link>
           </div>
 
-          <div className={styles.actRow}>
+          <div className={styles.actGrid}>
             {activity.slice(0, 2).map(item => {
               const { grad } = getCardVisuals(item.id, weatherMode);
               return (
-                <div key={item.id} className={styles.actCard}>
-                  <div className={styles.actImg} style={{ background: grad }}>
-                    <span className={styles.actBgEmoji}>{item.emoji}</span>
-                    <div className={styles.editShimmer} />
-                    <span className={styles.actEmojiBadge}>{item.emoji}</span>
-                  </div>
-                  <div className={styles.actBody}>
+                <Link key={item.id} to="/activity" className={styles.actCard} style={{ background: grad }}>
+                  <div className={styles.actOverlay}>
                     <h3 className={styles.actTitle}>{item.title}</h3>
-                    <p  className={styles.actDesc}>{item.desc}</p>
-                    {item.badges && (
-                      <div className={styles.actTags}>
-                        {item.badges.map(b => (
-                          <span key={b} className={styles.actTag}>{b}</span>
-                        ))}
+                    <p className={styles.actDesc}>{item.desc}</p>
+                    {item.meta && (
+                      <div className={styles.actMeta}>
+                        <span>{item.meta.cost}</span>
+                        <span className={styles.actDot} />
+                        <span>{item.meta.duration}</span>
                       </div>
                     )}
-                    <div className={styles.actKws}>
-                      {item.keywords.map(kw => (
-                        <span key={kw}>#{kw}</span>
-                      ))}
-                    </div>
                   </div>
-                </div>
+                </Link>
               );
             })}
           </div>
         </section>
 
-      </div>{/* end .sections */}
+        {/* ── MUSIC ── */}
+        <section className={styles.section}>
+          <div className={styles.sectionHead}>
+            <div className={styles.sectionLabel}>Music</div>
+            <h2 className={styles.sectionTitle}>오늘의 플레이리스트</h2>
+            <Link to="/music" className={styles.seeAll}>전체보기 →</Link>
+          </div>
+
+          <MusicSection
+            items={music}
+            limit={6}
+            className={styles.musicGrid}
+          />
+        </section>
+
+      </div>
     </div>
   );
 }

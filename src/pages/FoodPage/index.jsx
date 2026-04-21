@@ -3,7 +3,7 @@ import WeatherBanner from '../../components/WeatherBanner';
 import FoodCard      from '../../components/FoodCard';
 import weatherData   from '../../data/weatherData';
 
-const BREAKPOINTS = { default: 4, 1280: 3, 900: 2, 560: 1 };
+const BREAKPOINTS = { default: 4, 1280: 3, 900: 2 };
 
 function FoodPage({ weatherMode }) {
   const items = weatherData[weatherMode].food;

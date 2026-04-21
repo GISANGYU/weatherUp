@@ -1,0 +1,209 @@
+/* ── 카드 기본 ── */
+.card {
+  background: transparent;
+  border-radius: 8px;
+  padding: 12px;
+  cursor: pointer;
+  transition: background var(--transition);
+  display: flex;
+  flex-direction: column;
+  min-width: 0; /* grid item가 콘텐츠 폭으로 확장되는 것 방지 */
+}
+
+.card:hover {
+  background: var(--card-bg);
+}
+
+/* ── 이미지 영역 ── */
+.imgWrap {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.coverImg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.fallback {
+  position: absolute;
+  inset: 0;
+  background: #7a7a7a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fallbackLogo {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+  user-select: none;
+}
+
+/* 재생 중 어두운 오버레이 */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 1;
+}
+
+/* ── 플레이 버튼 (우측 하단) ── */
+.playBtn {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: none;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 3;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.2s ease, transform 0.2s ease, background 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+}
+
+.playing {}
+
+.card:hover .playBtn,
+.playing .playBtn {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.playBtn:hover {
+  transform: translateY(0) scale(1.08);
+  background: var(--accent);
+  filter: brightness(1.12);
+}
+
+/* 재생 삼각형 */
+.playIcon {
+  display: block;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 7px 0 7px 14px;
+  border-color: transparent transparent transparent #fff;
+  margin-left: 2px;
+}
+
+/* 일시정지 아이콘 */
+.pauseIcon {
+  display: flex;
+  gap: 3px;
+  align-items: center;
+}
+.pauseIcon span {
+  display: block;
+  width: 3px;
+  height: 14px;
+  background: #fff;
+  border-radius: 2px;
+}
+
+/* ── 이퀄라이저 ── */
+.equalizer {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 20px;
+  z-index: 2;
+}
+
+.equalizer span {
+  display: block;
+  width: 4px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 2px;
+  transform-origin: bottom;
+}
+
+.equalizer span:nth-child(1) { height: 8px;  animation: eqBounce 0.9s ease-in-out infinite 0s; }
+.equalizer span:nth-child(2) { height: 16px; animation: eqBounce 0.9s ease-in-out infinite 0.18s; }
+.equalizer span:nth-child(3) { height: 10px; animation: eqBounce 0.9s ease-in-out infinite 0.36s; }
+
+@keyframes eqBounce {
+  0%, 100% { transform: scaleY(0.35); }
+  50%       { transform: scaleY(1.1); }
+}
+
+/* ── 텍스트 ── */
+.info {
+  padding: 0 2px;
+  overflow: hidden; /* 슬라이드 애니메이션 클리핑 기준 */
+}
+
+.title {
+  display: block;
+  line-height: 1.35;
+  white-space: nowrap;
+}
+
+.titlePlaying { color: var(--accent); }
+
+.artist {
+  display: block;
+  margin-top: 3px;
+  line-height: 1.35;
+  white-space: nowrap;
+}
+
+/* 기본: 말줄임 */
+.titleText,
+.artistText {
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  vertical-align: bottom;
+}
+
+.titleText {
+  font-size: 14px;
+  font-weight: 600;
+  color: inherit; /* .titlePlaying 색상 상속 */
+}
+
+.artistText {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* 호버: 슬라이드로 전체 텍스트 표시 */
+.card:hover .titleText,
+.card:hover .artistText {
+  max-width: none;
+  overflow: visible;
+  text-overflow: clip;
+  animation: slideText 2.5s ease-in-out 0.2s infinite alternate;
+}
+
+/* 100% = inline-block 요소의 자기 폭(텍스트 콘텐츠 폭)
+   max(0px, ...) → 텍스트가 컨테이너보다 짧으면 이동 안 함 */
+@keyframes slideText {
+  from { transform: translateX(0); }
+  to   { transform: translateX(calc(-1 * max(0px, 100% - 140px))); }
+}

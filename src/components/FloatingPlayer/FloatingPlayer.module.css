@@ -1,0 +1,112 @@
+.container {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  opacity: 0;
+  pointer-events: none;
+  z-index: -1;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateX(-50%) translateY(24px) scale(0.95); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0)     scale(1);   }
+}
+
+/* ── 트랙 정보 ── */
+.info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+}
+
+.musicIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.25;
+}
+
+.artist {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.55);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.35;
+  margin-top: 1px;
+}
+
+/* ── YouTube 컨트롤 바 크롭 ── */
+/* iframe 실제 높이 113px (200 × 9/16), 하단 40px = 컨트롤 바만 노출 */
+.iframeWrap {
+  width: 200px;
+  height: 40px;
+  overflow: hidden;
+  border-radius: 8px;
+  flex-shrink: 0;
+  position: relative;
+  background: #000;
+}
+
+.iframe {
+  position: absolute;
+  width: 200px;
+  height: 113px;
+  bottom: 0;
+  left: 0;
+  border: none;
+  display: block;
+}
+
+/* ── 닫기 버튼 ── */
+.closeBtn {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, color 0.2s;
+  line-height: 1;
+}
+
+.closeBtn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+/* ── 모바일 ── */
+@media (max-width: 560px) {
+  .container {
+    bottom: 16px;
+    min-width: unset;
+    width: calc(100vw - 32px);
+    max-width: 400px;
+  }
+  .iframeWrap { width: 160px; }
+  .iframe      { width: 160px; height: 90px; }
+}

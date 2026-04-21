@@ -22,3 +22,16 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .claude/
+
+# dev server logs
+cra*.log
+cra*.out.log
+cra*.err.log
+
+# local-only docs & backups (not part of web build)
+/src_backup_*/
+/plan.md
+/skill/
+/WeatherUp_.pdf
+/발표대본.txt
+*.pdf

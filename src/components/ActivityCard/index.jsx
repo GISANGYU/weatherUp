@@ -1,39 +1,62 @@
+import { useState } from 'react';
+import useScrollFade from '../../hooks/useScrollFade';
 import { getCardVisuals } from '../../data/cardVisuals';
 import styles from './ActivityCard.module.css';
 
 function ActivityCard({ item, weatherMode }) {
-  const { grad, imgH } = getCardVisuals(item.id, weatherMode);
+  const { grad } = getCardVisuals(item.id, weatherMode);
+  const { ref, isVisible } = useScrollFade();
+  const [imgFailed, setImgFailed] = useState(false);
+  const showImg = item.imageUrl && !imgFailed;
+
+  const Tag = item.shopUrl ? 'a' : 'div';
+  const linkProps = item.shopUrl
+    ? { href: item.shopUrl, target: '_blank', rel: 'noopener noreferrer' }
+    : {};
 
   return (
-    <div className={styles.card}>
-      <div className={styles.imgWrap} style={{ background: grad, height: imgH }}>
-        <span className={styles.bgEmoji}>{item.emoji}</span>
-        <div className={styles.shimmer} />
-        <span className={styles.emojiBadge}>{item.emoji}</span>
-        {item.badges?.[0] && (
-          <span className={styles.topBadge}>{item.badges[0]}</span>
+    <Tag
+      ref={ref}
+      className={`${styles.card} ${item.shopUrl ? styles.cardLink : ''} fade-up ${isVisible ? 'visible' : ''}`}
+      {...linkProps}
+    >
+      <div className={styles.imgWrap} style={showImg ? {} : { background: grad }}>
+        {showImg && (
+          <img
+            src={item.imageUrl}
+            alt={item.title}
+            className={styles.productImg}
+            onError={() => setImgFailed(true)}
+          />
         )}
+        <div className={styles.imgOverlay}>
+          <h3 className={styles.imgTitle}>{item.title}</h3>
+          {item.badges?.[0] && (
+            <span className={styles.badge}>{item.badges[0]}</span>
+          )}
+        </div>
       </div>
 
       <div className={styles.body}>
-        <h3 className={styles.title}>{item.title}</h3>
-        <p  className={styles.desc}>{item.desc}</p>
+        <p className={styles.desc}>{item.desc}</p>
 
-        {item.badges?.length > 1 && (
-          <div className={styles.badges}>
-            {item.badges.slice(1).map(b => (
-              <span key={b} className={styles.badge}>{b}</span>
-            ))}
+        {item.meta && (
+          <div className={styles.meta}>
+            <span className={styles.metaTag}>{item.meta.cost}</span>
+            <span className={styles.metaDot} />
+            <span className={styles.metaTag}>{item.meta.duration}</span>
+            <span className={styles.metaDot} />
+            <span className={styles.metaTag}>활동량 {item.meta.intensity}</span>
           </div>
         )}
 
         <div className={styles.keywords}>
           {item.keywords.map(kw => (
-            <span key={kw} className={styles.kw}>#{kw}</span>
+            <span key={kw} className={styles.kw}>{kw}</span>
           ))}
         </div>
       </div>
-    </div>
+    </Tag>
   );
 }
 

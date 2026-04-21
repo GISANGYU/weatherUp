@@ -1,0 +1,50 @@
+.wrap {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  background: var(--accent-soft);
+  border: 1px solid var(--card-border);
+  border-radius: 999px;
+  padding: 3px;
+}
+
+.btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--text-soft, var(--text));
+  background: transparent;
+  border: none;
+  transition: background 0.18s ease, transform 0.18s ease, color 0.18s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn:hover {
+  background: var(--card-border);
+  color: var(--text);
+  transform: scale(1.08);
+}
+
+.btn.active {
+  background: var(--accent);
+  color: var(--accent-contrast, #fff);
+}
+
+.btn.active .icon {
+  transform: scale(1.12);
+}
+
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.18s ease;
+}
+
+@media (max-width: 480px) {
+  .btn  { width: 26px; height: 26px; }
+}

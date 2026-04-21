@@ -1,151 +1,112 @@
 .card {
   background: var(--card-bg);
   border: 1px solid var(--card-border);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
   overflow: hidden;
   transition: transform var(--transition), box-shadow var(--transition);
-  box-shadow: var(--shadow-accent);
+  cursor: pointer;
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.cardLink {
   cursor: pointer;
 }
 
 .card:hover {
-  transform: translateY(-6px);
+  transform: translateY(-4px);
   box-shadow: var(--shadow-hover);
 }
 
-:global(body.theme-rainy) .card {
-  background: var(--card-bg);
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
-  box-shadow: 0 8px 32px rgba(0,0,0,0.38), inset 0 1px 0 rgba(255,255,255,0.10);
-}
-:global(body.theme-rainy) .card:hover {
-  box-shadow: 0 16px 48px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.16);
-}
-:global(body.theme-snowy) .card {
-  backdrop-filter: blur(8px);
-  box-shadow: 0 4px 24px rgba(168,200,255,0.26), inset 0 1px 0 rgba(255,255,255,0.70);
-}
-
-/* ── 이미지 래퍼 ── */
 .imgWrap {
   position: relative;
+  aspect-ratio: 4 / 3;
   overflow: hidden;
-  transition: filter var(--transition);
 }
 
-.card:hover .imgWrap { filter: brightness(1.06); }
-
-/* 대형 블러 이모지 (장식용) */
-.bgEmoji {
-  position: absolute;
-  font-size: 110px;
-  opacity: 0.22;
-  filter: blur(2px);
-  bottom: -18px;
-  right: -8px;
-  line-height: 1;
-  transform: rotate(-12deg);
-  pointer-events: none;
-  user-select: none;
-}
-
-/* 광택 오버레이 */
-.shimmer {
+.productImg {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(255,255,255,0.18) 0%, transparent 55%);
-  pointer-events: none;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
-/* 유리 이모지 뱃지 */
-.emojiBadge {
+.imgOverlay {
   position: absolute;
-  top: 14px;
-  left: 14px;
-  font-size: 22px;
-  background: rgba(255,255,255,0.22);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255,255,255,0.38);
-  border-radius: var(--radius-md);
-  padding: 7px 10px;
-  line-height: 1;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.18);
-  z-index: 1;
-  transition: transform var(--transition);
-}
-
-.card:hover .emojiBadge {
-  transform: scale(1.10) translateY(-2px);
-}
-
-/* 상단 텍스트 뱃지 */
-.topBadge {
-  position: absolute;
-  top: 14px;
-  right: 14px;
-  font-size: 10px;
-  font-weight: 700;
-  padding: 4px 10px;
-  border-radius: 999px;
-  background: rgba(255,255,255,0.22);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(255,255,255,0.35);
-  color: #fff;
-  letter-spacing: 0.3px;
-}
-
-/* ── 콘텐츠 영역 ── */
-.body {
-  padding: 18px 20px 20px;
+  inset: 0;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  justify-content: flex-end;
+  padding: var(--sp-5);
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.52) 0%,
+    rgba(0, 0, 0, 0.16) 55%,
+    transparent 100%
+  );
 }
 
-.title {
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--text);
-  letter-spacing: -0.3px;
-  line-height: 1.3;
+.brandTag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  font-size: 11px;
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.48);
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  backdrop-filter: blur(4px);
+  z-index: 1;
 }
 
-.desc {
-  font-size: 13px;
-  color: var(--text-muted);
-  line-height: 1.65;
-}
-
-.badges {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
+.imgTitle {
+  font-size: 20px;
+  font-weight: var(--fw-bold);
+  color: #fff;
+  letter-spacing: var(--ls-snug);
+  line-height: var(--lh-snug);
 }
 
 .badge {
-  font-size: 10px;
-  font-weight: 600;
-  padding: 3px 9px;
-  border-radius: 999px;
-  background: var(--badge-bg);
-  color: var(--badge-text);
-  border: 1px solid var(--card-border);
+  display: inline-block;
+  margin-top: var(--sp-2);
+  font-size: var(--text-label);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-wide);
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.70);
 }
 
-:global(body.theme-cloudy) .badge { border-color: var(--accent); }
+.body {
+  padding: var(--sp-5) var(--sp-5) var(--sp-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+.desc {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  line-height: var(--lh-relaxed);
+}
 
 .keywords {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 2px;
+  gap: var(--sp-2);
 }
 
 .kw {
-  font-size: 12px;
-  color: var(--accent);
-  font-weight: 500;
+  font-size: var(--text-label);
+  font-weight: var(--fw-medium);
+  color: var(--text-muted);
+  background: var(--badge-bg);
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
 }

@@ -1,0 +1,36 @@
+/* ── 섹션 ── */
+.section {
+  margin-bottom: 64px;
+}
+
+.sectionTitle {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 28px;
+  letter-spacing: -0.3px;
+}
+
+/* ── 카드 그리드 — 6열 고정 ── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  align-items: start;
+  gap: 16px;
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .sectionTitle {
+    font-size: 18px;
+  }
+}

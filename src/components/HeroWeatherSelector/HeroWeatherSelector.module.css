@@ -78,10 +78,10 @@
 
 /* ══ 아이콘 ═══════════════════════════════════════════ */
 .icon {
-  font-size: 22px;
-  display: inline-block;
-  line-height: 1;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.22));
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.12));
   transition: transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
@@ -108,6 +108,14 @@
   letter-spacing: -0.1px;
 }
 
+/* ══ 테마별 비활성 버튼 텍스트 색상 (rainy 제외) ════ */
+:global(body.theme-sunny)  .btn { color: rgba(120, 70, 10, 0.65); }
+:global(body.theme-sunny)  .btn:hover { color: rgba(120, 70, 10, 0.90); }
+:global(body.theme-cloudy) .btn { color: rgba(44, 62, 80, 0.60); }
+:global(body.theme-cloudy) .btn:hover { color: rgba(44, 62, 80, 0.88); }
+:global(body.theme-snowy)  .btn { color: rgba(58, 74, 107, 0.62); }
+:global(body.theme-snowy)  .btn:hover { color: rgba(58, 74, 107, 0.90); }
+
 /* ══ 테마별 active 텍스트 색상 ═══════════════════════ */
 :global(body.theme-sunny)  .btn.active { color: #8B4513; }
 :global(body.theme-cloudy) .btn.active { color: #2C3E50; }
@@ -118,7 +126,6 @@
 @media (max-width: 560px) {
   .btn    { padding: 12px 18px; gap: 6px; }
   .label  { display: none; }
-  .icon   { font-size: 20px; }
 }
 
 @media (max-width: 380px) {

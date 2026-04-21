@@ -1,21 +1,5 @@
 .banner {
-  display: flex;
-  align-items: center;
-  gap: var(--sp-lg);
-  padding: var(--sp-xl) 0 var(--sp-lg);
-}
-
-.icon {
-  font-size: 56px;
-  line-height: 1;
-  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.20));
-  animation: bannerIcon 3s ease-in-out infinite;
-  flex-shrink: 0;
-}
-
-@keyframes bannerIcon {
-  0%, 100% { transform: translateY(0) rotate(0deg);   }
-  50%       { transform: translateY(-6px) rotate(4deg); }
+  padding: 64px 0 48px;
 }
 
 .title {
@@ -24,7 +8,7 @@
   color: var(--text);
   letter-spacing: -0.8px;
   line-height: 1.2;
-  margin-bottom: var(--sp-xs);
+  margin-bottom: 12px;
 }
 
 .sub {

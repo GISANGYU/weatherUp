@@ -6,8 +6,12 @@
   background: var(--card-bg);
   backdrop-filter: blur(16px) saturate(150%);
   -webkit-backdrop-filter: blur(16px) saturate(150%);
-  padding: 48px var(--sp-lg) 32px;
-  transition: background var(--transition), border-color var(--transition);
+  padding: 40px var(--sp-lg) 56px;
+  transition:
+    background var(--transition),
+    border-color var(--transition);
+  padding-top: 40px;
+  padding-bottom: 40px;
 }
 
 /* ── 2컬럼 그리드 ── */
@@ -78,10 +82,10 @@
   font-size: 1rem;
   text-decoration: none;
   transition:
-    background   var(--transition-fast),
-    color        var(--transition-fast),
+    background var(--transition-fast),
+    color var(--transition-fast),
     border-color var(--transition-fast),
-    transform    0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .socialBtn:hover {
@@ -109,8 +113,21 @@
 }
 
 /* ── 반응형 ── */
+@media (max-width: 768px) {
+  .footer {
+    padding: 64px var(--sp-md) 48px;
+  }
+}
+
 @media (max-width: 480px) {
-  .footer  { padding: 36px var(--sp-md) 28px; }
-  .grid    { grid-template-columns: 1fr; gap: 28px; }
-  .socialBlock { align-items: flex-start; }
+  .footer {
+    padding: 52px var(--sp-md) 40px;
+  }
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .socialBlock {
+    align-items: flex-start;
+  }
 }

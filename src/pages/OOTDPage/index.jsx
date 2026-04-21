@@ -3,10 +3,10 @@ import WeatherBanner from '../../components/WeatherBanner';
 import OutfitCard    from '../../components/OutfitCard';
 import weatherData   from '../../data/weatherData';
 
-const BREAKPOINTS = { default: 4, 1280: 3, 900: 2, 560: 1 };
+const BREAKPOINTS = { default: 4, 1280: 3, 900: 2 };
 
 function OOTDPage({ weatherMode }) {
-  const items = weatherData[weatherMode].ootd;
+  const { ootd: items } = weatherData[weatherMode];
 
   return (
     <div className="container">

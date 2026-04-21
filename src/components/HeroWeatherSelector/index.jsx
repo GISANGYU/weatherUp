@@ -1,11 +1,12 @@
 import { useRef, useEffect, useState } from 'react';
+import { LuSun, LuCloud, LuCloudRain, LuSnowflake } from 'react-icons/lu';
 import styles from './HeroWeatherSelector.module.css';
 
 const BUTTONS = [
-  { mode: 'sunny',  label: '맑음', icon: '☀️' },
-  { mode: 'cloudy', label: '흐림', icon: '⛅' },
-  { mode: 'rainy',  label: '비',   icon: '🌧️' },
-  { mode: 'snowy',  label: '눈',   icon: '❄️' },
+  { mode: 'sunny',  label: '맑음', Icon: LuSun       },
+  { mode: 'cloudy', label: '흐림', Icon: LuCloud     },
+  { mode: 'rainy',  label: '비',   Icon: LuCloudRain },
+  { mode: 'snowy',  label: '눈',   Icon: LuSnowflake },
 ];
 
 function HeroWeatherSelector({ weatherMode, setWeatherMode }) {
@@ -27,10 +28,9 @@ function HeroWeatherSelector({ weatherMode, setWeatherMode }) {
 
   return (
     <div className={styles.wrap} ref={wrapRef}>
-      {/* 슬라이딩 인디케이터 */}
       <span className={styles.slider} style={sliderStyle} aria-hidden="true" />
 
-      {BUTTONS.map(({ mode, label, icon }) => {
+      {BUTTONS.map(({ mode, label, Icon }) => {
         const isActive = weatherMode === mode;
         return (
           <button
@@ -40,7 +40,7 @@ function HeroWeatherSelector({ weatherMode, setWeatherMode }) {
             aria-pressed={isActive}
           >
             <span className={`${styles.icon} ${isActive ? styles.iconActive : ''}`}>
-              {icon}
+              <Icon size={22} strokeWidth={1.8} />
             </span>
             <span className={styles.label}>{label}</span>
           </button>
