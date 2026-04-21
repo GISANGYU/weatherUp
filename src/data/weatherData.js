@@ -8,6 +8,10 @@ const foodSunnyImg  = (id) => `${PUB}/images/food/sunny/${id}.jpg`;
 const foodCloudyImg = (id) => `${PUB}/images/food/cloudy/${id}.jpg`;
 const foodRainyImg  = (id) => `${PUB}/images/food/rainy/${id}.jpg`;
 const foodSnowyImg  = (id) => `${PUB}/images/food/snowy/${id}.jpg`;
+const actSunnyImg   = (id) => `${PUB}/images/activity/sunny/${id}.jpg`;
+const actCloudyImg  = (id) => `${PUB}/images/activity/cloudy/${id}.jpg`;
+const actRainyImg   = (id) => `${PUB}/images/activity/rainy/${id}.jpg`;
+const actSnowyImg   = (id) => `${PUB}/images/activity/snowy/${id}.jpg`;
 
 const weatherData = {
   /* ══════════════ SUNNY ══════════════ */
@@ -329,8 +333,7 @@ const weatherData = {
         emoji: '🚴',
         meta: { cost: '무료', duration: '2~3시간', intensity: '보통' },
         shopUrl: 'https://www.bikeseoul.com',
-        imageUrl:
-          'https://images.pexels.com/photos/5807572/pexels-photo-5807572.jpeg?auto=compress&cs=tinysrgb&w=800',
+        imageUrl: actSunnyImg('sa1'),
       },
       {
         id: 'sa2',
@@ -341,8 +344,7 @@ const weatherData = {
         emoji: '🧺',
         meta: { cost: '저렴', duration: '반나절', intensity: '낮음' },
         shopUrl: 'https://parks.seoul.go.kr',
-        imageUrl:
-          'https://images.pexels.com/photos/16564695/pexels-photo-16564695.jpeg?auto=compress&cs=tinysrgb&w=800',
+        imageUrl: actSunnyImg('sa2'),
       },
       {
         id: 'sa3',
@@ -353,8 +355,7 @@ const weatherData = {
         emoji: '🏃',
         meta: { cost: '무료', duration: '1~2시간', intensity: '높음' },
         shopUrl: 'https://www.namsanseoul.com',
-        imageUrl:
-          'https://images.unsplash.com/photo-1571008887538-b36bb32f4571?auto=format&fit=crop&w=800&q=75',
+        imageUrl: actSunnyImg('sa3'),
       },
       {
         id: 'sa4',
@@ -366,8 +367,7 @@ const weatherData = {
         meta: { cost: '보통', duration: '1~2시간', intensity: '낮음' },
         shopUrl:
           'https://map.kakao.com/?q=%EB%A3%A8%ED%94%84%ED%83%91%EC%B9%B4%ED%8E%98',
-        imageUrl:
-          'https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=800&q=75',
+        imageUrl: actSunnyImg('sa4'),
       },
       {
         id: 'sa5',
@@ -378,8 +378,7 @@ const weatherData = {
         emoji: '🌱',
         meta: { cost: '저렴', duration: '2~4시간', intensity: '낮음' },
         shopUrl: 'https://botanicpark.seoul.go.kr',
-        imageUrl:
-          'https://images.pexels.com/photos/11741630/pexels-photo-11741630.jpeg?auto=compress&cs=tinysrgb&w=800',
+        imageUrl: actSunnyImg('sa5'),
       },
       {
         id: 'sa6',
@@ -391,8 +390,7 @@ const weatherData = {
         meta: { cost: '무료', duration: '1시간', intensity: '낮음' },
         shopUrl:
           'https://map.kakao.com/?q=%EC%95%BC%EC%99%B8%EC%9A%94%EA%B0%80',
-        imageUrl:
-          'https://images.pexels.com/photos/8940618/pexels-photo-8940618.jpeg?auto=compress&cs=tinysrgb&w=800',
+        imageUrl: actSunnyImg('sa6'),
       },
       {
         id: 'sa7',
@@ -403,8 +401,7 @@ const weatherData = {
         emoji: '🚣',
         meta: { cost: '보통', duration: '1~2시간', intensity: '보통' },
         shopUrl: 'https://hangang.seoul.go.kr',
-        imageUrl:
-          'https://images.pexels.com/photos/2250521/pexels-photo-2250521.jpeg?auto=compress&cs=tinysrgb&w=800',
+        imageUrl: actSunnyImg('sa7'),
       },
       {
         id: 'sa8',
@@ -415,8 +412,7 @@ const weatherData = {
         emoji: '⛳',
         meta: { cost: '보통', duration: '1~2시간', intensity: '보통' },
         shopUrl: 'https://www.golfzon.com',
-        imageUrl:
-          'https://images.pexels.com/photos/114972/pexels-photo-114972.jpeg?auto=compress&cs=tinysrgb&w=800',
+        imageUrl: actSunnyImg('sa8'),
       },
       {
         id: 'sa9',
@@ -427,8 +423,7 @@ const weatherData = {
         emoji: '⚾',
         meta: { cost: '보통', duration: '3~4시간', intensity: '낮음' },
         shopUrl: 'https://www.ticketlink.co.kr/sports/baseball',
-        imageUrl:
-          'https://images.pexels.com/photos/17061702/pexels-photo-17061702.jpeg?auto=compress&cs=tinysrgb&w=800',
+        imageUrl: actSunnyImg('sa9'),
       },
       {
         id: 'sa10',
@@ -439,8 +434,7 @@ const weatherData = {
         emoji: '🌅',
         meta: { cost: '무료', duration: '1~2시간', intensity: '낮음' },
         shopUrl: 'https://parks.seoul.go.kr',
-        imageUrl:
-          'https://images.pexels.com/photos/17257617/pexels-photo-17257617.jpeg?auto=compress&cs=tinysrgb&w=800',
+        imageUrl: actSunnyImg('sa10'),
       },
       {
         id: 'sa11',
@@ -451,8 +445,7 @@ const weatherData = {
         emoji: '🚗',
         meta: { cost: '저렴', duration: '반나절', intensity: '낮음' },
         shopUrl: 'https://korean.visitkorea.or.kr',
-        imageUrl:
-          'https://images.pexels.com/photos/2244997/pexels-photo-2244997.jpeg?auto=compress&cs=tinysrgb&w=800',
+        imageUrl: actSunnyImg('sa11'),
       },
       {
         id: 'sa12',
@@ -463,8 +456,7 @@ const weatherData = {
         emoji: '🧗',
         meta: { cost: '보통', duration: '2~3시간', intensity: '높음' },
         shopUrl: 'https://www.kfcm.or.kr',
-        imageUrl:
-          'https://images.pexels.com/photos/6310419/pexels-photo-6310419.jpeg?auto=compress&cs=tinysrgb&w=800',
+        imageUrl: actSunnyImg('sa12'),
       },
     ],
 
@@ -978,8 +970,7 @@ const weatherData = {
         badges: null,
         emoji: '📚',
         meta: { cost: '저렴', duration: '2~3시간', intensity: '낮음' },
-        imageUrl:
-          'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=800&q=75',
+        imageUrl: actCloudyImg('ca1'),
       },
       {
         id: 'ca2',
@@ -989,8 +980,7 @@ const weatherData = {
         badges: null,
         emoji: '🖼️',
         meta: { cost: '보통', duration: '2~3시간', intensity: '낮음' },
-        imageUrl:
-          'https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?auto=format&fit=crop&w=800&q=75',
+        imageUrl: actCloudyImg('ca2'),
       },
       {
         id: 'ca3',
@@ -1000,8 +990,7 @@ const weatherData = {
         badges: ['초보 가능'],
         emoji: '🍪',
         meta: { cost: '저렴', duration: '1~2시간', intensity: '낮음' },
-        imageUrl:
-          'https://images.pexels.com/photos/1028704/pexels-photo-1028704.jpeg?auto=compress&cs=tinysrgb&w=800',
+        imageUrl: actCloudyImg('ca3'),
       },
       {
         id: 'ca4',
@@ -1011,8 +1000,7 @@ const weatherData = {
         badges: null,
         emoji: '🎬',
         meta: { cost: '보통', duration: '2~3시간', intensity: '낮음' },
-        imageUrl:
-          'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=800&q=75',
+        imageUrl: actCloudyImg('ca4'),
       },
       {
         id: 'ca5',
@@ -1022,8 +1010,7 @@ const weatherData = {
         badges: null,
         emoji: '🎤',
         meta: { cost: '저렴', duration: '1~2시간', intensity: '낮음' },
-        imageUrl:
-          'https://images.pexels.com/photos/7764146/pexels-photo-7764146.jpeg?auto=compress&cs=tinysrgb&w=800',
+        imageUrl: actCloudyImg('ca5'),
       },
       {
         id: 'ca6',
@@ -1033,8 +1020,7 @@ const weatherData = {
         badges: null,
         emoji: '🎲',
         meta: { cost: '보통', duration: '2~4시간', intensity: '낮음' },
-        imageUrl:
-          'https://images.pexels.com/photos/3970330/pexels-photo-3970330.jpeg?auto=compress&cs=tinysrgb&w=800',
+        imageUrl: actCloudyImg('ca6'),
       },
       {
         id: 'ca7',
@@ -1044,8 +1030,7 @@ const weatherData = {
         badges: ['초보 가능'],
         emoji: '🧗',
         meta: { cost: '보통', duration: '1~2시간', intensity: '높음' },
-        imageUrl:
-          'https://images.pexels.com/photos/4058053/pexels-photo-4058053.jpeg?auto=compress&cs=tinysrgb&w=800',
+        imageUrl: actCloudyImg('ca7'),
       },
       {
         id: 'ca8',
@@ -1055,8 +1040,7 @@ const weatherData = {
         badges: ['사전 예약 필요'],
         emoji: '🏺',
         meta: { cost: '보통', duration: '2시간', intensity: '낮음' },
-        imageUrl:
-          'https://images.pexels.com/photos/4502970/pexels-photo-4502970.jpeg?auto=compress&cs=tinysrgb&w=800',
+        imageUrl: actCloudyImg('ca8'),
       },
       {
         id: 'ca9',
@@ -1066,8 +1050,7 @@ const weatherData = {
         badges: null,
         emoji: '🐠',
         meta: { cost: '보통', duration: '2~3시간', intensity: '낮음' },
-        imageUrl:
-          'https://images.pexels.com/photos/1645028/pexels-photo-1645028.jpeg?auto=compress&cs=tinysrgb&w=800',
+        imageUrl: actCloudyImg('ca9'),
       },
       {
         id: 'ca10',
@@ -1077,8 +1060,7 @@ const weatherData = {
         badges: null,
         emoji: '🧘',
         meta: { cost: '무료', duration: '1시간', intensity: '낮음' },
-        imageUrl:
-          'https://images.pexels.com/photos/3822668/pexels-photo-3822668.jpeg?auto=compress&cs=tinysrgb&w=800',
+        imageUrl: actCloudyImg('ca10'),
       },
       {
         id: 'ca11',
@@ -1088,8 +1070,7 @@ const weatherData = {
         badges: null,
         emoji: '🎳',
         meta: { cost: '저렴', duration: '1~2시간', intensity: '낮음' },
-        imageUrl:
-          'https://images.pexels.com/photos/1752757/pexels-photo-1752757.jpeg?auto=compress&cs=tinysrgb&w=800',
+        imageUrl: actCloudyImg('ca11'),
       },
       {
         id: 'ca12',
@@ -1099,8 +1080,7 @@ const weatherData = {
         badges: ['사전 예약 필요'],
         emoji: '💐',
         meta: { cost: '보통', duration: '1~2시간', intensity: '낮음' },
-        imageUrl:
-          'https://images.pexels.com/photos/931177/pexels-photo-931177.jpeg?auto=compress&cs=tinysrgb&w=800',
+        imageUrl: actCloudyImg('ca12'),
       },
     ],
 
@@ -1613,8 +1593,7 @@ const weatherData = {
         badges: null,
         emoji: '💻',
         meta: { cost: '보통', duration: '자유', intensity: '낮음' },
-        imageUrl:
-          'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=75',
+        imageUrl: actRainyImg('rai1'),
       },
       {
         id: 'rai2',
@@ -1624,8 +1603,7 @@ const weatherData = {
         badges: null,
         emoji: '✨',
         meta: { cost: '보통', duration: '1~2시간', intensity: '낮음' },
-        imageUrl:
-          'https://images.unsplash.com/photo-1541961017774-22349e4a1262?auto=format&fit=crop&w=800&q=75',
+        imageUrl: actRainyImg('rai2'),
       },
       {
         id: 'rai3',
@@ -1635,8 +1613,7 @@ const weatherData = {
         badges: ['추천 장르: 로맨스'],
         emoji: '🎬',
         meta: { cost: '저렴', duration: '2시간+', intensity: '낮음' },
-        imageUrl:
-          'https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?auto=format&fit=crop&w=800&q=75',
+        imageUrl: actRainyImg('rai3'),
       },
       {
         id: 'rai4',
@@ -1646,8 +1623,7 @@ const weatherData = {
         badges: null,
         emoji: '✏️',
         meta: { cost: '무료', duration: '자유', intensity: '낮음' },
-        imageUrl:
-          'https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=800&q=75',
+        imageUrl: actRainyImg('rai4'),
       },
       {
         id: 'rai5',
@@ -1657,8 +1633,7 @@ const weatherData = {
         badges: null,
         emoji: '🧹',
         meta: { cost: '무료', duration: '자유', intensity: '보통' },
-        imageUrl:
-          'https://images.pexels.com/photos/4108720/pexels-photo-4108720.jpeg?auto=compress&cs=tinysrgb&w=800',
+        imageUrl: actRainyImg('rai5'),
       },
       {
         id: 'rai6',
@@ -1668,8 +1643,7 @@ const weatherData = {
         badges: ['초보 가능'],
         emoji: '🍪',
         meta: { cost: '저렴', duration: '1~2시간', intensity: '낮음' },
-        imageUrl:
-          'https://images.pexels.com/photos/1028704/pexels-photo-1028704.jpeg?auto=compress&cs=tinysrgb&w=800',
+        imageUrl: actRainyImg('rai6'),
       },
       {
         id: 'rai7',
@@ -1679,8 +1653,7 @@ const weatherData = {
         badges: ['추천 장르: 로맨스'],
         emoji: '📺',
         meta: { cost: '저렴', duration: '자유', intensity: '낮음' },
-        imageUrl:
-          'https://images.pexels.com/photos/1040160/pexels-photo-1040160.jpeg?auto=compress&cs=tinysrgb&w=800',
+        imageUrl: actRainyImg('rai7'),
       },
       {
         id: 'rai8',
@@ -1690,8 +1663,7 @@ const weatherData = {
         badges: null,
         emoji: '🧩',
         meta: { cost: '저렴', duration: '자유', intensity: '낮음' },
-        imageUrl:
-          'https://images.pexels.com/photos/3799832/pexels-photo-3799832.jpeg?auto=compress&cs=tinysrgb&w=800',
+        imageUrl: actRainyImg('rai8'),
       },
       {
         id: 'rai9',
@@ -1701,8 +1673,7 @@ const weatherData = {
         badges: null,
         emoji: '📚',
         meta: { cost: '다양', duration: '자유', intensity: '낮음' },
-        imageUrl:
-          'https://images.pexels.com/photos/4050405/pexels-photo-4050405.jpeg?auto=compress&cs=tinysrgb&w=800',
+        imageUrl: actRainyImg('rai9'),
       },
       {
         id: 'rai10',
@@ -1712,8 +1683,7 @@ const weatherData = {
         badges: null,
         emoji: '🎸',
         meta: { cost: '무료', duration: '자유', intensity: '낮음' },
-        imageUrl:
-          'https://images.pexels.com/photos/1763075/pexels-photo-1763075.jpeg?auto=compress&cs=tinysrgb&w=800',
+        imageUrl: actRainyImg('rai10'),
       },
       {
         id: 'rai11',
@@ -1723,8 +1693,7 @@ const weatherData = {
         badges: null,
         emoji: '✍️',
         meta: { cost: '무료', duration: '자유', intensity: '낮음' },
-        imageUrl:
-          'https://images.pexels.com/photos/1765033/pexels-photo-1765033.jpeg?auto=compress&cs=tinysrgb&w=800',
+        imageUrl: actRainyImg('rai11'),
       },
       {
         id: 'rai12',
@@ -1734,8 +1703,7 @@ const weatherData = {
         badges: null,
         emoji: '🧖',
         meta: { cost: '저렴', duration: '2~3시간', intensity: '낮음' },
-        imageUrl:
-          'https://images.pexels.com/photos/3621532/pexels-photo-3621532.jpeg?auto=compress&cs=tinysrgb&w=800',
+        imageUrl: actRainyImg('rai12'),
       },
     ],
 
@@ -2253,8 +2221,7 @@ const weatherData = {
         badges: ['미끄럼 주의'],
         emoji: '📸',
         meta: { cost: '무료', duration: '1~2시간', intensity: '보통' },
-        imageUrl:
-          'https://images.unsplash.com/photo-1551698618-1dfc6d674176?auto=format&fit=crop&w=800&q=75',
+        imageUrl: actSnowyImg('snoa1'),
       },
       {
         id: 'snoa2',
@@ -2264,8 +2231,7 @@ const weatherData = {
         badges: ['장비 렌탈 가능'],
         emoji: '⛷️',
         meta: { cost: '비쌈', duration: '하루', intensity: '높음' },
-        imageUrl:
-          'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=800&q=75',
+        imageUrl: actSnowyImg('snoa2'),
       },
       {
         id: 'snoa3',
@@ -2275,8 +2241,7 @@ const weatherData = {
         badges: null,
         emoji: '⛄',
         meta: { cost: '무료', duration: '1시간', intensity: '보통' },
-        imageUrl:
-          'https://images.unsplash.com/photo-1510627498534-cf7e9002facc?auto=format&fit=crop&w=800&q=75',
+        imageUrl: actSnowyImg('snoa3'),
       },
       {
         id: 'snoa4',
@@ -2286,8 +2251,7 @@ const weatherData = {
         badges: null,
         emoji: '📖',
         meta: { cost: '무료', duration: '자유', intensity: '낮음' },
-        imageUrl:
-          'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&w=800&q=75',
+        imageUrl: actSnowyImg('snoa4'),
       },
       {
         id: 'snoa5',
@@ -2297,8 +2261,7 @@ const weatherData = {
         badges: ['방한 필수'],
         emoji: '🛷',
         meta: { cost: '보통', duration: '반나절', intensity: '보통' },
-        imageUrl:
-          'https://images.pexels.com/photos/6476259/pexels-photo-6476259.jpeg?auto=compress&cs=tinysrgb&w=800',
+        imageUrl: actSnowyImg('snoa5'),
       },
       {
         id: 'snoa6',
@@ -2308,8 +2271,7 @@ const weatherData = {
         badges: ['장비 렌탈 가능'],
         emoji: '⛸️',
         meta: { cost: '보통', duration: '1~2시간', intensity: '보통' },
-        imageUrl:
-          'https://images.pexels.com/photos/1666021/pexels-photo-1666021.jpeg?auto=compress&cs=tinysrgb&w=800',
+        imageUrl: actSnowyImg('snoa6'),
       },
       {
         id: 'snoa7',
@@ -2319,8 +2281,7 @@ const weatherData = {
         badges: null,
         emoji: '♨️',
         meta: { cost: '보통', duration: '2~3시간', intensity: '낮음' },
-        imageUrl:
-          'https://images.pexels.com/photos/3997991/pexels-photo-3997991.jpeg?auto=compress&cs=tinysrgb&w=800',
+        imageUrl: actSnowyImg('snoa7'),
       },
       {
         id: 'snoa8',
@@ -2330,8 +2291,7 @@ const weatherData = {
         badges: ['사전 예약 추천'],
         emoji: '🎪',
         meta: { cost: '보통', duration: '하루', intensity: '보통' },
-        imageUrl:
-          'https://images.pexels.com/photos/716276/pexels-photo-716276.jpeg?auto=compress&cs=tinysrgb&w=800',
+        imageUrl: actSnowyImg('snoa8'),
       },
       {
         id: 'snoa9',
@@ -2341,8 +2301,7 @@ const weatherData = {
         badges: ['초보 가능'],
         emoji: '🧶',
         meta: { cost: '저렴', duration: '자유', intensity: '낮음' },
-        imageUrl:
-          'https://images.pexels.com/photos/3972058/pexels-photo-3972058.jpeg?auto=compress&cs=tinysrgb&w=800',
+        imageUrl: actSnowyImg('snoa9'),
       },
       {
         id: 'snoa10',
@@ -2352,8 +2311,7 @@ const weatherData = {
         badges: ['방한 철저 준비'],
         emoji: '🏕️',
         meta: { cost: '보통', duration: '1박', intensity: '높음' },
-        imageUrl:
-          'https://images.pexels.com/photos/1703314/pexels-photo-1703314.jpeg?auto=compress&cs=tinysrgb&w=800',
+        imageUrl: actSnowyImg('snoa10'),
       },
       {
         id: 'snoa11',
@@ -2363,8 +2321,7 @@ const weatherData = {
         badges: null,
         emoji: '☕',
         meta: { cost: '보통', duration: '반나절', intensity: '낮음' },
-        imageUrl:
-          'https://images.pexels.com/photos/312418/pexels-photo-312418.jpeg?auto=compress&cs=tinysrgb&w=800',
+        imageUrl: actSnowyImg('snoa11'),
       },
       {
         id: 'snoa12',
@@ -2374,8 +2331,7 @@ const weatherData = {
         badges: null,
         emoji: '📸',
         meta: { cost: '무료', duration: '자유', intensity: '낮음' },
-        imageUrl:
-          'https://images.pexels.com/photos/773594/pexels-photo-773594.jpeg?auto=compress&cs=tinysrgb&w=800',
+        imageUrl: actSnowyImg('snoa12'),
       },
     ],
 

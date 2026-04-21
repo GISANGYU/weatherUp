@@ -43,7 +43,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition: transform var(--transition);
+  color: var(--text);
+  transition: transform var(--transition), color var(--transition);
 }
 
 .logo:hover .logoIcon {

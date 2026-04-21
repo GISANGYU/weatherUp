@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import styles from './Footer.module.css';
 
 /* Simple Icons SVG paths — https://simpleicons.org */
@@ -34,11 +35,25 @@ const SOCIAL = [
     href: 'https://www.instagram.com/yu_web_up/',
   }, // ^_^ 여기에 인스타그램 링크
   { name: 'facebook', label: 'Facebook', href: 'https://www.facebook.com/profile.php?id=100005894472118&locale=ko_KR' }, // ^_^ 여기에 페이스북 링크
-  { name: 'kakaotalk', label: 'KakaoTalk', href: 'KAKAOTALK_URL' }, // ^_^ 여기에 카카오톡 오픈채팅 링크
+  { name: 'kakaotalk', label: 'KakaoTalk', copyText: 'yu2647' }, // 클릭 시 카톡 ID 클립보드 복사
   { name: 'github', label: 'GitHub', href: 'https://github.com/GISANGYU' }, // ^_^ 여기에 깃허브 링크
 ];
 
 function Footer() {
+  const [copiedKey, setCopiedKey] = useState(null);
+
+  const handleCopy = (key, text) => async (e) => {
+    e.preventDefault();
+    try {
+      await navigator.clipboard.writeText(text);
+    } catch {
+      window.prompt('복사하세요:', text);
+      return;
+    }
+    setCopiedKey(key);
+    setTimeout(() => setCopiedKey(curr => (curr === key ? null : curr)), 1800);
+  };
+
   return (
     <footer className={styles.footer}>
       <div className={styles.grid}>
@@ -56,19 +71,36 @@ function Footer() {
         <div className={styles.socialBlock}>
           <p className={styles.socialTitle}>Follow</p>
           <div className={styles.socialGrid}>
-            {SOCIAL.map(({ name, label, href }) => (
-              <a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.socialBtn}
-                aria-label={label}
-                title={label}
-              >
-                <SvgIcon name={name} />
-              </a>
-            ))}
+            {SOCIAL.map(({ name, label, href, copyText }) => {
+              if (copyText) {
+                const copied = copiedKey === name;
+                return (
+                  <a
+                    key={label}
+                    href="#copy"
+                    onClick={handleCopy(name, copyText)}
+                    className={styles.socialBtn}
+                    aria-label={copied ? `ID ${copyText} 복사됨` : `${label} ID ${copyText} 복사`}
+                    title={copied ? `복사됨 ✓  ${copyText}` : `클릭하여 ID 복사: ${copyText}`}
+                  >
+                    <SvgIcon name={name} />
+                  </a>
+                );
+              }
+              return (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.socialBtn}
+                  aria-label={label}
+                  title={label}
+                >
+                  <SvgIcon name={name} />
+                </a>
+              );
+            })}
           </div>
         </div>
       </div>

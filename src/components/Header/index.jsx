@@ -1,11 +1,18 @@
 import { useEffect, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
+import { LuSun, LuCloud, LuCloudRain, LuSnowflake } from 'react-icons/lu';
 import AboutPanel      from '../AboutPanel';
 import NavDrawer       from '../NavDrawer';
 import NowPlayingBadge from '../NowPlayingBadge';
 import WeatherPicker   from '../WeatherPicker';
-import WeatherIcon     from '../WeatherIcon';
 import styles from './Header.module.css';
+
+const LOGO_ICONS = {
+  sunny:  LuSun,
+  cloudy: LuCloud,
+  rainy:  LuCloudRain,
+  snowy:  LuSnowflake,
+};
 
 const NAV = [
   { to: '/ootd',     label: 'OOTD'     },
@@ -53,6 +60,8 @@ function Header({ weatherMode, setWeatherMode }) {
   const closeInfo = () => setInfoOpen(false);
   const openInfo  = () => setInfoOpen(true);
 
+  const LogoIcon = LOGO_ICONS[weatherMode] || LuSun;
+
   return (
     <>
       <header className={`${styles.header} ${scrolled ? styles.scrolled : ''}`}>
@@ -60,7 +69,9 @@ function Header({ weatherMode, setWeatherMode }) {
 
           {/* ── 왼쪽: 로고 ── */}
           <NavLink to="/" className={styles.logo} onClick={closeMenu}>
-            <span className={styles.logoIcon}><WeatherIcon mode={weatherMode} size={20} /></span>
+            <span className={styles.logoIcon}>
+              <LogoIcon size={20} strokeWidth={1.9} />
+            </span>
             <span className={styles.logoText}>WeatherUp</span>
           </NavLink>
 
