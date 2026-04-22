@@ -3,7 +3,7 @@
   border: 1px solid var(--card-border);
   border-radius: var(--radius-md);
   overflow: hidden;
-  transition: transform var(--transition), box-shadow var(--transition);
+  transition: transform var(--transition), box-shadow var(--transition), background var(--transition), border-color var(--transition);
   cursor: pointer;
   display: block;
   text-decoration: none;
@@ -17,6 +17,53 @@
 .card:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-hover);
+}
+
+/* ═════ Liquid Glass — Rainy 테마 전용 ═════ */
+:global(body.theme-rainy) .card {
+  position: relative;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, transparent 35%),
+    linear-gradient(135deg, rgba(40, 68, 108, 0.38), rgba(18, 28, 42, 0.48));
+  border: 1px solid transparent;
+  backdrop-filter: blur(60px) saturate(220%) brightness(1.08);
+  -webkit-backdrop-filter: blur(60px) saturate(220%) brightness(1.08);
+  box-shadow:
+    0 28px 64px -12px rgba(0, 0, 0, 0.55),
+    0 10px 24px -8px rgba(0, 0, 0, 0.35),
+    inset 0 2px 1px rgba(255, 255, 255, 0.38),
+    inset 1px 0 0 rgba(255, 255, 255, 0.10),
+    inset -1px 0 0 rgba(255, 255, 255, 0.10),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.30),
+    inset 0 0 32px rgba(74, 158, 255, 0.05);
+}
+
+:global(body.theme-rainy) .card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background: radial-gradient(
+    ellipse 130% 55% at 50% -25%,
+    rgba(255, 255, 255, 0.22) 0%,
+    transparent 70%
+  );
+  z-index: 2;
+}
+
+:global(body.theme-rainy) .card:hover {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.12) 0%, transparent 35%),
+    linear-gradient(135deg, rgba(52, 86, 134, 0.46), rgba(24, 38, 58, 0.56));
+  box-shadow:
+    0 40px 80px -16px rgba(0, 0, 0, 0.65),
+    0 14px 32px -10px rgba(0, 0, 0, 0.45),
+    inset 0 2px 1px rgba(255, 255, 255, 0.48),
+    inset 1px 0 0 rgba(255, 255, 255, 0.16),
+    inset -1px 0 0 rgba(255, 255, 255, 0.16),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.30),
+    inset 0 0 48px rgba(74, 158, 255, 0.10);
 }
 
 .imgWrap {

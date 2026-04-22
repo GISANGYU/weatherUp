@@ -1,9 +1,18 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './MusicCard.module.css';
 
 function MusicCard({ item, cover, isPlaying = false, onPlay }) {
-  const [imgFailed, setImgFailed] = useState(false);
-  const showCover = cover && !imgFailed;
+  /* 0: 원본(300x300), 1: 100x100 다운그레이드, 2: 실패 */
+  const [tier, setTier] = useState(0);
+
+  /* cover prop이 바뀌면 tier 리셋 */
+  useEffect(() => { setTier(0); }, [cover]);
+
+  const src = (() => {
+    if (!cover || tier === 2) return null;
+    if (tier === 1) return cover.replace('300x300bb', '100x100bb');
+    return cover;
+  })();
 
   return (
     <div
@@ -11,12 +20,20 @@ function MusicCard({ item, cover, isPlaying = false, onPlay }) {
       onClick={onPlay}
     >
       <div className={styles.imgWrap}>
-        {showCover ? (
+        {src ? (
           <img
-            src={cover}
+            src={src}
             alt={item.title}
             className={styles.coverImg}
-            onError={() => setImgFailed(true)}
+            onError={() => {
+              if (tier === 0) {
+                console.warn('[cover] 300x300 failed, retry 100x100:', item.artist, '-', item.title);
+                setTier(1);
+              } else {
+                console.warn('[cover] all sizes failed:', item.artist, '-', item.title);
+                setTier(2);
+              }
+            }}
           />
         ) : (
           <div className={styles.fallback}>
