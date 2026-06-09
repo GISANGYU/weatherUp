@@ -1,9 +1,6 @@
-import Masonry from 'react-masonry-css';
 import WeatherBanner from '../../components/WeatherBanner';
 import ActivityCard  from '../../components/ActivityCard';
 import weatherData   from '../../data/weatherData';
-
-const BREAKPOINTS = { default: 4, 1280: 3, 900: 2 };
 
 function ActivityPage({ weatherMode }) {
   const items = weatherData[weatherMode].activity;
@@ -11,15 +8,11 @@ function ActivityPage({ weatherMode }) {
   return (
     <div className="container">
       <WeatherBanner weatherMode={weatherMode} category="activity" />
-      <Masonry
-        breakpointCols={BREAKPOINTS}
-        className="masonry-grid"
-        columnClassName="masonry-column"
-      >
+      <div className="card-grid">
         {items.map(item => (
           <ActivityCard key={item.id} item={item} weatherMode={weatherMode} />
         ))}
-      </Masonry>
+      </div>
     </div>
   );
 }

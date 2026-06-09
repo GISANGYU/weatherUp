@@ -1,4 +1,83 @@
-/* ══ HERO ══════════════════════════════════════════════ */
+/* ══ VISUAL HERO — 풀스크린 무드 비주얼 ═════════════════════
+   높이 80vh → 하단에 다음 콘텐츠가 살짝 보여 스크롤 존재를 암시.
+   날씨 셀렉터는 섹션 높이 ~80% 지점에 배치 (absolute).        */
+.visual {
+  position: relative;
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 var(--sp-8);
+}
+
+.visualInner {
+  position: absolute;
+  top: 38%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  margin: 0 auto;
+  width: 100%;
+  max-width: 760px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-4);
+}
+
+.visualEyebrow {
+  font: 700 12px/1 'Space Mono', ui-monospace, monospace;
+  letter-spacing: var(--ls-wider);
+  text-transform: uppercase;
+  color: var(--accent);
+  animation: fadeUp 0.55s ease both;
+}
+
+.visualTitle {
+  font-size: clamp(40px, 6vw, 72px);
+  font-weight: var(--fw-black);
+  letter-spacing: var(--ls-tight);
+  line-height: 1.08;
+  color: var(--text);
+  animation: fadeUp 0.6s 0.06s ease both;
+}
+
+.visualSub {
+  font-size: var(--text-body);
+  color: var(--text-muted);
+  line-height: var(--lh-relaxed);
+  max-width: 480px;
+  animation: fadeUp 0.6s 0.12s ease both;
+}
+
+/* 섹션 높이 ~60% 지점 — 2배 커진 셀렉터 */
+.visualSelector {
+  position: absolute;
+  top: 60%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-5);
+  animation: fadeUp 0.6s 0.18s ease both;
+}
+
+.selectEyebrow {
+  font: 700 12px/1.5 'Space Mono', ui-monospace, monospace;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+@media (max-width: 640px) {
+  .visualInner { top: 30%; }
+  .visualSelector { top: 58%; }
+}
+
+/* ══ HERO (구버전 · 미사용) ══════════════════════════════ */
 .hero {
   min-height: 88vh;
   display: flex;
@@ -9,7 +88,8 @@
 }
 
 .heroInner {
-  max-width: 720px;
+  max-width: 1080px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -17,39 +97,77 @@
 }
 
 .heroEyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
   font-size: var(--text-label);
   font-weight: var(--fw-semibold);
   letter-spacing: var(--ls-wider);
   text-transform: uppercase;
   color: var(--accent);
+  animation: fadeUp 0.55s ease both;
 }
 
-/* ══ HERO ICON ══════════════════════════════════════════ */
-.heroIcon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  animation: heroIconFloat 3.6s ease-in-out infinite, fadeUp 0.55s 0.08s ease both;
-  transition: color 0.5s ease, filter 0.5s ease;
+.heroDot {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.55;
 }
 
-@keyframes heroIconFloat {
-  0%,  100% { transform: translateY(0);    }
-  50%        { transform: translateY(-8px); }
+/* ── 현재 기온 블록 ───────────────────────────────────── */
+.heroTemp {
+  display: flex;
+  align-items: baseline;
+  gap: var(--sp-4);
+  animation: fadeUp 0.6s 0.04s ease both;
 }
 
-.heroIcon_sunny  { filter: drop-shadow(0 8px 32px rgba(255, 184, 0,   0.55)); }
-.heroIcon_cloudy { filter: drop-shadow(0 8px 32px rgba(122, 147, 181, 0.45)); }
-.heroIcon_rainy  { filter: drop-shadow(0 8px 32px rgba(74,  158, 255, 0.50)); }
-.heroIcon_snowy  { filter: drop-shadow(0 8px 32px rgba(133, 180, 232, 0.55)); }
+.heroTempCurrent {
+  font-size: clamp(72px, 12vw, 140px);
+  font-weight: var(--fw-black);
+  color: var(--text);
+  letter-spacing: var(--ls-tight);
+  line-height: 1;
+}
+
+.heroTempDeg {
+  font-weight: var(--fw-bold);
+  color: var(--accent);
+}
+
+.heroTempMeta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--sp-2);
+}
+
+.heroThemeBadge {
+  font-size: var(--text-label);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--ls-wider);
+  text-transform: uppercase;
+  color: var(--accent);
+  background: var(--accent-soft, rgba(0, 0, 0, 0.06));
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+}
+
+.heroTempRange {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}
 
 .heroTitle {
-  font-size: var(--text-display);
+  font-size: var(--text-h1);
   font-weight: var(--fw-black);
   color: var(--text);
   letter-spacing: var(--ls-tight);
   line-height: var(--lh-tight);
-  animation: fadeUp 0.6s ease both;
+  margin-top: var(--sp-2);
+  animation: fadeUp 0.6s 0.08s ease both;
 }
 
 @keyframes fadeUp {
@@ -65,323 +183,453 @@
   animation: fadeUp 0.6s 0.12s ease both;
 }
 
-/* ══ SECTIONS ═══════════════════════════════════════════ */
+/* ── 7일 ForecastRow ──────────────────────────────────── */
+.forecastRow {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: var(--sp-3);
+  width: 100%;
+  max-width: 1080px;
+  margin-top: var(--sp-6);
+  animation: fadeUp 0.6s 0.18s ease both;
+}
+
+@media (max-width: 900px) {
+  .forecastRow {
+    grid-template-columns: repeat(7, minmax(80px, 1fr));
+    overflow-x: auto;
+    padding-bottom: var(--sp-2);
+    scrollbar-width: thin;
+  }
+}
+
+@media (max-width: 560px) {
+  .forecastRow {
+    grid-template-columns: repeat(7, 96px);
+  }
+}
+
+/* ══ EDITORIAL SECTIONS (Stitch 시안 반영) ════════════════ */
 .sections {
-  width: 90%;
-  max-width: var(--max-width);
+  width: calc(100% - 2 * var(--sp-12));
+  max-width: 1600px;
   margin: 0 auto;
   padding-bottom: var(--sp-24);
   display: flex;
   flex-direction: column;
-  gap: var(--sp-20);
+  gap: 132px;
 }
 
-.section {}
-
+/* ── 섹션 헤더: eyebrow(mono) + display 타이틀 + 전체보기 ── */
 .sectionHead {
   display: flex;
-  align-items: baseline;
+  justify-content: space-between;
+  align-items: flex-end;
   gap: var(--sp-4);
-  margin-bottom: var(--sp-6);
-  border-bottom: 1px solid var(--divider);
-  padding-bottom: var(--sp-4);
+  margin-bottom: 56px;
 }
 
-.sectionLabel {
-  font-size: var(--text-label);
-  font-weight: var(--fw-semibold);
-  letter-spacing: var(--ls-wider);
+.eyebrow {
+  display: block;
+  margin-bottom: var(--sp-2);
+  font: 700 13px/1.5 'Space Mono', ui-monospace, monospace;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--accent);
-  flex-shrink: 0;
 }
 
 .sectionTitle {
-  font-size: var(--text-h2);
-  font-weight: var(--fw-bold);
+  font-family: 'Manrope', 'Pretendard', sans-serif;
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 800;
+  letter-spacing: var(--ls-tight);
+  line-height: 1.15;
   color: var(--text);
-  letter-spacing: var(--ls-snug);
-  flex: 1;
 }
 
 .seeAll {
-  font-size: var(--text-sm);
-  font-weight: var(--fw-medium);
-  color: var(--text-muted);
-  white-space: nowrap;
-  transition: color var(--transition);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
   flex-shrink: 0;
+  font-size: var(--text-body);
+  font-weight: var(--fw-semibold);
+  color: var(--accent);
+  white-space: nowrap;
 }
-.seeAll:hover { color: var(--accent); }
+.seeAllArrow { transition: transform var(--transition); }
+.seeAll:hover .seeAllArrow { transform: translateX(4px); }
 
-/* ══ OOTD ════════════════════════════════════════════════ */
-.ootdGrid {
-  display: grid;
-  grid-template-columns: 3fr 2fr;
-  gap: var(--sp-4);
-  height: 480px;
+/* 카드 배경 미디어 — 이미지/그라데이션 + 호버 줌 (각 섹션에서 공용) */
+.media {
+  position: absolute;
+  inset: 0;
+  transition: transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
-/* 피처드 카드 */
-.featuredCard {
+/* ════════════════════════════════════════════════════════
+   Balanced Layout (Stitch) — 4개 섹션
+   ════════════════════════════════════════════════════════ */
+
+/* ══ STYLE — 시네마틱 가로 캐러셀 ══ */
+/* 슬라이드 예고형 — 1번 카드 full, 2번 카드는 화면 오른쪽 끝까지 닿으며 잘림.
+   왼쪽은 컨테이너 정렬 유지, 오른쪽만 뷰포트 끝까지 full-bleed (body가 overflow-x:hidden). */
+.styleRow {
+  display: flex;
+  gap: var(--sp-6);
+  /* 세로 그림자가 잘리지 않도록 위/아래만 padding + 음수 margin으로 위치 보정.
+     왼쪽은 컨테이너 시작점에 정확히 맞춤(돌출 없음), 오른쪽만 full-bleed.
+     (overflow-x:auto 는 overflow-y 도 auto 로 만들어 드롭섀도를 직사각형으로 자른다) */
+  padding: 20px 0 46px;
+  margin-top: -20px;
+  margin-bottom: -46px;
+  margin-right: calc(50% - 50vw);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  /* 오른쪽 끝으로 갈수록 점점 투명 — 넘어간 2번 카드가 부드럽게 사라지게.
+     마스크는 #fff(보임)→transparent(사라짐) 이어야 alpha/luminance 모드 양쪽에서 안전 */
+  -webkit-mask-image: linear-gradient(to right, #fff 0, #fff 82%, transparent 99%);
+          mask-image: linear-gradient(to right, #fff 0, #fff 82%, transparent 99%);
+}
+.styleRow::-webkit-scrollbar { display: none; }
+
+.slide {
+  display: block;
   position: relative;
+  flex: 0 0 60%;
+  aspect-ratio: 8 / 3;
   border-radius: var(--radius-lg);
   overflow: hidden;
-  display: block;
-  transition: transform var(--transition);
+  scroll-snap-align: start;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
 }
-.featuredCard:hover { transform: scale(1.01); }
+.slide:hover .media { transform: scale(1.05); }
 
-.featuredOverlay {
+.slideOverlay {
   position: absolute;
   inset: 0;
+  z-index: 1;
   display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: var(--sp-8);
-  background: linear-gradient(
-    to top,
-    rgba(0,0,0,0.68) 0%,
-    rgba(0,0,0,0.28) 50%,
-    transparent 100%
-  );
+  align-items: center;
+  padding: clamp(var(--sp-6), 5vw, var(--sp-16));
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0.10) 45%, transparent 75%);
 }
+.slideInner { max-width: 26rem; color: #fff; }
 
-.featuredEye {
-  font-size: var(--text-label);
-  font-weight: var(--fw-semibold);
-  letter-spacing: var(--ls-wider);
+.slideEyebrow {
+  display: block;
+  font: 700 14px/1.5 'Space Mono', ui-monospace, monospace;
+  letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.65);
-  margin-bottom: var(--sp-2);
-}
-
-.featuredTitle {
-  font-size: 28px;
-  font-weight: var(--fw-black);
-  color: #fff;
-  letter-spacing: var(--ls-tight);
-  line-height: var(--lh-snug);
-  margin-bottom: var(--sp-3);
-}
-
-.featuredDesc {
-  font-size: var(--text-sm);
-  color: rgba(255,255,255,0.78);
-  line-height: var(--lh-normal);
+  color: rgba(255, 255, 255, 0.92);
   margin-bottom: var(--sp-4);
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
 }
+.slideTitle {
+  font-family: 'Manrope', 'Pretendard', sans-serif;
+  font-size: clamp(30px, 4vw, 56px);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: var(--ls-tight);
+  margin-bottom: var(--sp-6);
+}
+.slideBtn {
+  display: inline-block;
+  color: rgba(255, 255, 255, 0.95);
+  font: 600 14px/1 'Space Mono', ui-monospace, monospace;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding-bottom: 5px;
+  border-bottom: 1.5px solid rgba(255, 255, 255, 0.6);
+  transition: border-color var(--transition);
+}
+.slide:hover .slideBtn { border-color: #fff; }
 
-.featuredKws {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--sp-2);
-}
-
-.featuredKw {
-  font-size: var(--text-label);
-  font-weight: var(--fw-medium);
-  color: rgba(255,255,255,0.65);
-  background: rgba(255,255,255,0.14);
-  border: 1px solid rgba(255,255,255,0.22);
-  padding: 3px 10px;
-  border-radius: var(--radius-pill);
-}
-
-/* 서브 카드 3장 */
-.ootdSubs {
-  display: flex;
-  flex-direction: column;
-  gap: var(--sp-4);
-}
-
-.subCard {
-  flex: 1;
-  position: relative;
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  display: block;
-  transition: transform var(--transition);
-  min-height: 0;
-}
-.subCard:hover { transform: scale(1.02); }
-
-.subOverlay {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: var(--sp-5);
-  background: linear-gradient(
-    to top,
-    rgba(0,0,0,0.62) 0%,
-    rgba(0,0,0,0.16) 60%,
-    transparent 100%
-  );
-}
-
-.subTitle {
-  font-size: 15px;
-  font-weight: var(--fw-bold);
-  color: #fff;
-  line-height: var(--lh-snug);
-  margin-bottom: var(--sp-2);
-}
-
-.subKws {
-  display: flex;
-  gap: var(--sp-2);
-}
-.subKws span {
-  font-size: var(--text-label);
-  color: rgba(255,255,255,0.62);
-}
-
-/* ══ FOOD ════════════════════════════════════════════════ */
-.foodGrid {
+/* ══ CUISINE — 에디토리얼 3-그리드 (캡션 하단) ══ */
+.cuisineGrid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--sp-4);
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-8);
 }
-
-.foodCard {
+.cuisineCard { display: block; }
+.cuisineImg {
   position: relative;
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 1 / 1;
   border-radius: var(--radius-md);
   overflow: hidden;
-  display: block;
-  transition: transform var(--transition);
+  background: var(--card);
+  margin-bottom: var(--sp-4);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.5s ease;
 }
-.foodCard:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+.cuisineCard:hover .cuisineImg { box-shadow: 0 16px 34px rgba(0, 0, 0, 0.10); }
+.cuisineCard:hover .media { transform: scale(1.05); }
 
-.foodOverlay {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: var(--sp-4);
-  background: linear-gradient(
-    to top,
-    rgba(0,0,0,0.65) 0%,
-    rgba(0,0,0,0.18) 55%,
-    transparent 100%
-  );
+.cuisineTitle {
+  font-family: 'Manrope', 'Pretendard', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.3;
 }
-
-.foodTitle {
-  display: block;
-  font-size: 16px;
-  font-weight: var(--fw-bold);
-  color: #fff;
-  line-height: var(--lh-snug);
-}
-
-.foodSub {
+.cuisineSub {
   margin-top: var(--sp-1);
-  font-size: var(--text-caption);
-  color: rgba(255,255,255,0.65);
+  font-size: var(--text-sm);
+  color: var(--text-muted);
 }
 
-/* ══ ACTIVITY ════════════════════════════════════════════ */
-.actGrid {
+/* ══ ACTIVITY — 트립틱 콜라주 ══ */
+.collage {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--sp-4);
+  grid-template-columns: repeat(12, 1fr);
+  align-items: center;
 }
+.colLeft   { grid-column: span 3; z-index: 1; margin-right: -32px; }
+.colCenter { grid-column: span 6; z-index: 2; }
+.colRight  { grid-column: span 3; z-index: 1; margin-left: -32px; }
 
-.actCard {
-  position: relative;
-  aspect-ratio: 16 / 8;
-  border-radius: var(--radius-md);
-  overflow: hidden;
+.actSide {
   display: block;
-  transition: transform var(--transition);
+  position: relative;
+  height: 450px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.16);
 }
-.actCard:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+.actCenter {
+  display: block;
+  position: relative;
+  height: 600px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 4px solid rgba(255, 255, 255, 0.22);
+  box-shadow: 0 28px 60px rgba(0, 0, 0, 0.24);
+}
+.actSide:hover .media, .actCenter:hover .media { transform: scale(1.05); }
 
 .actOverlay {
   position: absolute;
   inset: 0;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   padding: var(--sp-6);
-  background: linear-gradient(
-    to top,
-    rgba(0,0,0,0.65) 0%,
-    rgba(0,0,0,0.20) 55%,
-    transparent 100%
-  );
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.78) 0%, rgba(0, 0, 0, 0.10) 55%, transparent 100%);
 }
-
-.actTitle {
-  font-size: 20px;
-  font-weight: var(--fw-bold);
-  color: #fff;
-  letter-spacing: var(--ls-snug);
+.actOverlayLg { padding: var(--sp-10); }
+.actEyebrow {
+  font: 700 12px/1.5 'Space Mono', ui-monospace, monospace;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.85);
   margin-bottom: var(--sp-2);
 }
-
-.actDesc {
-  font-size: var(--text-sm);
-  color: rgba(255,255,255,0.75);
-  line-height: var(--lh-normal);
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  margin-bottom: var(--sp-3);
+.actEyebrowAccent { color: var(--accent); }
+.actName {
+  font-family: 'Manrope', 'Pretendard', sans-serif;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: var(--ls-snug);
+  line-height: 1.15;
+}
+.actNameSm { font-size: 23px; }
+.actNameLg { font-size: clamp(30px, 3.4vw, 40px); }
+.actDescTxt {
+  margin-top: var(--sp-3);
+  max-width: 24rem;
+  font-size: var(--text-body);
+  color: rgba(255, 255, 255, 0.85);
+  line-height: var(--lh-relaxed);
 }
 
-.actMeta {
-  display: flex;
-  align-items: center;
-  gap: var(--sp-3);
-  font-size: var(--text-caption);
-  color: rgba(255,255,255,0.60);
-}
-
-.actDot {
-  width: 3px;
-  height: 3px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.40);
-}
-
-/* ══ MUSIC ════════════════════════════════════════════════ */
-.musicGrid {
+/* ══ MUSIC — 분할(피처드 + 그리드 + 리스트) ══ */
+.musicSplit {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: var(--sp-3);
+  grid-template-columns: 5fr 7fr;
+  gap: var(--sp-8);
   align-items: start;
 }
 
-/* ══ RESPONSIVE ══════════════════════════════════════════ */
-@media (max-width: 1024px) {
-  .ootdGrid  { grid-template-columns: 1fr; height: auto; }
-  .ootdSubs  { flex-direction: row; height: 180px; }
-  .subCard   { flex: 1; }
-  .musicGrid { grid-template-columns: repeat(4, 1fr); }
+.musicFeatured {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--card);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  border: none;
+  display: block;
+}
+.musicFeatured .media { background-size: cover; background-position: center; }
+.featEmoji {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 96px;
+  background: color-mix(in srgb, var(--accent) 16%, var(--card));
+}
+.playOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  background: rgba(0, 0, 0, 0.42);
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+.musicFeatured:hover .playOverlay,
+.musicFeatured.isPlaying .playOverlay { opacity: 1; }
+.playOverlay .material-symbols-outlined { font-size: 72px; color: #fff; }
+.playLabel {
+  font: 600 13px/1 'Space Mono', ui-monospace, monospace;
+  letter-spacing: 0.2em;
+  color: #fff;
+}
+.musicFeatCaption {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: var(--sp-8);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.62) 0%, transparent 55%);
+}
+.musicFeatEyebrow {
+  font: 400 12px/1.5 'Space Mono', ui-monospace, monospace;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: var(--sp-2);
+}
+.musicFeatTitle {
+  font-family: 'Manrope', 'Pretendard', sans-serif;
+  font-size: clamp(24px, 3vw, 34px);
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.1;
+}
+.musicFeatSub {
+  margin-top: var(--sp-2);
+  font-size: var(--text-body);
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.musicRight { display: flex; flex-direction: column; gap: var(--sp-8); }
+.musicSmallGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-6);
+}
+.smallCard { cursor: pointer; }
+.smallCover {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--card);
+  margin-bottom: var(--sp-2);
+  transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease;
+}
+.smallCard:hover .smallCover { transform: translateY(-6px); box-shadow: 0 16px 30px rgba(0, 0, 0, 0.12); }
+.smallCover .media { background-size: cover; background-position: center; }
+.smallEmoji {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  background: color-mix(in srgb, var(--accent) 12%, var(--card));
+}
+.smallTitle {
+  font-size: var(--text-body);
+  font-weight: var(--fw-semibold);
+  color: var(--text);
+  line-height: 1.3;
+}
+.smallGenre {
+  margin-top: 2px;
+  font: 400 12px/1.4 'Space Mono', ui-monospace, monospace;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+.trackList { display: flex; flex-direction: column; gap: var(--sp-2); }
+.trackRow {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  padding: var(--sp-3);
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background var(--transition), border-color var(--transition);
+}
+.trackRow:hover {
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+  border-color: var(--border);
+}
+.trackThumb {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: var(--card);
+}
+.trackThumb .media { background-size: cover; background-position: center; }
+.trackThumbEmoji {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  background: color-mix(in srgb, var(--accent) 12%, var(--card));
+}
+.trackInfo { flex: 1; min-width: 0; }
+.trackTitle {
+  font-size: var(--text-body);
+  font-weight: var(--fw-semibold);
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.trackMeta {
+  margin-top: 2px;
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}
+.trackIcon { color: var(--accent); flex-shrink: 0; font-size: 26px; }
+
+/* ══ RESPONSIVE ══ */
+@media (max-width: 900px) {
+  .cuisineGrid { grid-template-columns: repeat(3, 1fr); }
 }
 
 @media (max-width: 768px) {
-  .foodGrid  { grid-template-columns: repeat(2, 1fr); }
-  .actGrid   { grid-template-columns: 1fr; }
-  .ootdSubs  { height: auto; flex-direction: row; }
-  .musicGrid { grid-template-columns: repeat(3, 1fr); }
-  .sections  { gap: var(--sp-16); width: 92%; }
+  .sections { gap: var(--sp-16); width: calc(100% - 2 * var(--sp-8)); }
+  .slide { flex: 0 0 86%; aspect-ratio: 21 / 9; }
+  .cuisineGrid { grid-template-columns: 1fr; }
+  .collage { display: flex; flex-direction: column; }
+  .colLeft, .colCenter, .colRight { margin: 0; }
+  .actSide, .actCenter { height: 320px; }
+  .musicSplit { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 480px) {
-  .foodGrid  { grid-template-columns: repeat(2, 1fr); }
-  .musicGrid { grid-template-columns: repeat(2, 1fr); }
-  .heroTitle { letter-spacing: -0.02em; }
-  .ootdSubs  { flex-direction: column; height: auto; }
-  .subCard   { aspect-ratio: 16 / 7; }
+  .musicSmallGrid { grid-template-columns: repeat(2, 1fr); }
 }

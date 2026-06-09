@@ -17,6 +17,15 @@ const localActSunny   = (id) => `${PUB}/images/activity/sunny/${id}.jpg`;
 const localActCloudy  = (id) => `${PUB}/images/activity/cloudy/${id}.jpg`;
 const localActRainy   = (id) => `${PUB}/images/activity/rainy/${id}.jpg`;
 const localActSnowy   = (id) => `${PUB}/images/activity/snowy/${id}.jpg`;
+const localOotdPc     = (id) => `${PUB}/images/ootd/partly-cloudy/${id}.jpg`;
+const localFoodPc     = (id) => `${PUB}/images/food/partly-cloudy/${id}.jpg`;
+const localActPc      = (id) => `${PUB}/images/activity/partly-cloudy/${id}.jpg`;
+const localOotdStormy = (id) => `${PUB}/images/ootd/stormy/${id}.jpg`;
+const localFoodStormy = (id) => `${PUB}/images/food/stormy/${id}.jpg`;
+const localActStormy  = (id) => `${PUB}/images/activity/stormy/${id}.jpg`;
+const localOotdDusty  = (id) => `${PUB}/images/ootd/dusty/${id}.jpg`;
+const localFoodDusty  = (id) => `${PUB}/images/food/dusty/${id}.jpg`;
+const localActDusty   = (id) => `${PUB}/images/activity/dusty/${id}.jpg`;
 
 const CARD_PHOTOS = {
 
@@ -100,6 +109,54 @@ const CARD_PHOTOS = {
   snoa2: localActSnowy('snoa2'),
   snoa3: localActSnowy('snoa3'),
   snoa4: localActSnowy('snoa4'),
+
+  /* ══ PARTLY-CLOUDY · OOTD ════════════════════════════════ */
+  pco1: localOotdPc('pco1'),
+  pco2: localOotdPc('pco2'),
+  pco3: localOotdPc('pco3'),
+  pco4: localOotdPc('pco4'),
+
+  /* ══ PARTLY-CLOUDY · FOOD ════════════════════════════════ */
+  pcf1: localFoodPc('pcf1'),
+  pcf2: localFoodPc('pcf2'),
+  pcf3: localFoodPc('pcf3'),
+  pcf4: localFoodPc('pcf4'),
+
+  /* ══ PARTLY-CLOUDY · ACTIVITY ════════════════════════════ */
+  pca1: localActPc('pca1'),
+  pca2: localActPc('pca2'),
+
+  /* ══ STORMY · OOTD ═══════════════════════════════════════ */
+  sto1: localOotdStormy('sto1'),
+  sto2: localOotdStormy('sto2'),
+  sto3: localOotdStormy('sto3'),
+  sto4: localOotdStormy('sto4'),
+
+  /* ══ STORMY · FOOD ═══════════════════════════════════════ */
+  stf1: localFoodStormy('stf1'),
+  stf2: localFoodStormy('stf2'),
+  stf3: localFoodStormy('stf3'),
+  stf4: localFoodStormy('stf4'),
+
+  /* ══ STORMY · ACTIVITY ═══════════════════════════════════ */
+  sta1: localActStormy('sta1'),
+  sta2: localActStormy('sta2'),
+
+  /* ══ DUSTY · OOTD ════════════════════════════════════════ */
+  duo1: localOotdDusty('duo1'),
+  duo2: localOotdDusty('duo2'),
+  duo3: localOotdDusty('duo3'),
+  duo4: localOotdDusty('duo4'),
+
+  /* ══ DUSTY · FOOD ════════════════════════════════════════ */
+  duf1: localFoodDusty('duf1'),
+  duf2: localFoodDusty('duf2'),
+  duf3: localFoodDusty('duf3'),
+  duf4: localFoodDusty('duf4'),
+
+  /* ══ DUSTY · ACTIVITY ════════════════════════════════════ */
+  dua1: localActDusty('dua1'),
+  dua2: localActDusty('dua2'),
 };
 
 export default CARD_PHOTOS;

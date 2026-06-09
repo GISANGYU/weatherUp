@@ -30,8 +30,17 @@ cra*.err.log
 
 # local-only docs & backups (not part of web build)
 /src_backup_*/
-/plan.md
+/plan*.md
 /skill/
 /WeatherUp_.pdf
 /발표대본.txt
+/STUDY_NOTES.md
 *.pdf
+
+# design scratch / mockups (not part of the app)
+/daily-demo.html
+/design-bento.html
+/design-concepts.html
+/weather-demos.html
+/stitch-prompt.md
+/섹션*.png

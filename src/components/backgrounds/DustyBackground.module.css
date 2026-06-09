@@ -1,0 +1,130 @@
+/* 황사 — 3색만 사용
+ *   --dust-haze  : 모래빛 (하늘·창문·태양 글로우)
+ *   --dust-mid   : 중간빛 (원경 건물·스모그)
+ *   --dust-dark  : 실루엣 (근경 건물)                          */
+.wrapper {
+  position: fixed;
+  inset: 0;
+  --dust-haze: #e3d2ac;
+  --dust-mid:  #b59a6c;
+  --dust-dark: #4a3a28;
+  background: linear-gradient(180deg, var(--dust-haze) 0%, var(--dust-mid) 100%);
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.paleSun {
+  position: absolute;
+  top: 26%;
+  left: 64%;
+  width: 320px;
+  height: 320px;
+  margin: -160px 0 0 -160px;
+  background: radial-gradient(circle,
+    color-mix(in srgb, var(--dust-haze) 85%, transparent) 0%,
+    transparent 70%);
+  border-radius: 50%;
+  animation: dusty-sun 5s ease-in-out infinite;
+  z-index: 1;
+}
+
+@keyframes dusty-sun {
+  0%, 100% { opacity: 0.55; }
+  50%      { opacity: 0.95; }
+}
+
+/* ── 원경: 흐릿한 저층 실루엣 (하늘에 녹아드는 거리감) ── */
+.far {
+  position: absolute;
+  left: -2%;
+  right: -2%;
+  bottom: 30%;
+  height: 26%;
+  background: var(--dust-mid);
+  opacity: 0.5;
+  filter: blur(1px);
+  -webkit-mask-size: 100% 100%;
+          mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
+  -webkit-mask-position: bottom;
+          mask-position: bottom;
+  z-index: 2;
+}
+
+/* ── 근경: 비율 유지(auto 100%) + 가로 타일링 → 늘어짐 없는 스카이라인 ── */
+.near {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 44%;
+  background: var(--dust-dark);
+  -webkit-mask-size: auto 100%;
+          mask-size: auto 100%;
+  -webkit-mask-repeat: repeat-x;
+          mask-repeat: repeat-x;
+  -webkit-mask-position: bottom left;
+          mask-position: bottom left;
+  z-index: 3;
+}
+
+/* ── 먼지 안개: 모래빛 덩어리가 화면을 가로질러 둥둥 떠다님 ── */
+.dust {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+}
+
+.mote {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle,
+    color-mix(in srgb, var(--dust-haze) 48%, transparent) 0%,
+    transparent 70%);
+  filter: blur(10px);
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.mote:nth-child(1) { top: 30%; width: 300px; height: 190px; animation: dust-float-a 30s linear infinite;     }
+.mote:nth-child(2) { top: 54%; width: 220px; height: 150px; animation: dust-float-b 40s linear infinite 6s;  }
+.mote:nth-child(3) { top: 12%; width: 360px; height: 230px; animation: dust-float-a 52s linear infinite 14s; }
+.mote:nth-child(4) { top: 66%; width: 180px; height: 130px; animation: dust-float-b 34s linear infinite 22s; }
+.mote:nth-child(5) { top: 40%; width: 260px; height: 170px; animation: dust-float-a 46s linear infinite 30s; }
+
+@keyframes dust-float-a {
+  0%   { transform: translate(-25vw, 0);     opacity: 0;   }
+  18%  {                                     opacity: 0.5; }
+  82%  {                                     opacity: 0.5; }
+  100% { transform: translate(125vw, -22px); opacity: 0;   }
+}
+@keyframes dust-float-b {
+  0%   { transform: translate(-25vw, 0);     opacity: 0;   }
+  18%  {                                     opacity: 0.4; }
+  82%  {                                     opacity: 0.4; }
+  100% { transform: translate(125vw, 20px);  opacity: 0;   }
+}
+
+/* ── 미세먼지 띠 ── */
+.smog {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg,
+    transparent 0%,
+    color-mix(in srgb, var(--dust-mid) 28%, transparent) 60%,
+    color-mix(in srgb, var(--dust-mid) 58%, transparent) 100%);
+  filter: blur(6px);
+  z-index: 4;
+  animation: dusty-smog 11s ease-in-out infinite;
+}
+
+@keyframes dusty-smog {
+  0%, 100% { transform: translateY(0);    opacity: 0.85; }
+  50%      { transform: translateY(-12px); opacity: 1;    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .paleSun, .smog { animation: none; }
+  .mote { animation: none; opacity: 0.32; }
+}

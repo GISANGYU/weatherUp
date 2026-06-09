@@ -1,0 +1,37 @@
+.wrapper {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(180deg, #363c44 0%, #4c545f 100%);
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.cloud {
+  position: absolute;
+  color: #c5ccd4;
+  /* 셀렉터 구름과 동일한 라디얼 그라디언트 — 정사각 요소라 형상이 그대로 재현됨 */
+  background:
+    radial-gradient(circle at 44% 49%, currentColor 0 15%, transparent 16%),
+    radial-gradient(circle at 60% 46%, currentColor 0 17%, transparent 18%),
+    radial-gradient(circle at 33% 60%, currentColor 0 15%, transparent 16%),
+    radial-gradient(circle at 51% 61%, currentColor 0 17%, transparent 18%),
+    radial-gradient(circle at 69% 60%, currentColor 0 15%, transparent 16%),
+    radial-gradient(ellipse 34% 11% at 51% 71%, rgba(20, 28, 38, 0.20) 0 60%, transparent 100%);
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.20));
+  animation-name: cloudy-drift;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.cloud1 { top: 10%; width: 340px; height: 340px; animation-duration: 44s; }
+.cloud2 { top: 34%; width: 440px; height: 440px; animation-duration: 58s; animation-delay: -28s; }
+.cloud3 { top: 60%; width: 300px; height: 300px; animation-duration: 50s; animation-delay: -16s; }
+
+@keyframes cloudy-drift {
+  0%   { transform: translateX(-580px); }
+  100% { transform: translateX(calc(100vw + 580px)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cloud { animation: none; }
+}

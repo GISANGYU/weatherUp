@@ -1,0 +1,159 @@
+/* DevTokensPage — Phase 2 토큰 시각 검증 전용. 실제 앱 스타일과 분리. */
+
+.page {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 48px 24px 96px;
+  background: #fafafa;
+  color: #222;
+  font-family: 'Pretendard', sans-serif;
+}
+
+.pageHeader {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.pageHeader h1 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.pageHeader p {
+  color: #666;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.pageHeader code {
+  background: #eee;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+/* ── 7 테마 그리드 ─────────────────────────────────────────────────────── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Theme card: 토큰이 실제 적용된 미니 페이지 ────────────────────────── */
+.card {
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.cardTitle {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.cardMood {
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.brightnessBadge {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--bg);
+  white-space: nowrap;
+}
+
+/* 내부 카드 — --card 토큰 검증 */
+.innerCard {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.innerText {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text);
+}
+
+.innerMuted {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.accentButton {
+  align-self: flex-start;
+  background: var(--accent);
+  color: var(--bg);
+  font-weight: 600;
+  font-size: 13px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: transform 0.2s ease;
+}
+
+.accentButton:hover {
+  transform: translateY(-1px);
+}
+
+/* 토큰 스와치 그리드 */
+.tokens {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--border);
+}
+
+.swatch {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+}
+
+.swatchChip {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.swatchLabel {
+  font-family: ui-monospace, monospace;
+  color: var(--text-muted);
+  font-size: 11px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

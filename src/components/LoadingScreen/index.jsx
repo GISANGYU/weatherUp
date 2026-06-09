@@ -2,10 +2,13 @@ import { useEffect, useState } from 'react';
 import styles from './LoadingScreen.module.css';
 
 const ICONS = [
-  { icon: '☀️', label: '맑음', colorVar: '#FFB800' },
-  { icon: '⛅', label: '흐림', colorVar: '#8A9BB0' },
-  { icon: '🌧️', label: '비',   colorVar: '#4A9EFF' },
-  { icon: '❄️', label: '눈',   colorVar: '#6A9FD8' },
+  { icon: '☀️', label: '맑음',     colorVar: '#FFB800' },
+  { icon: '⛅', label: '구름조금', colorVar: '#9BB8D9' },
+  { icon: '❄️', label: '눈',       colorVar: '#A8C8FF' },
+  { icon: '🌫️', label: '황사',     colorVar: '#B8A888' },
+  { icon: '☁️', label: '흐림',     colorVar: '#B8C5D5' },
+  { icon: '🌧️', label: '비',       colorVar: '#4A9EFF' },
+  { icon: '⚡', label: '뇌우',     colorVar: '#8877F5' },
 ];
 
 function LoadingScreen({ visible }) {
@@ -53,7 +56,7 @@ function LoadingScreen({ visible }) {
         </div>
 
         {/* 메시지 */}
-        <p className={styles.message}>날씨 정보를 불러오고 있어요!</p>
+        <p className={styles.message}>무드를 준비하고 있어요!</p>
 
         {/* 도트 인디케이터 */}
         <div className={styles.dots}>

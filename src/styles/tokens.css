@@ -1,0 +1,69 @@
+/* =========================================================================
+   tokens.css — Phase 2 원시 토큰 (Raw Design Tokens)
+   ---------------------------------------------------------------------------
+   7 테마 × 6 의미축 = 42 원시 변수. 컴포넌트는 이 파일의 변수를 직접
+   참조하지 않고 themes.css 의 의미 토큰(--bg, --accent, --text,
+   --text-muted, --card, --border) 을 경유한다.
+
+   밝기 계열
+   ├── 밝음   : sunny, snowy, partly-cloudy, dusty
+   └── 어두움 : cloudy, rainy, stormy  (날씨 자체가 어두운 색감을 결정)
+   ========================================================================= */
+
+:root {
+  /* ── 1. sunny (밝음) ──────────────────────────────────────────────────── */
+  --sunny-bg:         #EEF6FF;
+  --sunny-accent:     #FFB800;
+  --sunny-text:       #2C3E50;
+  --sunny-text-muted: #6B7A8C;
+  --sunny-card:       #FFFFFF;
+  --sunny-border:     rgba(44, 62, 80, 0.08);
+
+  /* ── 2. snowy (밝음) ──────────────────────────────────────────────────── */
+  --snowy-bg:         #EAF0FF;
+  --snowy-accent:     #A8C8FF;
+  --snowy-text:       #2A3A5A;
+  --snowy-text-muted: #6A7A9A;
+  --snowy-card:       rgba(255, 255, 255, 0.9);
+  --snowy-border:     rgba(42, 58, 90, 0.10);
+
+  /* ── 3. partly-cloudy (밝음) ──────────────────────────────────────────── */
+  --partly-cloudy-bg:         #E8F0F7;
+  --partly-cloudy-accent:     #9BB8D9;
+  --partly-cloudy-text:       #3A4A5C;
+  --partly-cloudy-text-muted: #7A8A9C;
+  --partly-cloudy-card:       #FFFFFF;
+  --partly-cloudy-border:     rgba(58, 74, 92, 0.08);
+
+  /* ── 4. dusty (밝음 · 따뜻) ──────────────────────────────────────────── */
+  --dusty-bg:         #E5DFD3;
+  --dusty-accent:     #B8A888;
+  --dusty-text:       #3A3428;
+  --dusty-text-muted: #7A6E5C;
+  --dusty-card:       #F5EFE3;
+  --dusty-border:     rgba(58, 52, 40, 0.10);
+
+  /* ── 5. cloudy (어두움) ──────────────────────────────────────────────── */
+  --cloudy-bg:         #2A2E35;
+  --cloudy-accent:     #B8C5D5;
+  --cloudy-text:       #E5E8ED;
+  --cloudy-text-muted: #98A0AC;
+  --cloudy-card:       rgba(255, 255, 255, 0.06);
+  --cloudy-border:     rgba(255, 255, 255, 0.10);
+
+  /* ── 6. rainy (어두움) ───────────────────────────────────────────────── */
+  --rainy-bg:         #1C2B3A;
+  --rainy-accent:     #4A9EFF;
+  --rainy-text:       #E8F4FF;
+  --rainy-text-muted: #9AB5CC;
+  --rainy-card:       rgba(255, 255, 255, 0.08);
+  --rainy-border:     rgba(255, 255, 255, 0.12);
+
+  /* ── 7. stormy (어두움) ──────────────────────────────────────────────── */
+  --stormy-bg:         #151823;
+  --stormy-accent:     #8877F5;
+  --stormy-text:       #E8E5FF;
+  --stormy-text-muted: #A099C0;
+  --stormy-card:       rgba(255, 255, 255, 0.07);
+  --stormy-border:     rgba(255, 255, 255, 0.12);
+}

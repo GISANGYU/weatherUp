@@ -1,17 +1,25 @@
 import { useEffect, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { LuSun, LuCloud, LuCloudRain, LuSnowflake } from 'react-icons/lu';
+import {
+  LuSun, LuCloudSun, LuSnowflake, LuHaze,
+  LuCloud, LuCloudRain, LuCloudLightning,
+} from 'react-icons/lu';
 import AboutPanel      from '../AboutPanel';
 import NavDrawer       from '../NavDrawer';
 import NowPlayingBadge from '../NowPlayingBadge';
-import WeatherPicker   from '../WeatherPicker';
+import WeatherSelector from '../WeatherSelector';
+import { useWeather }  from '../../context/WeatherContext';
 import styles from './Header.module.css';
 
+/* 선택된 무드별 로고 아이콘 — AboutPanel 의 7종 세트와 동일 */
 const LOGO_ICONS = {
-  sunny:  LuSun,
-  cloudy: LuCloud,
-  rainy:  LuCloudRain,
-  snowy:  LuSnowflake,
+  'sunny':         LuSun,
+  'partly-cloudy': LuCloudSun,
+  'snowy':         LuSnowflake,
+  'dusty':         LuHaze,
+  'cloudy':        LuCloud,
+  'rainy':         LuCloudRain,
+  'stormy':        LuCloudLightning,
 };
 
 const NAV = [
@@ -19,13 +27,16 @@ const NAV = [
   { to: '/food',     label: 'Food'     },
   { to: '/activity', label: 'Activity' },
   { to: '/music',    label: 'Music'    },
+  { to: '/daily',    label: 'Daily'    },
 ];
 
-function Header({ weatherMode, setWeatherMode }) {
-  const [scrolled,     setScrolled]     = useState(false);
-  const [menuOpen,     setMenuOpen]     = useState(false);
-  const [infoOpen,     setInfoOpen]     = useState(false);
-  const [showPicker,   setShowPicker]   = useState(false);
+function Header() {
+  const { currentTheme, setTheme } = useWeather();
+
+  const [scrolled,  setScrolled]  = useState(false);
+  const [menuOpen,  setMenuOpen]  = useState(false);
+  const [infoOpen,  setInfoOpen]  = useState(false);
+  const [showStrip, setShowStrip] = useState(false);
   const location = useLocation();
 
   const isMusicPage = location.pathname === '/music';
@@ -37,20 +48,20 @@ function Header({ weatherMode, setWeatherMode }) {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  /* 날씨 선택기 표시 로직
-     - 메인(/)   : 히어로 비쥬얼(88vh) 지나면 표시
-     - 서브페이지 : 항상 표시                          */
+  /* 헤더 chip 셀렉터 표시 로직
+     - 메인(/)   : 히어로(셀렉터 보이는 구간) 지나면 표시
+     - 서브페이지 : 항상 표시                           */
   useEffect(() => {
     const isHome = location.pathname === '/';
 
     if (!isHome) {
-      setShowPicker(true);
+      setShowStrip(true);
       return;
     }
 
-    setShowPicker(false);
-    const threshold = window.innerHeight * 0.75;
-    const check = () => setShowPicker(window.scrollY > threshold);
+    setShowStrip(false);
+    const threshold = window.innerHeight * 0.7;
+    const check = () => setShowStrip(window.scrollY > threshold);
     check();
     window.addEventListener('scroll', check, { passive: true });
     return () => window.removeEventListener('scroll', check);
@@ -60,7 +71,7 @@ function Header({ weatherMode, setWeatherMode }) {
   const closeInfo = () => setInfoOpen(false);
   const openInfo  = () => setInfoOpen(true);
 
-  const LogoIcon = LOGO_ICONS[weatherMode] || LuSun;
+  const LogoIcon = LOGO_ICONS[currentTheme] || LuSun;
 
   return (
     <>
@@ -91,14 +102,9 @@ function Header({ weatherMode, setWeatherMode }) {
             ))}
           </nav>
 
-          {/* ── 오른쪽: NowPlaying + 날씨선택기 + ℹ (PC) / 햄버거 (모바일) ── */}
+          {/* ── 오른쪽: NowPlaying + ℹ (PC) / 햄버거 (모바일) ── */}
           <div className={styles.right}>
             {!isMusicPage && <NowPlayingBadge />}
-
-            {/* 날씨 선택기 — ℹ 버튼 왼쪽 */}
-            <div className={`${styles.pickerWrap} ${showPicker ? styles.pickerVisible : ''}`}>
-              <WeatherPicker weatherMode={weatherMode} setWeatherMode={setWeatherMode} />
-            </div>
 
             {/* PC 전용: ℹ / × 토글 버튼 */}
             <button
@@ -129,14 +135,24 @@ function Header({ weatherMode, setWeatherMode }) {
           </div>
 
         </div>
+
+        {/* ── 스크롤 sticky strip: 7테마 mini chip 셀렉터 ── */}
+        <div
+          className={`${styles.strip} ${showStrip ? styles.stripVisible : ''}`}
+          aria-hidden={!showStrip}
+        >
+          <div className={styles.stripInner}>
+            <WeatherSelector variant="chip" />
+          </div>
+        </div>
       </header>
 
       <NavDrawer isOpen={menuOpen} onClose={closeMenu} onAbout={openInfo} />
       <AboutPanel
         isOpen={infoOpen}
         onClose={closeInfo}
-        weatherMode={weatherMode}
-        setWeatherMode={setWeatherMode}
+        weatherMode={currentTheme}
+        setWeatherMode={setTheme}
       />
     </>
   );

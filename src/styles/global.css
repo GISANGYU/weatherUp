@@ -1,6 +1,13 @@
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
-@import './variables.css';
+
+/* Phase 1 (동결) — body.theme-X 단독 클래스용, Phase 1 페이지 호환 유지 */
+@import './variables-phase1.css';
+@import './themes-phase1.css';
+
+/* Phase 2 (재건축) — .theme-X.mode-Y 조합 클래스용 */
+@import './tokens.css';
 @import './themes.css';
+@import './scenes.css';
 
 *, *::before, *::after {
   box-sizing: border-box;
@@ -17,6 +24,7 @@ body {
   color: var(--text);
   transition: background-color 0.3s ease, color 0.3s ease;
   overflow-x: hidden;
+  overscroll-behavior-y: none;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
 }
@@ -30,7 +38,8 @@ img  { max-width: 100%; display: block; }
 .main-content {
   position: relative;
   z-index: 1;
-  min-height: calc(100vh - var(--header-h));
+  padding-top: var(--header-h);
+  min-height: 100vh;
 }
 
 /* ── 서브페이지 컨테이너 ── */
@@ -50,13 +59,19 @@ img  { max-width: 100%; display: block; }
   .container { width: 92%; }
 }
 
-/* ── 균등 카드 그리드 (서브페이지 공통) ── */
+/* ── 균등 카드 그리드 (서브페이지 공통) ──
+   grid-auto-rows: 1fr + 카드 stretch → 같은 종류 카드끼리 높이를 가장 큰 카드에 맞춰 일괄 정렬.
+   콘텐츠 길이가 달라도 카드 박스 높이가 동일해진다. */
 .card-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: var(--sp-4);
-  align-items: start;
+  align-items: stretch;
+  grid-auto-rows: 1fr;
 }
+
+/* 카드(그리드 직속)를 행 높이만큼 채워 동일 높이 보장 */
+.card-grid > * { height: 100%; }
 
 @media (max-width: 1280px) { .card-grid { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 900px)  { .card-grid { grid-template-columns: repeat(2, 1fr); } }

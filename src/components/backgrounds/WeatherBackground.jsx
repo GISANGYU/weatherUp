@@ -1,12 +1,27 @@
-import SunnyBackground  from './SunnyBackground';
-import CloudyBackground from './CloudyBackground';
-import RainyBackground  from './RainyBackground';
-import SnowyBackground  from './SnowyBackground';
+import SunnyBackground        from './SunnyBackground';
+import PartlyCloudyBackground from './PartlyCloudyBackground';
+import CloudyBackground       from './CloudyBackground';
+import RainyBackground        from './RainyBackground';
+import StormyBackground       from './StormyBackground';
+import SnowyBackground        from './SnowyBackground';
+import DustyBackground        from './DustyBackground';
 
-function WeatherBackground({ weatherMode }) {
+const BG_BY_THEME = {
+  'sunny':         SunnyBackground,
+  'partly-cloudy': PartlyCloudyBackground,
+  'cloudy':        CloudyBackground,
+  'rainy':         RainyBackground,
+  'stormy':        StormyBackground,
+  'snowy':         SnowyBackground,
+  'dusty':         DustyBackground,
+};
+
+function WeatherBackground({ theme }) {
+  const Bg = BG_BY_THEME[theme] || SunnyBackground;
+
   return (
     <div
-      key={weatherMode}
+      key={theme}
       style={{
         position: 'fixed',
         inset: 0,
@@ -15,10 +30,7 @@ function WeatherBackground({ weatherMode }) {
         animation: 'bgFadeIn 0.7s ease',
       }}
     >
-      {weatherMode === 'sunny'  && <SunnyBackground />}
-      {weatherMode === 'cloudy' && <CloudyBackground />}
-      {weatherMode === 'rainy'  && <RainyBackground />}
-      {weatherMode === 'snowy'  && <SnowyBackground />}
+      <Bg />
     </div>
   );
 }

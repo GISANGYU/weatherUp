@@ -12,13 +12,22 @@ const actSunnyImg   = (id) => `${PUB}/images/activity/sunny/${id}.jpg`;
 const actCloudyImg  = (id) => `${PUB}/images/activity/cloudy/${id}.jpg`;
 const actRainyImg   = (id) => `${PUB}/images/activity/rainy/${id}.jpg`;
 const actSnowyImg   = (id) => `${PUB}/images/activity/snowy/${id}.jpg`;
+const ootdPcImg     = (id) => `${PUB}/images/ootd/partly-cloudy/${id}.jpg`;
+const foodPcImg     = (id) => `${PUB}/images/food/partly-cloudy/${id}.jpg`;
+const actPcImg      = (id) => `${PUB}/images/activity/partly-cloudy/${id}.jpg`;
+const ootdStormyImg = (id) => `${PUB}/images/ootd/stormy/${id}.jpg`;
+const foodStormyImg = (id) => `${PUB}/images/food/stormy/${id}.jpg`;
+const actStormyImg  = (id) => `${PUB}/images/activity/stormy/${id}.jpg`;
+const ootdDustyImg  = (id) => `${PUB}/images/ootd/dusty/${id}.jpg`;
+const foodDustyImg  = (id) => `${PUB}/images/food/dusty/${id}.jpg`;
+const actDustyImg   = (id) => `${PUB}/images/activity/dusty/${id}.jpg`;
 
 const weatherData = {
   /* ══════════════ SUNNY ══════════════ */
   sunny: {
     messages: {
       home: {
-        title: '완벽한 맑은 날이에요',
+        title: '완벽한 맑은 날',
         subtitle: '햇살 가득한 하루, 가볍고 밝게 나가봐요',
       },
       ootd: {
@@ -669,7 +678,7 @@ const weatherData = {
   cloudy: {
     messages: {
       home: {
-        title: '구름 낀 차분한 날이에요',
+        title: '차분한 흐린 날',
         subtitle: '여유롭고 감성적인 하루를 보내봐요',
       },
       ootd: {
@@ -1294,7 +1303,7 @@ const weatherData = {
   rainy: {
     messages: {
       home: {
-        title: '비 오는 날이에요',
+        title: '운치 있는 비 오는 날',
         subtitle: '나가실때 우산챙겨가세요!',
       },
       ootd: {
@@ -1917,7 +1926,7 @@ const weatherData = {
   snowy: {
     messages: {
       home: {
-        title: '눈 내리는 날이에요',
+        title: '포근한 눈 내리는 날',
         subtitle: '소복히 쌓인 눈과 낭만있는 하루를 보내세요.',
       },
       ootd: {
@@ -2541,6 +2550,346 @@ const weatherData = {
         link: 'https://youtu.be/1q3dO4b6TzE',
         emoji: '❄️',
       },
+    ],
+  },
+
+  /* ══════════════ PARTLY-CLOUDY (구름조금 · 산뜻 · 변덕 · 가벼움) ══════════════ */
+  'partly-cloudy': {
+    messages: {
+      home: {
+        title: '산뜻한 구름 낀 날',
+        subtitle: '햇살과 구름이 번갈아드는 변덕스러운 하루, 가볍게 레이어드해요',
+      },
+      ootd: {
+        title: '구름 낀 날의 레이어드',
+        subtitle: '벗었다 입었다 — 일교차에 유연한 가벼운 겹쳐입기',
+      },
+      food: {
+        title: '산뜻한 브런치 한 접시',
+        subtitle: '구름 낀 날엔 가벼운 카페 브런치가 어울려요',
+      },
+      activity: {
+        title: '걷기 좋은 흐릿한 날',
+        subtitle: '햇볕이 부드러워 골목 산책·카페 투어에 딱이에요',
+      },
+      music: {
+        title: '구름 낀 날의 플레이리스트',
+        subtitle: '산뜻하고 가벼운 인디 팝으로 변덕스러운 하늘을 채워봐요',
+      },
+    },
+
+    palette: [
+      { name: 'Cloud Grey', hex: '#9BB8D9' },
+      { name: 'Soft Sky', hex: '#C7D8EC' },
+      { name: 'Breeze Blue', hex: '#7FA3C9' },
+      { name: 'Warm Sand', hex: '#E8DEC9' },
+      { name: 'Paper White', hex: '#F4F7FB' },
+    ],
+
+    ootdGuide: {
+      tips: [
+        '얇은 가디건·셔켓으로 벗고 입기 쉬운 레이어드를 하세요',
+        '일교차가 크니 이너는 가볍게, 아우터는 휴대하기 쉽게',
+        '톤다운된 파스텔·블루그레이가 흐린 하늘과 잘 어울려요',
+      ],
+      avoids: [
+        '두꺼운 단벌 아우터는 한낮 햇살에 더워질 수 있어요',
+        '얇은 반팔 단독은 구름 들어올 때 쌀쌀해져요',
+      ],
+    },
+
+    ootd: [
+      { id: 'pco1',  title: 'Light Cardigan', desc: '얇은 코튼 가디건을 티셔츠 위에 걸친 레이어드. 구름이 해를 가릴 때 바로 여미기 좋은 데일리 룩', keywords: ['코튼 가디건', '슬랙스', '로퍼'], badges: ['레이어드'], emoji: '🧥', brand: 'UNIQLO', shopUrl: 'https://www.uniqlo.com/kr/ko/men/cardigans', imageUrl: ootdPcImg('pco1') },
+      { id: 'pco2',  title: 'Spring Trench', desc: '가벼운 봄 트렌치코트로 완성하는 클래식 룩. 변덕스러운 날씨에 우아함과 실용성을 동시에', keywords: ['트렌치코트', '니트', '첼시부츠'], badges: ['클래식'], emoji: '🧥', brand: 'COS', shopUrl: 'https://www.cos.com/en_krw/men/coats-and-jackets.html', imageUrl: ootdPcImg('pco2') },
+      { id: 'pco3',  title: 'Denim Jacket', desc: '데님 자켓에 화이트 티 조합. 구름 낀 산뜻한 날의 캐주얼 정석으로 어디에나 어울려요', keywords: ['데님 자켓', '화이트 티', '치노'], badges: ['데일리'], emoji: '👖', brand: "Levi's", shopUrl: 'https://www.levis.co.kr', imageUrl: ootdPcImg('pco3') },
+      { id: 'pco4',  title: 'Knit Vest', desc: '셔츠 위에 니트 베스트를 더한 레이어드. 가볍게 체온 조절되는 변덕 날씨용 프레피 룩', keywords: ['니트 베스트', '옥스퍼드 셔츠', '슬랙스'], badges: ['프레피'], emoji: '🦺', brand: 'ZARA', shopUrl: 'https://www.zara.com/kr/ko/man-knitwear-vests-l716.html', imageUrl: ootdPcImg('pco4') },
+      { id: 'pco5',  title: 'Cotton Shirt', desc: '구김 적은 코튼 셔츠 한 장으로 산뜻하게. 소매를 걷거나 내리며 온도에 맞춰 입어요', keywords: ['코튼 셔츠', '와이드 팬츠', '스니커즈'], badges: ['베이직'], emoji: '👔', brand: 'MUJI', shopUrl: 'https://www.muji.com/kr', imageUrl: ootdPcImg('pco5') },
+      { id: 'pco6',  title: 'Light Blazer', desc: '언컨 블레이저로 격식과 편안함 사이. 흐린 날 출근룩이나 가벼운 약속에 두루 좋아요', keywords: ['언컨 블레이저', '슬랙스', '로퍼'], badges: ['세미정장'], emoji: '🧥', brand: 'SsangSsang', shopUrl: 'https://www.musinsa.com', imageUrl: ootdPcImg('pco6') },
+      { id: 'pco7',  title: 'Stripe Tee', desc: '마린 스트라이프 티에 가벼운 셔켓. 구름 사이 햇살처럼 경쾌한 캐주얼 무드', keywords: ['스트라이프 티', '셔켓', '데님'], badges: ['캐주얼'], emoji: '👕', brand: 'SPAO', shopUrl: 'https://www.spao.com', imageUrl: ootdPcImg('pco7') },
+      { id: 'pco8',  title: 'Wide Slacks', desc: '드레이프 좋은 와이드 슬랙스에 니트 조합. 바람 살랑이는 흐린 날 편안한 실루엣', keywords: ['와이드 슬랙스', '라운드 니트', '로퍼'], badges: ['미니멀'], emoji: '👖', brand: 'COS', shopUrl: 'https://www.cos.com', imageUrl: ootdPcImg('pco8') },
+      { id: 'pco9',  title: 'Hoodie Layer', desc: '후드 위에 코치 자켓을 걸친 스트릿 레이어드. 활동적인 흐린 날 외출에 가볍고 편해요', keywords: ['후드티', '코치 자켓', '카고팬츠'], badges: ['스트릿'], emoji: '🧢', brand: 'Carhartt', shopUrl: 'https://www.carhartt-wip.com', imageUrl: ootdPcImg('pco9') },
+      { id: 'pco10', title: 'Linen Blazer', desc: '린넨 블레이저로 가볍게 격식. 통기성 좋아 한낮엔 시원하고 흐릴 땐 적당히 따뜻해요', keywords: ['린넨 블레이저', '코튼 팬츠', '로퍼'], badges: ['린넨'], emoji: '🌿', brand: 'Massimo Dutti', shopUrl: 'https://www.massimodutti.com', imageUrl: ootdPcImg('pco10') },
+      { id: 'pco11', title: 'Shacket Style', desc: '셔츠와 자켓 사이 셔켓 하나로 완성. 벗고 입기 쉬워 변덕 날씨의 만능 아우터', keywords: ['셔켓', '맨투맨', '데님'], badges: ['만능템'], emoji: '🧥', brand: 'TOPTEN', shopUrl: 'https://topten10mall.com', imageUrl: ootdPcImg('pco11') },
+      { id: 'pco12', title: 'Pastel Knit', desc: '파스텔 톤 니트로 흐린 하늘에 산뜻한 포인트. 부드러운 컬러가 구름 낀 날 무드를 살려요', keywords: ['파스텔 니트', '슬랙스', '스니커즈'], badges: ['포인트 컬러'], emoji: '🧶', brand: 'H&M', shopUrl: 'https://www2.hm.com/ko_kr', imageUrl: ootdPcImg('pco12') },
+    ],
+
+    food: [
+      { id: 'pcf1',  title: '브런치 플레이트', area: '성수동', menu: '에그 스크램블 & 소시지', desc: '성수동 카페의 든든한 브런치 플레이트. 구름 낀 느긋한 아침을 여는 완벽한 한 끼', keywords: ['스크램블 에그', '소시지', '사워도우', '루꼴라'], badges: ['브런치'], emoji: '🍳', shopUrl: 'https://map.naver.com/v5/search/성수동 브런치', imageUrl: foodPcImg('pcf1') },
+      { id: 'pcf2',  title: '리코타 샐러드', area: '한남동', menu: '리코타 치즈 샐러드', desc: '한남동 비스트로의 부드러운 리코타 샐러드. 가볍지만 풍미 가득한 흐린 날 점심', keywords: ['리코타', '발사믹', '견과', '베이비채소'], badges: null, emoji: '🥗', shopUrl: 'https://map.naver.com/v5/search/한남동 샐러드', imageUrl: foodPcImg('pcf2') },
+      { id: 'pcf3',  title: '에그 베네딕트', area: '익선동', menu: '에그 베네딕트', desc: '익선동 한옥 카페의 에그 베네딕트. 홀랜다이즈 소스가 흐린 날 입맛을 깨워줘요', keywords: ['포치드 에그', '잉글리시 머핀', '홀랜다이즈'], badges: ['오늘의 추천'], emoji: '🍳', shopUrl: 'https://map.naver.com/v5/search/익선동 브런치', imageUrl: foodPcImg('pcf3') },
+      { id: 'pcf4',  title: '플랫 화이트', area: '성수동', menu: '플랫 화이트', desc: '성수동 로스터리의 진한 플랫 화이트. 구름 낀 오후 카페에서 한 박자 쉬어가기 좋아요', keywords: ['에스프레소', '스팀밀크', '라떼아트'], badges: ['시그니처'], emoji: '☕', shopUrl: 'https://map.naver.com/v5/search/성수동 카페', imageUrl: foodPcImg('pcf4') },
+      { id: 'pcf5',  title: '감자 뇨끼', area: '을지로', menu: '고르곤졸라 뇨끼', desc: '을지로 골목 식당의 쫄깃한 감자 뇨끼. 부드러운 크림소스가 흐린 날에 위로가 돼요', keywords: ['감자 뇨끼', '고르곤졸라', '크림소스'], badges: null, emoji: '🥟', shopUrl: 'https://map.naver.com/v5/search/을지로 파스타', imageUrl: foodPcImg('pcf5') },
+      { id: 'pcf6',  title: '판나코타', area: '망원동', menu: '바닐라 판나코타', desc: '망원동 디저트 카페의 부드러운 판나코타. 산뜻한 베리 소스가 흐린 날 입가심으로 좋아요', keywords: ['판나코타', '베리 소스', '바닐라'], badges: ['디저트'], emoji: '🍮', shopUrl: 'https://map.naver.com/v5/search/망원동 디저트', imageUrl: foodPcImg('pcf6') },
+      { id: 'pcf7',  title: '명란 파스타', area: '합정동', menu: '명란 크림 파스타', desc: '합정동 파스타집의 고소한 명란 크림 파스타. 짭조름함이 흐린 날 입맛을 살려줘요', keywords: ['명란', '크림', '링귀니', '쪽파'], badges: null, emoji: '🍝', shopUrl: 'https://map.naver.com/v5/search/합정 파스타', imageUrl: foodPcImg('pcf7') },
+      { id: 'pcf8',  title: '수제 버거', area: '홍대', menu: '클래식 치즈버거', desc: '홍대 수제버거집의 두툼한 패티 버거. 구름 낀 날 든든하게 채우고 싶을 때 정답', keywords: ['소고기 패티', '체다치즈', '브리오슈'], badges: ['든든'], emoji: '🍔', shopUrl: 'https://map.naver.com/v5/search/홍대 수제버거', imageUrl: foodPcImg('pcf8') },
+      { id: 'pcf9',  title: '과일 타르트', area: '종로', menu: '제철 과일 타르트', desc: '종로 베이커리의 산뜻한 과일 타르트. 새콤달콤한 제철 과일이 흐린 날 기분을 환기시켜요', keywords: ['타르트', '제철 과일', '커스터드'], badges: ['오늘의 추천'], emoji: '🥧', shopUrl: 'https://map.naver.com/v5/search/종로 디저트', imageUrl: foodPcImg('pcf9') },
+      { id: 'pcf10', title: '콜드브루', area: '강남', menu: '콜드브루', desc: '강남 카페의 깔끔한 콜드브루. 부드러운 바디감이 흐린 오후를 산뜻하게 깨워줘요', keywords: ['콜드브루', '원액', '얼음'], badges: null, emoji: '🧋', shopUrl: 'https://map.naver.com/v5/search/강남 카페', imageUrl: foodPcImg('pcf10') },
+      { id: 'pcf11', title: '비건 보울', area: '한남동', menu: '그레인 보울', desc: '한남동 비건 식당의 든든한 그레인 보울. 곡물과 채소가 가득해 가볍고 건강한 한 끼', keywords: ['퀴노아', '병아리콩', '아보카도', '구운채소'], badges: ['비건'], emoji: '🥙', shopUrl: 'https://map.naver.com/v5/search/한남동 비건', imageUrl: foodPcImg('pcf11') },
+      { id: 'pcf12', title: '크로플', area: '익선동', menu: '플레인 크로플', desc: '익선동 카페의 겉바속촉 크로플. 흐린 날 커피와 곁들이기 좋은 산뜻한 디저트', keywords: ['크로플', '메이플 시럽', '버터'], badges: ['디저트'], emoji: '🧇', shopUrl: 'https://map.naver.com/v5/search/익선동 크로플', imageUrl: foodPcImg('pcf12') },
+    ],
+
+    activity: [
+      { id: 'pca1',  title: '익선동 한옥 골목', area: '익선', desc: '구름 낀 부드러운 빛 아래 익선동 한옥 골목을 천천히 거닐어요. 사진 찍기에 딱 좋은 산뜻한 날', keywords: ['한옥', '골목 산책', '사진'], badges: null, emoji: '🏘️', meta: { cost: '무료', duration: '1~2시간', intensity: '낮음' }, shopUrl: 'https://map.naver.com/v5/search/익선동', imageUrl: actPcImg('pca1') },
+      { id: 'pca2',  title: '성수동 카페 투어', area: '성수', desc: '구름 낀 날 성수동 감성 카페를 골목골목 투어. 햇살이 부드러워 카페 호핑하기 완벽해요', keywords: ['카페', '성수', '디저트'], badges: null, emoji: '☕', meta: { cost: '보통', duration: '반나절', intensity: '낮음' }, shopUrl: 'https://map.naver.com/v5/search/성수동 카페', imageUrl: actPcImg('pca2') },
+      { id: 'pca3',  title: '서울숲 피크닉', area: '성수', desc: '뜨겁지 않은 흐린 날 서울숲 잔디밭에서 느긋한 피크닉. 돗자리 하나면 충분해요', keywords: ['서울숲', '피크닉', '잔디밭'], badges: ['돗자리'], emoji: '🧺', meta: { cost: '저렴', duration: '반나절', intensity: '낮음' }, shopUrl: 'https://map.naver.com/v5/search/서울숲', imageUrl: actPcImg('pca3') },
+      { id: 'pca4',  title: '망원시장 먹킷리스트', area: '망원', desc: '망원시장에서 길거리 간식 도장깨기. 흐린 날 시장 구경하며 먹는 재미가 쏠쏠해요', keywords: ['전통시장', '길거리 음식', '망원'], badges: null, emoji: '🥟', meta: { cost: '저렴', duration: '1~2시간', intensity: '낮음' }, shopUrl: 'https://map.naver.com/v5/search/망원시장', imageUrl: actPcImg('pca4') },
+      { id: 'pca5',  title: '한강 망원지구 자전거', area: '망원', desc: '햇볕이 부드러운 흐린 날 한강 망원지구에서 자전거. 덥지 않아 라이딩하기 최적이에요', keywords: ['자전거', '한강', '망원지구'], badges: ['따릉이'], emoji: '🚲', meta: { cost: '저렴', duration: '1~2시간', intensity: '보통' }, shopUrl: 'https://www.bikeseoul.com', imageUrl: actPcImg('pca5') },
+      { id: 'pca6',  title: '을지로 노가리 골목', area: '을지로', desc: '흐린 저녁 을지로 노가리 골목의 레트로 감성. 가볍게 한잔하며 변덕스러운 하루를 마무리', keywords: ['을지로', '노가리', '레트로'], badges: null, emoji: '🍺', meta: { cost: '보통', duration: '2~3시간', intensity: '낮음' }, shopUrl: 'https://map.naver.com/v5/search/을지로 노가리골목', imageUrl: actPcImg('pca6') },
+      { id: 'pca7',  title: '북촌 한옥마을', area: '북촌', desc: '구름 낀 차분한 빛의 북촌 한옥마을 나들이. 골목마다 다른 풍경이 산책의 묘미예요', keywords: ['북촌', '한옥', '나들이'], badges: null, emoji: '🏯', meta: { cost: '무료', duration: '2~3시간', intensity: '보통' }, shopUrl: 'https://map.naver.com/v5/search/북촌한옥마을', imageUrl: actPcImg('pca7') },
+      { id: 'pca8',  title: '광장시장 구경', area: '광장', desc: '광장시장에서 빈대떡과 마약김밥. 흐린 날 북적이는 시장 구경이 활기를 더해줘요', keywords: ['광장시장', '빈대떡', '먹거리'], badges: ['먹거리'], emoji: '🍢', meta: { cost: '저렴', duration: '1~2시간', intensity: '낮음' }, shopUrl: 'https://map.naver.com/v5/search/광장시장', imageUrl: actPcImg('pca8') },
+      { id: 'pca9',  title: '합정 책방 투어', area: '합정', desc: '흐린 날 합정·망원의 독립서점을 천천히 둘러봐요. 비 올 듯 말 듯한 날 실내 산책으로 좋아요', keywords: ['독립서점', '책방', '합정'], badges: null, emoji: '📚', meta: { cost: '무료', duration: '1~2시간', intensity: '낮음' }, shopUrl: 'https://map.naver.com/v5/search/합정 독립서점', imageUrl: actPcImg('pca9') },
+      { id: 'pca10', title: '남산 둘레길', area: '남산', desc: '햇볕 약한 흐린 날 남산 둘레길 트레킹. 나무 그늘 아래 선선하게 걷기 좋은 코스', keywords: ['남산', '둘레길', '트레킹'], badges: ['편한 신발'], emoji: '🥾', meta: { cost: '무료', duration: '2~3시간', intensity: '보통' }, shopUrl: 'https://map.naver.com/v5/search/남산 둘레길', imageUrl: actPcImg('pca10') },
+      { id: 'pca11', title: '연남동 경의선숲길', area: '연남', desc: '연남동 경의선숲길(연트럴파크) 산책. 구름 낀 날 벤치에 앉아 사람 구경하기 좋은 도심 속 쉼터', keywords: ['경의선숲길', '연남동', '산책'], badges: null, emoji: '🌳', meta: { cost: '무료', duration: '1~2시간', intensity: '낮음' }, shopUrl: 'https://map.naver.com/v5/search/경의선숲길', imageUrl: actPcImg('pca11') },
+      { id: 'pca12', title: 'DDP 전시 관람', area: '동대문', desc: '변덕스러운 날씨엔 DDP 실내 전시. 우주선 같은 건축 공간에서 디자인 전시를 즐겨요', keywords: ['DDP', '전시', '실내'], badges: ['실내'], emoji: '🎨', meta: { cost: '보통', duration: '2~3시간', intensity: '낮음' }, shopUrl: 'https://www.ddp.or.kr', imageUrl: actPcImg('pca12') },
+    ],
+
+    music: [
+      { id: 'pcm1',  title: 'Mr. Blue Sky', artist: 'Electric Light Orchestra', genre: 'Pop Rock', mood: 'Bright', desc: '구름이 걷히고 파란 하늘이 드러나는 순간을 그린 명곡. 변덕스러운 날씨에 딱 맞는 제목', link: 'https://youtu.be/aQUlA8Hcv4s', emoji: '☀️' },
+      { id: 'pcm2',  title: '봄날', artist: '방탄소년단 (BTS)', genre: 'K-Pop', mood: 'Wistful', desc: '구름 낀 날의 아련한 무드와 잘 어울리는 명곡. 산뜻하면서도 그리움이 묻어나요', link: 'https://youtu.be/xEeFrLSkMm8', emoji: '🌸' },
+      { id: 'pcm3',  title: 'Sunflower', artist: 'Post Malone & Swae Lee', genre: 'Indie Pop', mood: 'Breezy', desc: '나른하고 산뜻한 멜로디. 구름 사이로 햇살이 비치는 날 가볍게 흥얼대기 좋아요', link: 'https://youtu.be/ApXoWvfEYVU', emoji: '🌻' },
+      { id: 'pcm4',  title: 'Blueming', artist: '아이유 (IU)', genre: 'K-Pop', mood: 'Bright', desc: '설레는 산뜻함이 가득한 곡. 구름 사이로 비치는 햇살처럼 경쾌한 무드', link: 'https://youtu.be/D1PvIWdJ8xo', emoji: '💙' },
+      { id: 'pcm5',  title: 'Something Just Like This', artist: 'The Chainsmokers & Coldplay', genre: 'Indie Pop', mood: 'Breezy', desc: '시원하게 트인 사운드. 흐린 하늘 아래 드라이브하며 듣기 좋은 산뜻한 트랙', link: 'https://youtu.be/FM7MFYoylVs', emoji: '☁️' },
+      { id: 'pcm6',  title: 'Yellow', artist: 'Coldplay', genre: 'Alternative Rock', mood: 'Dreamy', desc: '몽환적이고 따뜻한 콜드플레이의 명곡. 구름 낀 날의 부드러운 빛과 잘 어울려요', link: 'https://youtu.be/yKNxeF4KMsY', emoji: '💛' },
+      { id: 'pcm7',  title: 'Dreams', artist: 'Fleetwood Mac', genre: 'Soft Rock', mood: 'Dreamy', desc: '바람결 같은 그루브의 클래식. 변덕스러운 하늘처럼 유려하게 흐르는 사운드', link: 'https://youtu.be/mrZRURcb1cM', emoji: '✨' },
+      { id: 'pcm8',  title: 'The Less I Know the Better', artist: 'Tame Impala', genre: 'Psychedelic Pop', mood: 'Dreamy', desc: '몽글몽글 사이키델릭 팝. 구름 사이를 떠다니는 듯한 산뜻한 베이스라인', link: 'https://youtu.be/2SUwOgmvzK4', emoji: '🌀' },
+      { id: 'pcm9',  title: 'Eight', artist: '아이유 (IU)', genre: 'K-Pop', mood: 'Wistful', desc: '산뜻한 기타 리프에 아련함이 더해진 곡. 변덕스러운 날의 감성을 채워줘요', link: 'https://youtu.be/TgOu00Mf3kI', emoji: '🎈' },
+      { id: 'pcm10', title: 'Super Shy', artist: 'NewJeans', genre: 'K-Pop / Dance Pop', mood: 'Bright', desc: '통통 튀는 산뜻한 비트. 구름 사이 햇살처럼 경쾌하고 사랑스러운 트랙', link: 'https://youtu.be/ArmDp-zijuc', emoji: '🐰' },
+      { id: 'pcm11', title: 'Saturn', artist: 'Sleeping at Last', genre: 'Indie Pop', mood: 'Dreamy', desc: '우주처럼 광활하고 잔잔한 곡. 흐린 하늘을 올려다보며 듣기 좋은 몽환적 트랙', link: 'https://youtu.be/dzNvk80XY9s', emoji: '🪐' },
+      { id: 'pcm12', title: "Can't Stop the Feeling", artist: 'Justin Timberlake', genre: 'Dance Pop', mood: 'Bright', desc: '구름을 걷어내는 듯한 발랄한 에너지. 흐린 날 기분을 산뜻하게 끌어올려요', link: 'https://youtu.be/ru0K8uYEZWw', emoji: '🎉' },
+      { id: 'pcm13', title: 'Ditto', artist: 'NewJeans', genre: 'K-Pop', mood: 'Dreamy', desc: '몽글몽글 산뜻한 뉴진스 사운드. 구름 낀 날 청량하게 듣기 좋은 트랙', link: 'https://youtu.be/pSUydWEqKwE', emoji: '💫' },
+      { id: 'pcm14', title: 'Dancing Queen', artist: 'ABBA', genre: 'Disco Pop', mood: 'Bright', desc: '언제 들어도 산뜻한 디스코 명곡. 흐린 하늘도 환하게 만드는 경쾌한 멜로디', link: 'https://youtu.be/xFrGuyw1V8s', emoji: '👑' },
+      { id: 'pcm15', title: 'Uptown Funk', artist: 'Mark Ronson ft. Bruno Mars', genre: 'Funk / Pop', mood: 'Bright', desc: '리듬감 넘치는 펑크 팝. 변덕스러운 하루에 활기를 불어넣는 그루비한 트랙', link: 'https://youtu.be/OPf0YbXqDm0', emoji: '🕺' },
+      { id: 'pcm16', title: 'Do I Wanna Know?', artist: 'Arctic Monkeys', genre: 'Indie Rock', mood: 'Dreamy', desc: '묵직하고 산뜻한 인디 록. 구름 낀 늦은 오후의 무드와 절묘하게 어울려요', link: 'https://youtu.be/bpOSxM0rNPM', emoji: '🎸' },
+      { id: 'pcm17', title: 'September', artist: 'Earth, Wind & Fire', genre: 'Funk / Soul', mood: 'Bright', desc: '한 점 구름 없는 듯 명랑한 소울 펑크. 흐린 날에도 발이 절로 움직이는 클래식', link: 'https://youtu.be/Gs069dndIYk', emoji: '🌟' },
+      { id: 'pcm18', title: '밤편지 (Through the Night)', artist: '아이유 (IU)', genre: 'K-Pop Ballad', mood: 'Mellow', desc: '잔잔하게 스며드는 밤편지. 흐릿한 저녁의 부드러운 무드를 완성해요', link: 'https://youtu.be/BzYnNdJhZQw', emoji: '🌙' },
+      { id: 'pcm19', title: 'Levitating', artist: 'Dua Lipa', genre: 'Nu-Disco / Pop', mood: 'Bright', desc: '둥실 떠오르는 듯한 산뜻한 디스코 팝. 구름 위를 걷는 듯 경쾌한 비트', link: 'https://youtu.be/TUVcZfQe-Kw', emoji: '✨' },
+      { id: 'pcm20', title: 'Dynamite', artist: '방탄소년단 (BTS)', genre: 'Pop / Disco', mood: 'Bright', desc: '구름을 걷어내는 듯한 밝은 에너지. 흐린 날에 활기를 불어넣는 디스코 팝', link: 'https://youtu.be/gdZLi9oWNZg', emoji: '💥' },
+    ],
+  },
+
+  'stormy': {
+    messages: {
+      home: {
+        title: '거센 천둥번개 치는 밤',
+        subtitle: '창밖엔 폭우와 번개 — 안에서 즐기는 드라마틱한 하루',
+      },
+      ootd: {
+        title: '폭우에도 끄떡없는 무장',
+        subtitle: '방수와 다크 무드로 완성하는 비 오는 날의 룩',
+      },
+      food: {
+        title: '비 오는 날엔 뜨끈한 한 상',
+        subtitle: '천둥소리엔 김 오르는 국물과 전 한 접시',
+      },
+      activity: {
+        title: '실내에서 즐기는 폭풍의 밤',
+        subtitle: '비 쏟아질 땐 영화·재즈바·전시로 깊이 빠져들기',
+      },
+      music: {
+        title: '폭풍의 밤 플레이리스트',
+        subtitle: '드라마틱하고 카타르시스 넘치는 트랙으로 빗소리를 채워요',
+      },
+    },
+
+    palette: [
+      { name: 'Storm Navy', hex: '#1B2433' },
+      { name: 'Thunder Slate', hex: '#3A4658' },
+      { name: 'Lightning Steel', hex: '#6E7E96' },
+      { name: 'Rain Glass', hex: '#A9B7C9' },
+      { name: 'Bolt White', hex: '#E8EDF3' },
+    ],
+
+    ootdGuide: {
+      tips: [
+        '고어텍스·방수 아우터로 빗물을 완전히 차단하세요',
+        '레인부츠나 방수 스니커즈로 젖은 발을 막아요',
+        '다크 톤으로 입으면 빗물 얼룩도 눈에 덜 띄어요',
+      ],
+      avoids: [
+        '스웨이드·가죽 소재는 폭우에 손상되기 쉬워요',
+        '밑단이 긴 바지는 빗물에 젖어 무거워져요',
+      ],
+    },
+
+    ootd: [
+      { id: 'sto1',  title: 'Gore-Tex Shell', desc: '고어텍스 방수 셸 자켓. 폭우도 막아내는 완벽 방수로 천둥치는 날의 든든한 무장', keywords: ['고어텍스', '방수 자켓', '조거팬츠'], badges: ['방수'], emoji: '🧥', brand: "Arc'teryx", shopUrl: 'https://arcteryx.com', imageUrl: ootdStormyImg('sto1') },
+      { id: 'sto2',  title: 'Long Raincoat', desc: '무릎까지 덮는 롱 레인코트. 거센 비도 빈틈없이 막아내는 클래식 우중 룩', keywords: ['롱 레인코트', '터틀넥', '레인부츠'], badges: ['방수'], emoji: '🧥', brand: 'Rains', shopUrl: 'https://www.rains.com', imageUrl: ootdStormyImg('sto2') },
+      { id: 'sto3',  title: 'Dark Hoodie', desc: '다크 그레이 후드로 완성하는 무드. 비 오는 밤 분위기에 자연스럽게 녹아드는 캐주얼', keywords: ['후드티', '블랙진', '방수 스니커즈'], badges: null, emoji: '🧥', brand: 'COS', shopUrl: 'https://www.cos.com', imageUrl: ootdStormyImg('sto3') },
+      { id: 'sto4',  title: 'Rain Boots', desc: '첼시 타입 레인부츠. 물웅덩이도 거뜬한 방수로 폭우의 필수템', keywords: ['레인부츠', '와이드 팬츠', '후드'], badges: ['방수'], emoji: '🥾', brand: 'Hunter', shopUrl: 'https://www.hunterboots.com', imageUrl: ootdStormyImg('sto4') },
+      { id: 'sto5',  title: 'Waterproof Parka', desc: '방수 파카. 후드와 심실링으로 거센 비바람을 완벽하게 차단해요', keywords: ['방수 파카', '맨투맨', '조거팬츠'], badges: ['방수'], emoji: '🧥', brand: 'The North Face', shopUrl: 'https://www.thenorthface.co.kr', imageUrl: ootdStormyImg('sto5') },
+      { id: 'sto6',  title: 'Black Trench', desc: '블랙 트렌치로 완성하는 시크한 우중 룩. 드라마틱한 폭풍의 밤에 어울려요', keywords: ['블랙 트렌치', '니트', '첼시부츠'], badges: ['시크'], emoji: '🧥', brand: 'AllSaints', shopUrl: 'https://www.allsaints.com', imageUrl: ootdStormyImg('sto6') },
+      { id: 'sto7',  title: 'Packable Shell', desc: '휴대 가능한 방수 윈드브레이커. 갑작스런 뇌우에 바로 꺼내 입는 만능 아우터', keywords: ['윈드브레이커', '반팔티', '트랙팬츠'], badges: ['휴대용'], emoji: '🌬️', brand: 'Patagonia', shopUrl: 'https://www.patagonia.com', imageUrl: ootdStormyImg('sto7') },
+      { id: 'sto8',  title: 'Storm Anorak', desc: '풀오버 아노락. 강풍에도 펄럭임 없이 몸을 감싸는 우중 아우터', keywords: ['아노락', '후드', '카고팬츠'], badges: ['방수'], emoji: '🧥', brand: 'Stüssy', shopUrl: 'https://www.stussy.com', imageUrl: ootdStormyImg('sto8') },
+      { id: 'sto9',  title: 'Charcoal Layer', desc: '차콜 니트 위에 방수 셸을 겹친 레이어드. 천둥치는 저녁 따뜻하고 견고하게', keywords: ['차콜 니트', '방수 셸', '슬랙스'], badges: ['레이어드'], emoji: '🧶', brand: 'UNIQLO', shopUrl: 'https://www.uniqlo.com/kr', imageUrl: ootdStormyImg('sto9') },
+      { id: 'sto10', title: 'Tech Sneakers', desc: '방수 테크 스니커즈. 빗물이 스며들지 않는 소재로 폭우 속 발을 지켜요', keywords: ['방수 스니커즈', '조거팬츠', '후드'], badges: ['방수'], emoji: '👟', brand: 'Salomon', shopUrl: 'https://www.salomon.com', imageUrl: ootdStormyImg('sto10') },
+      { id: 'sto11', title: 'Dark Denim Set', desc: '다크 인디고 데님 셋업. 비 오는 밤 무드에 어울리는 묵직한 톤의 캐주얼', keywords: ['다크 데님', '데님 자켓', '부츠'], badges: null, emoji: '👖', brand: "Levi's", shopUrl: 'https://www.levis.co.kr', imageUrl: ootdStormyImg('sto11') },
+      { id: 'sto12', title: 'Storm Umbrella', desc: '대형 방풍 우산과 매치한 미니멀 블랙 룩. 강풍에도 뒤집히지 않는 완성형', keywords: ['방풍 우산', '블랙 코트', '레인부츠'], badges: ['방수'], emoji: '☂️', brand: 'Blunt', shopUrl: 'https://www.bluntumbrellas.com', imageUrl: ootdStormyImg('sto12') },
+    ],
+
+    food: [
+      { id: 'stf1',  title: '김치전 & 막걸리', area: '종로', menu: '김치전과 막걸리', desc: '빗소리엔 역시 바삭한 김치전에 막걸리 한 사발. 천둥치는 날의 국룰 조합', keywords: ['김치전', '막걸리', '부침개'], badges: ['비 오는 날'], emoji: '🥞', shopUrl: 'https://map.naver.com/v5/search/종로 전집', imageUrl: foodStormyImg('stf1') },
+      { id: 'stf2',  title: '얼큰 짬뽕', area: '연남동', menu: '해물 짬뽕', desc: '뜨끈하고 얼큰한 해물 짬뽕 한 그릇. 폭우에 으슬으슬할 때 속을 확 데워줘요', keywords: ['짬뽕', '해물', '매운맛'], badges: null, emoji: '🍜', shopUrl: 'https://map.naver.com/v5/search/연남동 중식', imageUrl: foodStormyImg('stf2') },
+      { id: 'stf3',  title: '돈코츠 라멘', area: '홍대', menu: '돈코츠 라멘', desc: '진한 돈코츠 국물의 라멘. 비 쏟아지는 밤 김 오르는 한 그릇이 위로가 돼요', keywords: ['라멘', '돈코츠', '차슈'], badges: ['오늘의 추천'], emoji: '🍜', shopUrl: 'https://map.naver.com/v5/search/홍대 라멘', imageUrl: foodStormyImg('stf3') },
+      { id: 'stf4',  title: '부대찌개', area: '신촌', menu: '부대찌개', desc: '얼큰하게 끓는 부대찌개. 천둥소리 들으며 보글보글 끓여 먹는 든든한 한 상', keywords: ['부대찌개', '소시지', '라면사리'], badges: null, emoji: '🍲', shopUrl: 'https://map.naver.com/v5/search/신촌 부대찌개', imageUrl: foodStormyImg('stf4') },
+      { id: 'stf5',  title: '곱창전골', area: '왕십리', menu: '곱창전골', desc: '진한 국물의 곱창전골. 비 오는 밤 소주 한잔과 곁들이기 좋은 뜨끈한 안주', keywords: ['곱창전골', '대창', '부추'], badges: null, emoji: '🍲', shopUrl: 'https://map.naver.com/v5/search/왕십리 곱창', imageUrl: foodStormyImg('stf5') },
+      { id: 'stf6',  title: '닭볶음탕', area: '을지로', menu: '매운 닭볶음탕', desc: '칼칼한 닭볶음탕. 폭우에 처진 기분을 매콤한 한 입으로 확 깨워줘요', keywords: ['닭볶음탕', '감자', '매운맛'], badges: ['얼큰'], emoji: '🍗', shopUrl: 'https://map.naver.com/v5/search/을지로 닭볶음탕', imageUrl: foodStormyImg('stf6') },
+      { id: 'stf7',  title: '어묵탕 & 사케', area: '이태원', menu: '오뎅탕과 사케', desc: '뜨거운 어묵탕에 따끈한 사케. 비 오는 밤 이자카야의 정석 조합', keywords: ['어묵탕', '사케', '이자카야'], badges: null, emoji: '🍢', shopUrl: 'https://map.naver.com/v5/search/이태원 이자카야', imageUrl: foodStormyImg('stf7') },
+      { id: 'stf8',  title: '순두부찌개', area: '강남', menu: '얼큰 순두부찌개', desc: '보글보글 끓는 순두부찌개. 천둥치는 날 뜨끈하게 속을 채우는 한 뚝배기', keywords: ['순두부', '계란', '매운맛'], badges: null, emoji: '🍲', shopUrl: 'https://map.naver.com/v5/search/강남 순두부', imageUrl: foodStormyImg('stf8') },
+      { id: 'stf9',  title: '싱글몰트 바', area: '청담', menu: '싱글몰트 위스키', desc: '폭풍의 밤엔 위스키 바에서 한 잔. 빗소리와 어울리는 묵직하고 깊은 향', keywords: ['위스키', '싱글몰트', '바'], badges: ['바'], emoji: '🥃', shopUrl: 'https://map.naver.com/v5/search/청담 위스키바', imageUrl: foodStormyImg('stf9') },
+      { id: 'stf10', title: '해물파전', area: '망원동', menu: '해물파전', desc: '바삭하게 부친 해물파전. 비 오는 날 막걸리와 함께라면 그걸로 완벽해요', keywords: ['해물파전', '오징어', '막걸리'], badges: ['비 오는 날'], emoji: '🥞', shopUrl: 'https://map.naver.com/v5/search/망원 파전', imageUrl: foodStormyImg('stf10') },
+      { id: 'stf11', title: '마라탕', area: '건대', menu: '마라탕', desc: '얼얼한 마라탕 한 그릇. 폭우에 떨어진 텐션을 매운맛으로 끌어올려요', keywords: ['마라탕', '마라', '매운맛'], badges: ['얼큰'], emoji: '🌶️', shopUrl: 'https://map.naver.com/v5/search/건대 마라탕', imageUrl: foodStormyImg('stf11') },
+      { id: 'stf12', title: '돼지국밥', area: '종로', menu: '돼지국밥', desc: '뜨끈한 돼지국밥 한 그릇. 비바람 부는 날 든든하게 속을 데우는 한 끼', keywords: ['돼지국밥', '수육', '깍두기'], badges: null, emoji: '🍲', shopUrl: 'https://map.naver.com/v5/search/종로 돼지국밥', imageUrl: foodStormyImg('stf12') },
+    ],
+
+    activity: [
+      { id: 'sta1',  title: '심야 영화관', area: '용산', desc: '폭우 쏟아지는 밤 심야 영화 한 편. 빗소리를 배경음 삼아 스크린에 빠져들어요', keywords: ['영화관', '심야영화', '실내'], badges: ['실내'], emoji: '🎬', meta: { cost: '보통', duration: '2~3시간', intensity: '낮음' }, shopUrl: 'https://www.cgv.co.kr', imageUrl: actStormyImg('sta1') },
+      { id: 'sta2',  title: '재즈바 라이브', area: '이태원', desc: '천둥치는 저녁 재즈바의 라이브 연주. 위스키 한 잔과 함께 깊어지는 밤', keywords: ['재즈바', '라이브', '위스키'], badges: ['실내'], emoji: '🎷', meta: { cost: '보통', duration: '2~3시간', intensity: '낮음' }, shopUrl: 'https://map.naver.com/v5/search/이태원 재즈바', imageUrl: actStormyImg('sta2') },
+      { id: 'sta3',  title: 'LP바 음악감상', area: '을지로', desc: '비 오는 밤 LP바에서 아날로그 음악 감상. 빗소리와 바이닐이 어우러지는 무드', keywords: ['LP바', '바이닐', '음악'], badges: ['실내'], emoji: '🎵', meta: { cost: '보통', duration: '1~2시간', intensity: '낮음' }, shopUrl: 'https://map.naver.com/v5/search/을지로 LP바', imageUrl: actStormyImg('sta3') },
+      { id: 'sta4',  title: '실내 클라이밍', area: '강남', desc: '비와 상관없는 실내 클라이밍장. 폭우에 갇힌 에너지를 짜릿하게 발산해요', keywords: ['클라이밍', '실내', '운동'], badges: ['실내'], emoji: '🧗', meta: { cost: '보통', duration: '1~2시간', intensity: '높음' }, shopUrl: 'https://map.naver.com/v5/search/강남 클라이밍', imageUrl: actStormyImg('sta4') },
+      { id: 'sta5',  title: '보드게임 카페', area: '홍대', desc: '친구들과 보드게임 카페에서 한나절. 비 오는 날 실내에서 즐기는 왁자지껄', keywords: ['보드게임', '카페', '실내'], badges: ['실내'], emoji: '🎲', meta: { cost: '저렴', duration: '2~3시간', intensity: '낮음' }, shopUrl: 'https://map.naver.com/v5/search/홍대 보드게임카페', imageUrl: actStormyImg('sta5') },
+      { id: 'sta6',  title: '미술관 전시', area: '삼청동', desc: '비 오는 날 차분히 둘러보는 미술관. 고요 속에서 작품에 온전히 집중해요', keywords: ['미술관', '전시', '실내'], badges: ['실내'], emoji: '🖼️', meta: { cost: '보통', duration: '2~3시간', intensity: '낮음' }, shopUrl: 'https://www.mmca.go.kr', imageUrl: actStormyImg('sta6') },
+      { id: 'sta7',  title: '방탈출 카페', area: '강남', desc: '스릴 넘치는 방탈출. 천둥치는 날 실내에서 두뇌를 풀가동하는 재미', keywords: ['방탈출', '추리', '실내'], badges: ['실내'], emoji: '🔐', meta: { cost: '보통', duration: '1~2시간', intensity: '보통' }, shopUrl: 'https://map.naver.com/v5/search/강남 방탈출', imageUrl: actStormyImg('sta7') },
+      { id: 'sta8',  title: '찜질방', area: '영등포', desc: '비 오는 날 찜질방에서 몸 지지기. 폭우의 으슬함을 뜨끈하게 녹여줘요', keywords: ['찜질방', '사우나', '휴식'], badges: ['실내'], emoji: '♨️', meta: { cost: '저렴', duration: '반나절', intensity: '낮음' }, shopUrl: 'https://map.naver.com/v5/search/영등포 찜질방', imageUrl: actStormyImg('sta8') },
+      { id: 'sta9',  title: '소극장 연극', area: '대학로', desc: '대학로 소극장 연극 관람. 비 오는 저녁 실내에서 즐기는 라이브 무대', keywords: ['연극', '공연', '대학로'], badges: ['실내'], emoji: '🎭', meta: { cost: '보통', duration: '2~3시간', intensity: '낮음' }, shopUrl: 'https://map.naver.com/v5/search/대학로 연극', imageUrl: actStormyImg('sta9') },
+      { id: 'sta10', title: '코인노래방', area: '신촌', desc: '비 오는 밤 노래방에서 스트레스 발산. 폭우 소리를 노래로 덮어버려요', keywords: ['노래방', '코노', '실내'], badges: ['실내'], emoji: '🎤', meta: { cost: '저렴', duration: '1~2시간', intensity: '보통' }, shopUrl: 'https://map.naver.com/v5/search/신촌 코인노래방', imageUrl: actStormyImg('sta10') },
+      { id: 'sta11', title: '카페 책 읽기', area: '연남동', desc: '창밖 빗줄기 보며 카페에서 독서. 비 오는 날 가장 운치 있는 실내 시간', keywords: ['북카페', '독서', '커피'], badges: ['실내'], emoji: '📖', meta: { cost: '저렴', duration: '1~2시간', intensity: '낮음' }, shopUrl: 'https://map.naver.com/v5/search/연남동 북카페', imageUrl: actStormyImg('sta11') },
+      { id: 'sta12', title: '오마카세', area: '청담', desc: '비 오는 밤 분위기 있는 오마카세. 셰프의 손길에 집중하는 특별한 저녁', keywords: ['오마카세', '스시', '파인다이닝'], badges: ['실내'], emoji: '🍣', meta: { cost: '높음', duration: '2~3시간', intensity: '낮음' }, shopUrl: 'https://map.naver.com/v5/search/청담 오마카세', imageUrl: actStormyImg('sta12') },
+    ],
+
+    music: [
+      { id: 'stm1',  title: 'Call Out My Name', artist: 'The Weeknd', genre: 'R&B', mood: 'Dramatic', desc: '몰아치는 감정의 R&B. 천둥치는 밤의 드라마틱한 무드와 완벽히 맞아떨어져요', link: 'https://youtu.be/vgPcD9bSoFk', emoji: '🌩️' },
+      { id: 'stm2',  title: 'Do I Wanna Know?', artist: 'Arctic Monkeys', genre: 'Indie Rock', mood: 'Brooding', desc: '묵직한 베이스의 인디 록. 폭우 쏟아지는 밤의 어둑한 긴장감을 채워요', link: 'https://youtu.be/bpOSxM0rNPM', emoji: '🎸' },
+      { id: 'stm3',  title: 'Creep', artist: 'Radiohead', genre: 'Alternative Rock', mood: 'Brooding', desc: '폭발하는 후렴의 얼터너티브 명곡. 천둥처럼 터지는 카타르시스', link: 'https://youtu.be/XFkzRNyygfk', emoji: '⚡' },
+      { id: 'stm4',  title: 'Karma Police', artist: 'Radiohead', genre: 'Alternative Rock', mood: 'Dramatic', desc: '서서히 고조되는 드라마틱한 사운드. 비바람 치는 밤에 깊이 빠져들기 좋아요', link: 'https://youtu.be/1uYWYWPc9HU', emoji: '🌧️' },
+      { id: 'stm5',  title: 'The Scientist', artist: 'Coldplay', genre: 'Alternative Rock', mood: 'Melancholic', desc: '빗물처럼 흘러내리는 피아노. 폭풍의 밤 감성을 적시는 콜드플레이 명곡', link: 'https://youtu.be/RB-RcX5DS5A', emoji: '🎹' },
+      { id: 'stm6',  title: 'Fix You', artist: 'Coldplay', genre: 'Alternative Rock', mood: 'Cathartic', desc: '터지는 후반부가 천둥 같은 카타르시스를 줘요. 비 오는 밤의 위로', link: 'https://youtu.be/k4V3Mo61fJM', emoji: '💡' },
+      { id: 'stm7',  title: 'Sign of the Times', artist: 'Harry Styles', genre: 'Rock Ballad', mood: 'Dramatic', desc: '웅장하게 몰아치는 록 발라드. 폭풍 같은 감정의 파고를 그려내요', link: 'https://youtu.be/qN4ooNx77u0', emoji: '🌩️' },
+      { id: 'stm8',  title: 'Back to Black', artist: 'Amy Winehouse', genre: 'Soul', mood: 'Dramatic', desc: '어둡고 짙은 소울. 비 내리는 밤의 묵직한 공기와 잘 어울려요', link: 'https://youtu.be/TJAfLE39ZZ8', emoji: '🖤' },
+      { id: 'stm9',  title: 'Kill Bill', artist: 'SZA', genre: 'R&B', mood: 'Brooding', desc: '나른하면서 위태로운 R&B. 천둥치는 밤의 음울한 무드에 녹아들어요', link: 'https://youtu.be/ApiFgJqVObI', emoji: '🌑' },
+      { id: 'stm10', title: "when the party's over", artist: 'Billie Eilish', genre: 'Alt Pop', mood: 'Haunting', desc: '적막을 가르는 보컬. 비 그친 뒤의 고요처럼 서늘하게 스며들어요', link: 'https://youtu.be/pbMwTqkKSps', emoji: '🕯️' },
+      { id: 'stm11', title: 'Somebody Else', artist: 'The 1975', genre: 'Indie Pop', mood: 'Brooding', desc: '몽환적이고 음울한 신스 팝. 폭풍의 밤 드라이브에 어울리는 트랙', link: 'https://youtu.be/3cQSoMGl6o8', emoji: '🌃' },
+      { id: 'stm12', title: 'Sweater Weather', artist: 'The Neighbourhood', genre: 'Indie Rock', mood: 'Moody', desc: '눅눅하고 무드 있는 인디 록. 비바람 부는 날의 분위기를 그대로 담아요', link: 'https://youtu.be/GCdkOh8Wghk', emoji: '🧥' },
+      { id: 'stm13', title: 'All Too Well (10 Min)', artist: 'Taylor Swift', genre: 'Folk Rock', mood: 'Dramatic', desc: '서사처럼 휘몰아치는 10분의 대곡. 폭풍 같은 감정에 깊이 잠겨요', link: 'https://youtu.be/tollwBTB7cg', emoji: '🍂' },
+      { id: 'stm14', title: 'Stay With Me', artist: 'Sam Smith', genre: 'Soul Pop', mood: 'Cathartic', desc: '간절하게 차오르는 소울 팝. 비 내리는 밤의 외로움을 어루만져요', link: 'https://youtu.be/pB-5XG-DbAA', emoji: '🎙️' },
+      { id: 'stm15', title: 'Someone You Loved', artist: 'Lewis Capaldi', genre: 'Pop Ballad', mood: 'Dramatic', desc: '폭우처럼 쏟아지는 감정의 발라드. 천둥치는 밤 가슴을 적셔요', link: 'https://youtu.be/zABLecsR5UE', emoji: '💔' },
+      { id: 'stm16', title: 'Skinny Love', artist: 'Bon Iver', genre: 'Indie Folk', mood: 'Aching', desc: '갈라지는 보컬의 인디 포크. 빗소리와 함께 깊어지는 먹먹한 밤', link: 'https://youtu.be/ssdgFoHLwnk', emoji: '🌲' },
+      { id: 'stm17', title: 'The Less I Know the Better', artist: 'Tame Impala', genre: 'Psych Pop', mood: 'Restless', desc: '꿈틀대는 베이스라인의 사이키델릭. 폭풍 전야의 불안한 그루브', link: 'https://youtu.be/2SUwOgmvzK4', emoji: '🌀' },
+      { id: 'stm18', title: 'good 4 u', artist: 'Olivia Rodrigo', genre: 'Pop Punk', mood: 'Explosive', desc: '터지는 팝 펑크 에너지. 천둥번개처럼 폭발하는 카타르시스', link: 'https://youtu.be/gNi_6U5Pm_o', emoji: '⚡' },
+      { id: 'stm19', title: 'Easy On Me', artist: 'Adele', genre: 'Pop Ballad', mood: 'Dramatic', desc: '묵직하게 차오르는 아델의 발라드. 비 내리는 밤의 깊은 울림', link: 'https://youtu.be/U3ASj1L6_sY', emoji: '🎹' },
+      { id: 'stm20', title: 'drivers license', artist: 'Olivia Rodrigo', genre: 'Pop Ballad', mood: 'Dramatic', desc: '서서히 폭발하는 감정의 곡. 폭우 쏟아지는 밤의 드라마를 완성해요', link: 'https://youtu.be/ZmDBbnmKpqQ', emoji: '🌧️' },
+    ],
+  },
+
+  'dusty': {
+    messages: {
+      home: {
+        title: '뿌옇게 황사 낀 날',
+        subtitle: '미세먼지엔 마스크 챙기고 실내에서 쾌적하게',
+      },
+      ootd: {
+        title: '황사를 막는 커버업 룩',
+        subtitle: '마스크와 가벼운 커버로 먼지로부터 보호해요',
+      },
+      food: {
+        title: '목을 달래는 따뜻한 한 끼',
+        subtitle: '황사엔 도라지·배처럼 목에 좋은 음식이 어울려요',
+      },
+      activity: {
+        title: '공기 맑은 실내에서 즐기기',
+        subtitle: '미세먼지 날엔 미술관·카페·실내 전시로 쾌적하게',
+      },
+      music: {
+        title: '뿌연 날의 플레이리스트',
+        subtitle: '나른하고 몽환적인 트랙으로 흐릿한 하늘을 채워요',
+      },
+    },
+
+    palette: [
+      { name: 'Dust Beige', hex: '#D9C7A3' },
+      { name: 'Sand Haze', hex: '#C9B48C' },
+      { name: 'Ochre Mist', hex: '#B89B6A' },
+      { name: 'Muted Khaki', hex: '#8C8160' },
+      { name: 'Pale Smog', hex: '#EDE6D6' },
+    ],
+
+    ootdGuide: {
+      tips: [
+        'KF94 마스크로 미세먼지를 확실히 차단하세요',
+        '긴소매·바람막이로 피부 노출을 줄여요',
+        '귀가 후 겉옷을 털고 바로 세탁하면 좋아요',
+      ],
+      avoids: [
+        '니트·기모 소재는 먼지가 잘 달라붙어요',
+        '콘택트렌즈보다 안경·선글라스가 눈 보호에 좋아요',
+      ],
+    },
+
+    ootd: [
+      { id: 'duo1',  title: 'KF94 Mask Look', desc: '마스크를 포인트로 한 미니멀 룩. 황사 날 필수템을 자연스럽게 스타일링', keywords: ['마스크', '후드', '조거팬츠'], badges: ['먼지 차단'], emoji: '😷', brand: 'Aer', shopUrl: 'https://www.musinsa.com', imageUrl: ootdDustyImg('duo1') },
+      { id: 'duo2',  title: 'Light Windbreaker', desc: '가벼운 바람막이로 먼지 차단. 통기성 좋으면서 피부 노출을 줄여줘요', keywords: ['바람막이', '반팔티', '트랙팬츠'], badges: ['커버업'], emoji: '🧥', brand: 'Nike', shopUrl: 'https://www.nike.com', imageUrl: ootdDustyImg('duo2') },
+      { id: 'duo3',  title: 'Bucket Hat Look', desc: '버킷햇으로 머리에 앉는 먼지를 막아요. 황사 날 캐주얼 커버 코디', keywords: ['버킷햇', '맨투맨', '데님'], badges: null, emoji: '🧢', brand: 'Stüssy', shopUrl: 'https://www.stussy.com', imageUrl: ootdDustyImg('duo3') },
+      { id: 'duo4',  title: 'Long Sleeve Set', desc: '얇은 긴팔 셋업으로 피부 보호. 가벼우면서 노출을 최소화한 황사 룩', keywords: ['긴팔 티', '와이드 팬츠', '스니커즈'], badges: ['커버업'], emoji: '👕', brand: 'MUJI', shopUrl: 'https://www.muji.com/kr', imageUrl: ootdDustyImg('duo4') },
+      { id: 'duo5',  title: 'Scarf Styling', desc: '스카프로 목과 입을 가볍게 커버. 먼지 막고 멋도 더하는 황사 아이템', keywords: ['스카프', '셔츠', '슬랙스'], badges: null, emoji: '🧣', brand: 'COS', shopUrl: 'https://www.cos.com', imageUrl: ootdDustyImg('duo5') },
+      { id: 'duo6',  title: 'Sunglasses Cover', desc: '선글라스로 눈을 보호하는 룩. 뿌연 하늘에도 시크함을 잃지 않아요', keywords: ['선글라스', '셔켓', '치노'], badges: null, emoji: '🕶️', brand: 'Gentle Monster', shopUrl: 'https://www.gentlemonster.com', imageUrl: ootdDustyImg('duo6') },
+      { id: 'duo7',  title: 'Khaki Field Jacket', desc: '카키 필드 자켓으로 흙빛 하늘과 조화. 황사 무드에 어울리는 어시 톤', keywords: ['카키 자켓', '티셔츠', '카고팬츠'], badges: null, emoji: '🧥', brand: 'Carhartt', shopUrl: 'https://www.carhartt-wip.com', imageUrl: ootdDustyImg('duo7') },
+      { id: 'duo8',  title: 'Hooded Anorak', desc: '후드 아노락으로 머리부터 먼지 차단. 가볍게 뒤집어쓰는 커버 아우터', keywords: ['아노락', '후드', '조거팬츠'], badges: ['커버업'], emoji: '🧥', brand: 'Patagonia', shopUrl: 'https://www.patagonia.com', imageUrl: ootdDustyImg('duo8') },
+      { id: 'duo9',  title: 'Beige Trench', desc: '베이지 트렌치로 완성하는 황사 날 클래식. 먼지 덜 타는 톤으로 깔끔하게', keywords: ['베이지 트렌치', '니트', '로퍼'], badges: null, emoji: '🧥', brand: 'Burberry', shopUrl: 'https://kr.burberry.com', imageUrl: ootdDustyImg('duo9') },
+      { id: 'duo10', title: 'Zip-up Hoodie', desc: '집업 후드로 간편하게 여미는 커버. 실내외 온도차에도 유연하게 대응해요', keywords: ['집업 후드', '반팔티', '트랙팬츠'], badges: null, emoji: '🧥', brand: 'Champion', shopUrl: 'https://www.champion.co.kr', imageUrl: ootdDustyImg('duo10') },
+      { id: 'duo11', title: 'Mask & Cap Set', desc: '마스크와 캡 모자 조합. 얼굴 노출을 최소화한 완전 무장 황사 룩', keywords: ['마스크', '볼캡', '후드'], badges: ['먼지 차단'], emoji: '🧢', brand: 'New Era', shopUrl: 'https://www.neweracap.co.kr', imageUrl: ootdDustyImg('duo11') },
+      { id: 'duo12', title: 'Earth Tone Knit', desc: '흙빛 어시 톤 니트로 뿌연 하늘과 어울리는 무드. 차분한 황사 날 룩', keywords: ['어시 톤 니트', '슬랙스', '스니커즈'], badges: ['포인트 컬러'], emoji: '🧶', brand: 'H&M', shopUrl: 'https://www2.hm.com/ko_kr', imageUrl: ootdDustyImg('duo12') },
+    ],
+
+    food: [
+      { id: 'duf1',  title: '도라지 배차', area: '인사동', menu: '도라지 배 청차', desc: '목을 부드럽게 달래는 도라지 배차. 황사로 칼칼한 목에 딱 좋은 따뜻한 한 잔', keywords: ['도라지', '배', '한방차'], badges: ['목 보호'], emoji: '🍵', shopUrl: 'https://map.naver.com/v5/search/인사동 전통찻집', imageUrl: foodDustyImg('duf1') },
+      { id: 'duf2',  title: '모과차', area: '삼청동', menu: '모과차', desc: '향긋한 모과차 한 잔. 뿌연 날 목과 기관지를 따뜻하게 감싸줘요', keywords: ['모과', '한방차', '따뜻한 차'], badges: null, emoji: '🍵', shopUrl: 'https://map.naver.com/v5/search/삼청동 찻집', imageUrl: foodDustyImg('duf2') },
+      { id: 'duf3',  title: '생강차', area: '북촌', menu: '생강차', desc: '알싸한 생강차로 몸을 데워요. 황사에 으슬한 날 면역에도 좋은 따뜻한 차', keywords: ['생강', '꿀', '한방차'], badges: ['목 보호'], emoji: '🫖', shopUrl: 'https://map.naver.com/v5/search/북촌 찻집', imageUrl: foodDustyImg('duf3') },
+      { id: 'duf4',  title: '소고기 미역국', area: '종로', menu: '소고기 미역국 백반', desc: '깔끔한 소고기 미역국 백반. 황사 날 속을 정화하듯 부드럽게 채워요', keywords: ['미역국', '소고기', '백반'], badges: null, emoji: '🍲', shopUrl: 'https://map.naver.com/v5/search/종로 백반', imageUrl: foodDustyImg('duf4') },
+      { id: 'duf5',  title: '콩나물국밥', area: '종로', menu: '콩나물국밥', desc: '시원한 콩나물국밥. 황사로 텁텁한 속을 개운하게 풀어주는 해장 한 그릇', keywords: ['콩나물', '국밥', '계란'], badges: ['해장'], emoji: '🍲', shopUrl: 'https://map.naver.com/v5/search/종로 콩나물국밥', imageUrl: foodDustyImg('duf5') },
+      { id: 'duf6',  title: '한우 곰탕', area: '마포', menu: '한우 곰탕', desc: '뽀얀 한우 곰탕. 뿌연 날 든든하고 부드럽게 속을 데우는 보양 한 끼', keywords: ['곰탕', '한우', '깍두기'], badges: null, emoji: '🍲', shopUrl: 'https://map.naver.com/v5/search/마포 곰탕', imageUrl: foodDustyImg('duf6') },
+      { id: 'duf7',  title: '녹차 라떼', area: '가로수길', menu: '녹차 라떼', desc: '진한 녹차 라떼. 항산화 가득한 녹차로 황사 날 몸을 부드럽게 달래요', keywords: ['녹차', '라떼', '항산화'], badges: null, emoji: '🍵', shopUrl: 'https://map.naver.com/v5/search/가로수길 카페', imageUrl: foodDustyImg('duf7') },
+      { id: 'duf8',  title: '그린 디톡스 주스', area: '청담', menu: '그린 디톡스 주스', desc: '채소·과일 가득 디톡스 주스. 미세먼지 날 몸 안을 맑게 채우고 싶을 때', keywords: ['디톡스', '녹즙', '과일'], badges: ['디톡스'], emoji: '🥤', shopUrl: 'https://map.naver.com/v5/search/청담 주스바', imageUrl: foodDustyImg('duf8') },
+      { id: 'duf9',  title: '배숙', area: '인사동', menu: '배숙(배 조림)', desc: '꿀과 생강 넣어 조린 따뜻한 배숙. 기침과 칼칼한 목에 좋은 전통 후식', keywords: ['배숙', '꿀', '생강'], badges: ['목 보호'], emoji: '🍐', shopUrl: 'https://map.naver.com/v5/search/인사동 전통디저트', imageUrl: foodDustyImg('duf9') },
+      { id: 'duf10', title: '들깨 칼국수', area: '을지로', menu: '들깨 칼국수', desc: '고소한 들깨 칼국수. 부드러운 국물이 황사로 지친 속을 편안하게 감싸요', keywords: ['들깨', '칼국수', '버섯'], badges: null, emoji: '🍜', shopUrl: 'https://map.naver.com/v5/search/을지로 칼국수', imageUrl: foodDustyImg('duf10') },
+      { id: 'duf11', title: '단호박죽', area: '삼청동', menu: '단호박죽', desc: '달큰하고 부드러운 단호박죽. 소화 편하고 목 넘김 좋은 황사 날 한 그릇', keywords: ['단호박', '죽', '부드러움'], badges: null, emoji: '🥣', shopUrl: 'https://map.naver.com/v5/search/삼청동 죽집', imageUrl: foodDustyImg('duf11') },
+      { id: 'duf12', title: '쌍화차', area: '북촌', menu: '쌍화차', desc: '한약재 가득 쌍화차. 면역과 기력 보충에 좋은, 뿌연 날 몸보신 한 잔', keywords: ['쌍화차', '한방', '대추'], badges: ['몸보신'], emoji: '🍵', shopUrl: 'https://map.naver.com/v5/search/북촌 쌍화차', imageUrl: foodDustyImg('duf12') },
+    ],
+
+    activity: [
+      { id: 'dua1',  title: '국립현대미술관', area: '삼청동', desc: '공기 쾌적한 미술관에서 작품 감상. 황사 날 실내에서 누리는 문화 시간', keywords: ['미술관', '전시', '실내'], badges: ['실내'], emoji: '🖼️', meta: { cost: '보통', duration: '2~3시간', intensity: '낮음' }, shopUrl: 'https://www.mmca.go.kr', imageUrl: actDustyImg('dua1') },
+      { id: 'dua2',  title: '교보문고', area: '광화문', desc: '드넓은 서점에서 책 구경. 미세먼지 피해 쾌적하게 시간 보내기 좋아요', keywords: ['서점', '독서', '실내'], badges: ['실내'], emoji: '📚', meta: { cost: '무료', duration: '1~2시간', intensity: '낮음' }, shopUrl: 'https://map.naver.com/v5/search/광화문 교보문고', imageUrl: actDustyImg('dua2') },
+      { id: 'dua3',  title: '아쿠아리움', area: '잠실', desc: '황사 날 실내 아쿠아리움 나들이. 물속 풍경 보며 답답함을 식혀요', keywords: ['아쿠아리움', '실내', '나들이'], badges: ['실내'], emoji: '🐠', meta: { cost: '보통', duration: '2~3시간', intensity: '낮음' }, shopUrl: 'https://map.naver.com/v5/search/잠실 아쿠아리움', imageUrl: actDustyImg('dua3') },
+      { id: 'dua4',  title: '실내 식물원', area: '마곡', desc: '유리온실 속 식물 감상. 공기 맑은 실내에서 초록을 즐기는 황사 날 산책', keywords: ['식물원', '온실', '실내'], badges: ['실내'], emoji: '🌿', meta: { cost: '저렴', duration: '1~2시간', intensity: '낮음' }, shopUrl: 'https://botanicpark.seoul.go.kr', imageUrl: actDustyImg('dua4') },
+      { id: 'dua5',  title: '영화관', area: '왕십리', desc: '미세먼지 날엔 영화관에서 한 편. 쾌적한 공기 속 스크린에 몰입해요', keywords: ['영화관', '실내', '휴식'], badges: ['실내'], emoji: '🎬', meta: { cost: '보통', duration: '2~3시간', intensity: '낮음' }, shopUrl: 'https://www.cgv.co.kr', imageUrl: actDustyImg('dua5') },
+      { id: 'dua6',  title: '베이킹 클래스', area: '연남동', desc: '원데이 베이킹 클래스. 실내에서 손으로 만드는 재미에 빠지는 황사 날 취미', keywords: ['베이킹', '클래스', '실내'], badges: ['실내'], emoji: '🧁', meta: { cost: '보통', duration: '2~3시간', intensity: '보통' }, shopUrl: 'https://map.naver.com/v5/search/연남동 베이킹클래스', imageUrl: actDustyImg('dua6') },
+      { id: 'dua7',  title: '카페 작업', area: '성수동', desc: '공기청정 잘 되는 카페에서 작업. 황사 피해 노트북 켜고 집중하기 좋아요', keywords: ['카페', '작업', '실내'], badges: ['실내'], emoji: '☕', meta: { cost: '저렴', duration: '반나절', intensity: '낮음' }, shopUrl: 'https://map.naver.com/v5/search/성수동 카페', imageUrl: actDustyImg('dua7') },
+      { id: 'dua8',  title: '도자기 공방', area: '이태원', desc: '핸드빌딩 도자기 원데이 클래스. 흙을 빚으며 몰입하는 실내 취미', keywords: ['도자기', '공방', '실내'], badges: ['실내'], emoji: '🏺', meta: { cost: '보통', duration: '2~3시간', intensity: '보통' }, shopUrl: 'https://map.naver.com/v5/search/이태원 도자기공방', imageUrl: actDustyImg('dua8') },
+      { id: 'dua9',  title: 'VR 체험존', area: '강남', desc: 'VR 게임 체험. 황사 날 실내에서 즐기는 짜릿한 가상현실', keywords: ['VR', '게임', '실내'], badges: ['실내'], emoji: '🥽', meta: { cost: '보통', duration: '1~2시간', intensity: '보통' }, shopUrl: 'https://map.naver.com/v5/search/강남 VR', imageUrl: actDustyImg('dua9') },
+      { id: 'dua10', title: '스파 & 마사지', area: '청담', desc: '미세먼지로 지친 몸을 스파에서 회복. 쾌적한 실내에서 누리는 힐링', keywords: ['스파', '마사지', '휴식'], badges: ['실내'], emoji: '💆', meta: { cost: '높음', duration: '2~3시간', intensity: '낮음' }, shopUrl: 'https://map.naver.com/v5/search/청담 스파', imageUrl: actDustyImg('dua10') },
+      { id: 'dua11', title: '롯데월드몰', area: '잠실', desc: '대형 쇼핑몰에서 실내 나들이. 황사 피해 쇼핑·식사·영화를 한 번에', keywords: ['쇼핑몰', '실내', '나들이'], badges: ['실내'], emoji: '🛍️', meta: { cost: '보통', duration: '반나절', intensity: '낮음' }, shopUrl: 'https://map.naver.com/v5/search/잠실 롯데월드몰', imageUrl: actDustyImg('dua11') },
+      { id: 'dua12', title: 'DDP 전시', area: '동대문', desc: 'DDP 디자인 전시 관람. 미세먼지 날 실내 건축 공간에서 즐기는 전시', keywords: ['DDP', '전시', '실내'], badges: ['실내'], emoji: '🎨', meta: { cost: '보통', duration: '2~3시간', intensity: '낮음' }, shopUrl: 'https://www.ddp.or.kr', imageUrl: actDustyImg('dua12') },
+    ],
+
+    music: [
+      { id: 'dum1',  title: 'Fade Into You', artist: 'Mazzy Star', genre: 'Dream Pop', mood: 'Hazy', desc: '안개처럼 번지는 드림 팝. 뿌옇게 흐린 하늘과 완벽하게 어울리는 몽환', link: 'https://youtu.be/ImKY6TZEyrI', emoji: '🌫️' },
+      { id: 'dum2',  title: 'Affection', artist: 'Cigarettes After Sex', genre: 'Dream Pop', mood: 'Hazy', desc: '나른하고 흐릿한 분위기. 황사로 흐린 날의 무드를 그대로 담은 트랙', link: 'https://youtu.be/XS086HpSXqA', emoji: '🚬' },
+      { id: 'dum3',  title: 'Cherry Wine', artist: 'Hozier', genre: 'Folk', mood: 'Faded', desc: '바랜 듯 부드러운 어쿠스틱 포크. 뿌연 오후에 잔잔히 스며들어요', link: 'https://youtu.be/-uMMIcnkTmE', emoji: '🍒' },
+      { id: 'dum4',  title: 'Carry You', artist: 'Novo Amor', genre: 'Indie Folk', mood: 'Misty', desc: '안개 낀 듯 아련한 인디 포크. 흐릿한 하늘 아래 마음을 다독여요', link: 'https://youtu.be/DCFbYEMJfBk', emoji: '🌁' },
+      { id: 'dum5',  title: 'Mystery of Love', artist: 'Sufjan Stevens', genre: 'Indie Folk', mood: 'Wistful', desc: '아련하고 섬세한 멜로디. 뿌연 날의 그리움 같은 무드를 채워요', link: 'https://youtu.be/yxGO1BEwbLI', emoji: '🤍' },
+      { id: 'dum6',  title: 'lovely', artist: 'Billie Eilish & Khalid', genre: 'Alt Pop', mood: 'Muted', desc: '먹먹하고 차분한 듀엣. 흐린 하늘처럼 묵직하게 가라앉는 무드', link: 'https://youtu.be/V1Pl8CzNzCw', emoji: '🩶' },
+      { id: 'dum7',  title: 'The Night We Met', artist: 'Lord Huron', genre: 'Indie Folk', mood: 'Nostalgic', desc: '아련한 노스탤지어의 인디 포크. 뿌옇게 바랜 추억을 떠올리게 해요', link: 'https://youtu.be/KtlgYxa6BMU', emoji: '🌙' },
+      { id: 'dum8',  title: 'Video Games', artist: 'Lana Del Rey', genre: 'Baroque Pop', mood: 'Hazy', desc: '몽롱하고 영화 같은 사운드. 흐린 날의 나른함을 우아하게 그려내요', link: 'https://youtu.be/cE6wxDqdOV0', emoji: '🎮' },
+      { id: 'dum9',  title: 'From the Start', artist: 'Laufey', genre: 'Jazz Pop', mood: 'Mellow', desc: '포근한 재즈 팝. 뿌연 오후 카페에서 듣기 좋은 부드러운 무드', link: 'https://youtu.be/NsGe6Ue3ops', emoji: '🎺' },
+      { id: 'dum10', title: 'Glimpse of Us', artist: 'Joji', genre: 'Ballad', mood: 'Faded', desc: '바랜 사진 같은 피아노 발라드. 흐릿한 하늘 아래 잔잔히 번져요', link: 'https://youtu.be/gPMl_LhKoSg', emoji: '🎹' },
+      { id: 'dum11', title: 'Heather', artist: 'Conan Gray', genre: 'Indie Pop', mood: 'Wistful', desc: '여리고 아련한 인디 팝. 뿌연 날의 옅은 쓸쓸함과 잘 어울려요', link: 'https://youtu.be/GRexqNM7Kxk', emoji: '🧣' },
+      { id: 'dum12', title: 'Astronomy', artist: 'Conan Gray', genre: 'Indie Pop', mood: 'Dreamy', desc: '아득하게 퍼지는 몽환적 사운드. 흐린 하늘을 올려다보며 듣기 좋아요', link: 'https://youtu.be/dNPPlQSSJxQ', emoji: '✨' },
+      { id: 'dum13', title: '사계 (四季)', artist: 'TAEYEON', genre: 'K-Pop', mood: 'Wistful', desc: '계절처럼 흘러가는 아련한 발라드. 뿌연 날의 차분한 무드를 채워요', link: 'https://youtu.be/v5ryZdpEHqM', emoji: '🍂' },
+      { id: 'dum14', title: '봄날 (Spring Day)', artist: 'BTS', genre: 'K-Pop', mood: 'Longing', desc: '그리움이 짙게 밴 명곡. 흐릿한 하늘 아래 아련하게 번지는 트랙', link: 'https://youtu.be/xEeFrLSkMm8', emoji: '🌸' },
+      { id: 'dum15', title: 'Still With You', artist: 'Jung Kook', genre: 'R&B', mood: 'Hazy', desc: '안개처럼 부드러운 R&B. 뿌연 날의 나른함을 감미롭게 감싸줘요', link: 'https://youtu.be/CkMxVDNh47M', emoji: '🌫️' },
+      { id: 'dum16', title: '모든 날, 모든 순간', artist: '폴킴 (Paul Kim)', genre: 'K-Ballad', mood: 'Warm', desc: '따뜻하게 스며드는 발라드. 흐린 날에도 마음을 포근하게 데워줘요', link: 'https://youtu.be/1q3dO4b6TzE', emoji: '🤎' },
+      { id: 'dum17', title: '밤편지 (Through the Night)', artist: '아이유 (IU)', genre: 'K-Ballad', mood: 'Mellow', desc: '잔잔하게 번지는 밤편지. 뿌연 저녁의 부드러운 무드를 완성해요', link: 'https://youtu.be/BzYnNdJhZQw', emoji: '🌙' },
+      { id: 'dum18', title: 'Eight', artist: '아이유 (IU)', genre: 'K-Pop', mood: 'Wistful', desc: '산뜻하면서 아련한 곡. 흐린 하늘에 옅게 깔리는 그리움을 채워요', link: 'https://youtu.be/TgOu00Mf3kI', emoji: '🎈' },
+      { id: 'dum19', title: 'Best Part', artist: 'Daniel Caesar ft. H.E.R.', genre: 'R&B Soul', mood: 'Warm', desc: '포근하게 감싸는 R&B 소울. 뿌연 오후를 부드럽게 물들이는 듀엣', link: 'https://youtu.be/pXdBOJGbSOY', emoji: '🌅' },
+      { id: 'dum20', title: 'Thinking Bout You', artist: 'Frank Ocean', genre: 'R&B', mood: 'Hazy', desc: '아득하게 퍼지는 팔세토. 흐릿한 하늘처럼 몽롱하게 번지는 R&B', link: 'https://youtu.be/Qt8H8WRbIZs', emoji: '☁️' },
     ],
   },
 };

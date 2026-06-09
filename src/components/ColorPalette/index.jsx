@@ -15,7 +15,7 @@ function ColorPalette({ palette }) {
     <section className={styles.wrap}>
       <div className={styles.header}>
         <p className={styles.eyebrow}>Color</p>
-        <h2 className={styles.title}>오늘의 컬러 팔레트</h2>
+        <h2 className={styles.title}>무드 컬러 팔레트</h2>
       </div>
 
       <div className={styles.swatches}>

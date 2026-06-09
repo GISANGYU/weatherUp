@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import WeatherBackground from './components/backgrounds/WeatherBackground';
 import Header            from './components/Header';
 import { MusicProvider } from './context/MusicContext';
+import { WeatherProvider, useWeather } from './context/WeatherContext';
 import Footer            from './components/Footer';
 import LoadingScreen     from './components/LoadingScreen';
 import HomePage          from './pages/HomePage';
@@ -12,7 +13,10 @@ import FoodPage          from './pages/FoodPage';
 import ActivityPage      from './pages/ActivityPage';
 import AboutPage         from './pages/AboutPage';
 import MusicPage         from './pages/MusicPage';
+import DailyPage         from './pages/DailyPage';
+import DevTokensPage     from './pages/DevTokensPage';
 import weatherData       from './data/weatherData';
+import { getContentTheme } from './data/themeInherit';
 import { prefetchAllThemes } from './hooks/useMusicCovers';
 import CARD_PHOTOS       from './data/cardPhotos';
 
@@ -21,26 +25,42 @@ function preloadImages(urls) {
     urls.map(url => new Promise(resolve => {
       const img = new window.Image();
       img.onload  = resolve;
-      img.onerror = resolve; // 실패해도 block 하지 않음
+      img.onerror = resolve;
       img.src = url;
     }))
   );
 }
 
-const THEMES = ['theme-sunny', 'theme-cloudy', 'theme-rainy', 'theme-snowy'];
+const ALL_THEME_CLASSES = [
+  'theme-sunny', 'theme-cloudy', 'theme-rainy', 'theme-snowy',
+  'theme-partly-cloudy', 'theme-stormy', 'theme-dusty',
+];
 const MIN_LOADING_MS = 3000;
 
-function AppContent({ weatherMode, setWeatherMode }) {
+/* ── Provider 안쪽: currentTheme 으로 body 클래스 sync + 라우트 ── */
+function AppShell() {
+  const { currentTheme } = useWeather();
+  const contentTheme     = getContentTheme(currentTheme);
+
+  useEffect(() => {
+    document.body.classList.remove(...ALL_THEME_CLASSES);
+    document.body.classList.add(`theme-${currentTheme}`);
+  }, [currentTheme]);
+
   return (
     <>
+      <WeatherBackground theme={currentTheme} />
+      <Header />
       <main className="main-content">
         <Routes>
-          <Route path="/"         element={<HomePage     weatherMode={weatherMode} setWeatherMode={setWeatherMode} />} />
-          <Route path="/ootd"     element={<OOTDPage     weatherMode={weatherMode} />} />
-          <Route path="/food"     element={<FoodPage     weatherMode={weatherMode} />} />
-          <Route path="/activity" element={<ActivityPage weatherMode={weatherMode} />} />
-          <Route path="/music"    element={<MusicPage    weatherMode={weatherMode} />} />
-          <Route path="/about"    element={<AboutPage    weatherMode={weatherMode} />} />
+          <Route path="/"             element={<HomePage />} />
+          <Route path="/ootd"         element={<OOTDPage     weatherMode={contentTheme} />} />
+          <Route path="/food"         element={<FoodPage     weatherMode={contentTheme} />} />
+          <Route path="/activity"     element={<ActivityPage weatherMode={contentTheme} />} />
+          <Route path="/music"        element={<MusicPage    weatherMode={contentTheme} />} />
+          <Route path="/daily"        element={<DailyPage    weatherMode={contentTheme} />} />
+          <Route path="/about"        element={<AboutPage    weatherMode={contentTheme} />} />
+          <Route path="/dev/tokens"   element={<DevTokensPage />} />
         </Routes>
       </main>
       <Footer />
@@ -49,11 +69,10 @@ function AppContent({ weatherMode, setWeatherMode }) {
 }
 
 function App() {
-  const [weatherMode, setWeatherMode] = useState('sunny');
-  const [timerDone,   setTimerDone]   = useState(false);
-  const [coversDone,  setCoversDone]  = useState(false);
-  const [photosDone,  setPhotosDone]  = useState(false);
-  const [showLoader,  setShowLoader]  = useState(true);
+  const [timerDone,  setTimerDone]  = useState(false);
+  const [coversDone, setCoversDone] = useState(false);
+  const [photosDone, setPhotosDone] = useState(false);
+  const [showLoader, setShowLoader] = useState(true);
 
   const isLoading = !timerDone || !coversDone || !photosDone;
 
@@ -70,7 +89,7 @@ function App() {
 
   /* 4개 테마 앨범 커버 전체 프리패치 */
   useEffect(() => {
-    const allItems = ['sunny', 'cloudy', 'rainy', 'snowy']
+    const allItems = ['sunny', 'partly-cloudy', 'cloudy', 'rainy', 'snowy', 'stormy', 'dusty']
       .flatMap(theme => weatherData[theme].music);
     prefetchAllThemes(allItems).then(() => setCoversDone(true));
   }, []);
@@ -83,19 +102,14 @@ function App() {
     }
   }, [isLoading]);
 
-  useEffect(() => {
-    document.body.classList.remove(...THEMES);
-    document.body.classList.add(`theme-${weatherMode}`);
-  }, [weatherMode]);
-
   return (
     <Router basename={process.env.PUBLIC_URL}>
-      <MusicProvider>
-        {showLoader && <LoadingScreen visible={isLoading} />}
-        <WeatherBackground weatherMode={weatherMode} />
-        <Header weatherMode={weatherMode} setWeatherMode={setWeatherMode} />
-        <AppContent weatherMode={weatherMode} setWeatherMode={setWeatherMode} />
-      </MusicProvider>
+      <WeatherProvider>
+        <MusicProvider>
+          {showLoader && <LoadingScreen visible={isLoading} />}
+          <AppShell />
+        </MusicProvider>
+      </WeatherProvider>
     </Router>
   );
 }

@@ -13,7 +13,7 @@ function MusicPage({ weatherMode }) {
       <WeatherBanner weatherMode={weatherMode} category="music" />
 
       <section className={styles.section}>
-        <h2 className={styles.sectionTitle}>오늘의 플레이리스트</h2>
+        <h2 className={styles.sectionTitle}>추천 플레이리스트</h2>
         <MusicSection items={popular} className={styles.grid} />
       </section>
 

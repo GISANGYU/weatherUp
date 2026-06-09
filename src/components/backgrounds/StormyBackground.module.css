@@ -1,0 +1,76 @@
+.wrapper {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(180deg, #0a0e18 0%, #1a2438 100%);
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.scene {
+  position: absolute;
+  inset: -20%;
+  transform: rotate(8deg);
+}
+
+.drop {
+  position: absolute;
+  top: -40px;
+  width: 1.8px;
+  height: 40px;
+  background: linear-gradient(transparent, rgba(200, 215, 240, 0.88));
+  animation-name: stormy-fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes stormy-fall {
+  from { transform: translateY(0); }
+  to   { transform: translateY(140vh); }
+}
+
+.bolt {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  opacity: 0;
+  z-index: 4;
+  filter:
+    drop-shadow(0 0 6px  rgba(255, 255, 255, 1))
+    drop-shadow(0 0 18px rgba(170, 200, 255, 0.95))
+    drop-shadow(0 0 36px rgba(110, 150, 255, 0.55));
+}
+.bolt svg { width: 100%; height: 100%; display: block; overflow: visible; }
+.bolt path {
+  fill: none;
+  stroke: #ffffff;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.b1 { left: 16%; width: 80px;  animation: stormy-strike 4s   ease-out infinite; animation-delay: -0.8s; }
+.b2 { left: 48%; width: 110px; animation: stormy-strike 5.2s ease-out infinite; animation-delay: -2.5s; }
+.b3 { left: 76%; width: 70px;  animation: stormy-strike 4.6s ease-out infinite; animation-delay: -3.4s; }
+
+@keyframes stormy-strike {
+  0%, 82%, 100% { opacity: 0; }
+  83%           { opacity: 1; }
+  84%           { opacity: 0; }
+  85%           { opacity: 1; }
+  87%           { opacity: 0.35; }
+  89%           { opacity: 0; }
+}
+
+.noise {
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    0deg, rgba(255, 255, 255, 0.025) 0 1px, transparent 1px 3px);
+  z-index: 5;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drop, .bolt { animation: none; }
+}

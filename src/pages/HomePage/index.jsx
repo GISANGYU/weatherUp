@@ -1,154 +1,215 @@
-import { Link } from 'react-router-dom';
-import weatherData         from '../../data/weatherData';
-import { getCardVisuals }  from '../../data/cardVisuals';
-import HeroWeatherSelector from '../../components/HeroWeatherSelector';
-import MusicSection        from '../../components/MusicSection';
-import WeatherIcon         from '../../components/WeatherIcon';
+import { useMemo }          from 'react';
+import { Link }             from 'react-router-dom';
+import weatherData          from '../../data/weatherData';
+import { getCardVisuals }   from '../../data/cardVisuals';
+import { useWeather }       from '../../context/WeatherContext';
+import { getContentTheme }  from '../../data/themeInherit';
+import { useMusicContext }  from '../../context/MusicContext';
+import { useMusicCovers }   from '../../hooks/useMusicCovers';
+import WeatherSelector      from '../../components/WeatherSelector';
 import styles from './HomePage.module.css';
 
-function HomePage({ weatherMode, setWeatherMode }) {
-  const { messages, ootd, food, activity, music } = weatherData[weatherMode];
+/* 카드 배경 — 로컬 이미지가 있으면 사진, 없으면 테마 그라데이션으로 폴백 */
+function mediaBg(item, theme) {
+  const { grad } = getCardVisuals(item.id, theme);
+  return item.imageUrl ? `url(${item.imageUrl}) center/cover no-repeat` : grad;
+}
+
+/* 섹션 헤더 — eyebrow(mono) + display 타이틀 + 전체보기 화살표 링크 */
+function SectionHead({ eyebrow, title, to }) {
+  return (
+    <div className={styles.sectionHead}>
+      <div>
+        <span className={styles.eyebrow}>{eyebrow}</span>
+        <h2 className={styles.sectionTitle}>{title}</h2>
+      </div>
+      <Link to={to} className={styles.seeAll}>
+        전체보기 <span className={styles.seeAllArrow}>→</span>
+      </Link>
+    </div>
+  );
+}
+
+function HomePage() {
+  const { currentTheme } = useWeather();
+  const contentTheme = getContentTheme(currentTheme);
+  const { messages, ootd, food, activity, music } = weatherData[contentTheme];
+
+  /* 음악 — 재생 + 커버 (Balanced 분할 레이아웃용) */
+  const { play, playingId } = useMusicContext();
+  const musicItems = useMemo(() => music.slice(0, 6), [music]);
+  const { covers }  = useMusicCovers(musicItems);
+  const featTrack   = musicItems[0];
+  const gridTracks  = musicItems.slice(1, 4);
+  const listTracks  = musicItems.slice(4, 6);
+
+  const playTrack = (t) => play(t.id, t.link, { title: t.title, artist: t.artist, emoji: t.emoji });
 
   return (
     <div>
 
-      {/* ══ HERO ══════════════════════════════════════════ */}
-      <section className={styles.hero}>
-        <div className={styles.heroInner}>
-          <p className={styles.heroEyebrow}>Today's Weather</p>
-          <div className={`${styles.heroIcon} ${styles[`heroIcon_${weatherMode}`]}`}>
-            <WeatherIcon mode={weatherMode} size={96} />
-          </div>
-          <h1 className={styles.heroTitle}>{messages.home.title}</h1>
-          <p className={styles.heroSub}>{messages.home.subtitle}</p>
-          <HeroWeatherSelector
-            weatherMode={weatherMode}
-            setWeatherMode={setWeatherMode}
-          />
+      {/* ══ VISUAL HERO — 기존 메인 비주얼 유지 ══ */}
+      <section className={styles.visual}>
+        <div className={styles.visualInner}>
+          <h1 className={styles.visualTitle}>{messages.home.title}</h1>
+          <p className={styles.visualSub}>{messages.home.subtitle}</p>
+        </div>
+
+        <div className={styles.visualSelector}>
+          <span className={styles.selectEyebrow}>Select Mood</span>
+          <WeatherSelector variant="heroLg" />
         </div>
       </section>
 
-      {/* ══ SECTIONS ══════════════════════════════════════ */}
+      {/* ══ EDITORIAL SECTIONS — Stitch "Balanced Layout" ══ */}
       <div className={styles.sections}>
 
-        {/* ── OOTD ── */}
+        {/* ── STYLE — 시네마틱 2-카드 ── */}
         <section className={styles.section}>
-          <div className={styles.sectionHead}>
-            <div className={styles.sectionLabel}>Style</div>
-            <h2 className={styles.sectionTitle}>오늘의 코디</h2>
-          </div>
+          <SectionHead eyebrow="STYLE" title={messages.ootd.title} to="/ootd" />
 
-          <div className={styles.ootdGrid}>
-            {/* 피처드 카드 */}
-            {(() => {
-              const item = ootd[0];
-              const { grad } = getCardVisuals(item.id, weatherMode);
-              return (
-                <Link to="/ootd" className={styles.featuredCard} style={{ background: grad }}>
-                  <div className={styles.featuredOverlay}>
-                    <span className={styles.featuredEye}>Featured Look</span>
-                    <h3 className={styles.featuredTitle}>{item.title}</h3>
-                    <p className={styles.featuredDesc}>{item.desc}</p>
-                    <div className={styles.featuredKws}>
-                      {item.keywords.slice(0, 3).map(kw => (
-                        <span key={kw} className={styles.featuredKw}>{kw}</span>
-                      ))}
-                    </div>
+          <div className={styles.styleRow}>
+            {ootd.slice(0, 2).map((item, i) => (
+              <Link key={item.id} to="/ootd" className={styles.slide}>
+                <div className={styles.media} style={{ background: mediaBg(item, contentTheme) }} />
+                <div className={styles.slideOverlay}>
+                  <div className={styles.slideInner}>
+                    <span className={styles.slideEyebrow}>
+                      {i === 0 ? 'Featured Spread' : (item.brand || item.keywords?.[0])}
+                    </span>
+                    <h3 className={styles.slideTitle}>{item.title}</h3>
+                    <span className={styles.slideBtn}>룩 보기 →</span>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        {/* ── CUISINE — 에디토리얼 3-그리드 ── */}
+        <section className={styles.section}>
+          <SectionHead eyebrow="CUISINE" title={messages.food.title} to="/food" />
+
+          <div className={styles.cuisineGrid}>
+            {food.slice(0, 3).map(item => (
+              <Link key={item.id} to="/food" className={styles.cuisineCard}>
+                <div className={styles.cuisineImg}>
+                  <div className={styles.media} style={{ background: mediaBg(item, contentTheme) }} />
+                </div>
+                <h3 className={styles.cuisineTitle}>{item.title}</h3>
+                <p className={styles.cuisineSub}>{item.keywords?.slice(0, 2).join(' · ')}</p>
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        {/* ── ACTIVITY — 트립틱 콜라주 ── */}
+        <section className={styles.section}>
+          <SectionHead eyebrow="ACTIVITY" title={messages.activity.title} to="/activity" />
+
+          <div className={styles.collage}>
+            <div className={styles.colLeft}>
+              {activity[1] && (
+                <Link to="/activity" className={styles.actSide}>
+                  <div className={styles.media} style={{ background: mediaBg(activity[1], contentTheme) }} />
+                  <div className={styles.actOverlay}>
+                    <span className={styles.actEyebrow}>{activity[1].area || activity[1].keywords?.[0]}</span>
+                    <strong className={`${styles.actName} ${styles.actNameSm}`}>{activity[1].title}</strong>
                   </div>
                 </Link>
-              );
-            })()}
+              )}
+            </div>
 
-            {/* 서브 카드 3장 */}
-            <div className={styles.ootdSubs}>
-              {ootd.slice(1, 4).map(item => {
-                const { grad } = getCardVisuals(item.id, weatherMode);
-                return (
-                  <Link key={item.id} to="/ootd" className={styles.subCard} style={{ background: grad }}>
-                    <div className={styles.subOverlay}>
-                      <span className={styles.subTitle}>{item.title}</span>
-                      <div className={styles.subKws}>
-                        {item.keywords.slice(0, 2).map(kw => (
-                          <span key={kw}>{kw}</span>
-                        ))}
-                      </div>
-                    </div>
-                  </Link>
-                );
-              })}
+            <div className={styles.colCenter}>
+              {activity[0] && (
+                <Link to="/activity" className={styles.actCenter}>
+                  <div className={styles.media} style={{ background: mediaBg(activity[0], contentTheme) }} />
+                  <div className={`${styles.actOverlay} ${styles.actOverlayLg}`}>
+                    <span className={`${styles.actEyebrow} ${styles.actEyebrowAccent}`}>HIGHLIGHT</span>
+                    <strong className={`${styles.actName} ${styles.actNameLg}`}>{activity[0].title}</strong>
+                    <p className={styles.actDescTxt}>{activity[0].desc}</p>
+                  </div>
+                </Link>
+              )}
+            </div>
+
+            <div className={styles.colRight}>
+              {activity[2] && (
+                <Link to="/activity" className={styles.actSide}>
+                  <div className={styles.media} style={{ background: mediaBg(activity[2], contentTheme) }} />
+                  <div className={styles.actOverlay}>
+                    <span className={styles.actEyebrow}>{activity[2].area || activity[2].keywords?.[0]}</span>
+                    <strong className={`${styles.actName} ${styles.actNameSm}`}>{activity[2].title}</strong>
+                  </div>
+                </Link>
+              )}
             </div>
           </div>
         </section>
 
-        {/* ── FOOD ── */}
+        {/* ── MUSIC — 분할(피처드 + 그리드 + 리스트) ── */}
         <section className={styles.section}>
-          <div className={styles.sectionHead}>
-            <div className={styles.sectionLabel}>Cuisine</div>
-            <h2 className={styles.sectionTitle}>오늘의 음식</h2>
-            <Link to="/food" className={styles.seeAll}>전체보기 →</Link>
-          </div>
+          <SectionHead eyebrow="MUSIC" title={messages.music.title} to="/music" />
 
-          <div className={styles.foodGrid}>
-            {food.slice(0, 4).map(item => {
-              const { grad } = getCardVisuals(item.id, weatherMode);
-              const bg = item.imageUrl
-                ? `url(${item.imageUrl}) center/cover no-repeat`
-                : grad;
-              return (
-                <Link key={item.id} to="/food" className={styles.foodCard} style={{ background: bg }}>
-                  <div className={styles.foodOverlay}>
-                    <strong className={styles.foodTitle}>{item.title}</strong>
-                    <p className={styles.foodSub}>{item.keywords.slice(0, 2).join(' · ')}</p>
+          <div className={styles.musicSplit}>
+            {/* 피처드 */}
+            {featTrack && (
+              <button
+                type="button"
+                className={`${styles.musicFeatured} ${playingId === featTrack.id ? styles.isPlaying : ''}`}
+                onClick={() => playTrack(featTrack)}
+              >
+                {covers[featTrack.id]
+                  ? <div className={styles.media} style={{ background: `url(${covers[featTrack.id]}) center/cover no-repeat` }} />
+                  : <div className={styles.featEmoji}>{featTrack.emoji || '🎵'}</div>}
+                <div className={styles.playOverlay}>
+                  <span className="material-symbols-outlined" aria-hidden>play_arrow</span>
+                  <span className={styles.playLabel}>PLAY NOW</span>
+                </div>
+                <div className={styles.musicFeatCaption}>
+                  <span className={styles.musicFeatEyebrow}>Currently Curated</span>
+                  <h3 className={styles.musicFeatTitle}>{featTrack.title}</h3>
+                  <p className={styles.musicFeatSub}>{featTrack.artist}</p>
+                </div>
+              </button>
+            )}
+
+            {/* 우측: 소형 그리드 + 트랙 리스트 */}
+            <div className={styles.musicRight}>
+              <div className={styles.musicSmallGrid}>
+                {gridTracks.map(t => (
+                  <div key={t.id} className={styles.smallCard} onClick={() => playTrack(t)}>
+                    <div className={styles.smallCover}>
+                      {covers[t.id]
+                        ? <div className={styles.media} style={{ background: `url(${covers[t.id]}) center/cover no-repeat` }} />
+                        : <div className={styles.smallEmoji}>{t.emoji || '🎵'}</div>}
+                    </div>
+                    <h4 className={styles.smallTitle}>{t.title}</h4>
+                    <p className={styles.smallGenre}>{t.genre}</p>
                   </div>
-                </Link>
-              );
-            })}
-          </div>
-        </section>
+                ))}
+              </div>
 
-        {/* ── ACTIVITY ── */}
-        <section className={styles.section}>
-          <div className={styles.sectionHead}>
-            <div className={styles.sectionLabel}>Activity</div>
-            <h2 className={styles.sectionTitle}>오늘 뭐할까?</h2>
-            <Link to="/activity" className={styles.seeAll}>전체보기 →</Link>
-          </div>
-
-          <div className={styles.actGrid}>
-            {activity.slice(0, 2).map(item => {
-              const { grad } = getCardVisuals(item.id, weatherMode);
-              return (
-                <Link key={item.id} to="/activity" className={styles.actCard} style={{ background: grad }}>
-                  <div className={styles.actOverlay}>
-                    <h3 className={styles.actTitle}>{item.title}</h3>
-                    <p className={styles.actDesc}>{item.desc}</p>
-                    {item.meta && (
-                      <div className={styles.actMeta}>
-                        <span>{item.meta.cost}</span>
-                        <span className={styles.actDot} />
-                        <span>{item.meta.duration}</span>
-                      </div>
-                    )}
+              <div className={styles.trackList}>
+                {listTracks.map(t => (
+                  <div key={t.id} className={styles.trackRow} onClick={() => playTrack(t)}>
+                    <div className={styles.trackThumb}>
+                      {covers[t.id]
+                        ? <div className={styles.media} style={{ background: `url(${covers[t.id]}) center/cover no-repeat` }} />
+                        : <div className={styles.trackThumbEmoji}>{t.emoji || '🎵'}</div>}
+                    </div>
+                    <div className={styles.trackInfo}>
+                      <h4 className={styles.trackTitle}>{t.title}</h4>
+                      <p className={styles.trackMeta}>{t.artist} · {t.genre}</p>
+                    </div>
+                    <span className={`material-symbols-outlined ${styles.trackIcon}`} aria-hidden>
+                      {playingId === t.id ? 'equalizer' : 'play_arrow'}
+                    </span>
                   </div>
-                </Link>
-              );
-            })}
+                ))}
+              </div>
+            </div>
           </div>
-        </section>
-
-        {/* ── MUSIC ── */}
-        <section className={styles.section}>
-          <div className={styles.sectionHead}>
-            <div className={styles.sectionLabel}>Music</div>
-            <h2 className={styles.sectionTitle}>오늘의 플레이리스트</h2>
-            <Link to="/music" className={styles.seeAll}>전체보기 →</Link>
-          </div>
-
-          <MusicSection
-            items={music}
-            limit={6}
-            className={styles.musicGrid}
-          />
         </section>
 
       </div>

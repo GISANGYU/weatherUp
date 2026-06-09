@@ -1,0 +1,1018 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WeatherUp — 발표자료</title>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- 슬라이드 카운터 / 네비 -->
+    <nav class="deck-nav">
+      <button class="nav-btn nav-prev" aria-label="이전 슬라이드">
+        &larr;
+      </button>
+      <span class="nav-count">
+        <span class="now">01</span> <span class="div">/</span>
+        <span class="total">15</span>
+      </span>
+      <button class="nav-btn nav-next" aria-label="다음 슬라이드">
+        &rarr;
+      </button>
+    </nav>
+
+    <main class="deck">
+      <!-- ═══════════════════════════════════════════
+         01 · 표지
+      ═════════════════════════════════════════════ -->
+      <section class="slide slide-cover" data-bg="dark" data-slide="01">
+        <header class="cover-top">
+          <span class="ct-rule"></span>
+          <span class="ct-tag">EDITORIAL · LIFESTYLE INTERFACE 2026</span>
+          <span class="ct-rule"></span>
+        </header>
+
+        <div class="cover-emblem">
+          <div class="emblem-inner">WEATHERUP</div>
+          <div class="emblem-line"></div>
+        </div>
+
+        <div class="cover-meta">
+          <p class="meta-key">A LIFESTYLE INTERFACE TUNED BY THE WEATHER</p>
+          <h1 class="meta-title">날씨로 완성하는<br />하루의 라이프스타일</h1>
+          <p class="meta-sub">계원예술대학교 · 프론트엔드 · 2026</p>
+        </div>
+
+        <div class="cover-foot">
+          <span class="foot-key">WEATHERUP</span>
+          <span class="foot-val">2026 · 05 · 20</span>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════
+         02 · 한 줄
+      ═════════════════════════════════════════════ -->
+      <section class="slide slide-statement" data-bg="light" data-slide="02">
+        <header class="slide-head">
+          <span class="head-key">01 · ONE SENTENCE</span>
+          <h2 class="head-title">한 줄</h2>
+        </header>
+        <div class="statement-block">
+          <blockquote class="big-quote">
+            내가 고른 <strong>날씨 무드</strong>가 UI 가 되어,<br />
+            <span class="quote-accent">옷·음식·활동·음악</span>까지 한
+            화면에서<br />
+            큐레이션해주는 라이프스타일 웹 서비스
+          </blockquote>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════
+         03 · 관점 전환
+      ═════════════════════════════════════════════ -->
+      <section class="slide" data-bg="dark" data-slide="03">
+        <header class="slide-head">
+          <span class="head-key">02 · DESIGN PIVOT</span>
+          <h2 class="head-title">정보형 → 큐레이션형</h2>
+        </header>
+        <div class="two-col">
+          <div class="col">
+            <div class="kicker">기존 날씨 앱</div>
+            <p class="big-line"><em>온도·강수확률만</em> 알려주고 끝</p>
+            <p class="small-note">
+              "비 80%" 라는 한 줄 정보만<br />
+              옷·음식·계획은 사용자가 따로 고민
+            </p>
+          </div>
+          <div class="col emphasized">
+            <div class="kicker accent">WEATHERUP</div>
+            <p class="big-line">고른 날씨가 곧 <em>하루의 모드</em></p>
+            <p class="small-note light">
+              UI 테마·콘텐츠·플레이리스트까지<br />
+              <strong>선택한 무드 하나로 일제히 큐레이션</strong>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════
+         04 · 디자인 원칙
+      ═════════════════════════════════════════════ -->
+      <section class="slide" data-bg="light" data-slide="04">
+        <header class="slide-head">
+          <span class="head-key">03 · DESIGN PRINCIPLES</span>
+          <h2 class="head-title">네 가지 원칙</h2>
+        </header>
+        <ol class="num-list">
+          <li>
+            <span class="nl-num">01</span>
+            <div class="nl-body">
+              <h3>사용자가 무드를 선택</h3>
+              <p>
+                7개의 날씨 버튼 중 <em>한 번 클릭</em> — 그 선택이 테마와
+                콘텐츠를 동시에 결정
+              </p>
+            </div>
+          </li>
+          <li>
+            <span class="nl-num">02</span>
+            <div class="nl-body">
+              <h3>단일 클래스 · 전체 전환</h3>
+              <p>
+                <code>body.theme-X</code> 한 줄로 색상·분위기·콘텐츠·배경
+                <em>일제히 전환</em>
+              </p>
+            </div>
+          </li>
+          <li>
+            <span class="nl-num">03</span>
+            <div class="nl-body">
+              <h3>셀렉터 · 상호작용의 핵심</h3>
+              <p>
+                7테마 버튼 row 가 메인 UI — 클릭 시 히어로 · 헤더 · 배경 ·
+                콘텐츠 일제히 동기화
+              </p>
+            </div>
+          </li>
+          <li>
+            <span class="nl-num">04</span>
+            <div class="nl-body">
+              <h3>4축 · Daily 페이지로 하루 응축</h3>
+              <p>
+                OOTD · Food · Activity · Music — Daily 페이지에서
+                <em>한 무드의 하루로 통째 큐레이션</em>
+              </p>
+            </div>
+          </li>
+        </ol>
+      </section>
+
+      <!-- ═══════════════════════════════════════════
+         05 · 7테마 시스템
+      ═════════════════════════════════════════════ -->
+      <section class="slide" data-bg="dark" data-slide="05">
+        <header class="slide-head">
+          <span class="head-key">04 · 7-THEME SYSTEM</span>
+          <h2 class="head-title">날씨 7종 · 단일 시스템</h2>
+        </header>
+
+        <div class="theme-matrix">
+          <div class="theme-card" data-theme="sunny" data-tone="bright">
+            <div class="tc-num">01 · BRIGHT</div>
+            <div>
+              <div class="tc-name">sunny</div>
+              <div class="tc-mood">맑음 · 에너지</div>
+              <div class="tc-accent"></div>
+              <div class="tc-hex">#EEF6FF · #FFB800</div>
+            </div>
+          </div>
+          <div class="theme-card" data-theme="partly-cloudy" data-tone="bright">
+            <div class="tc-num">02 · BRIGHT</div>
+            <div>
+              <div class="tc-name">partly-<br />cloudy</div>
+              <div class="tc-mood">가벼움 · 변덕</div>
+              <div class="tc-accent"></div>
+              <div class="tc-hex">#E8F0F7 · #9BB8D9</div>
+            </div>
+          </div>
+          <div class="theme-card" data-theme="snowy" data-tone="bright">
+            <div class="tc-num">03 · BRIGHT</div>
+            <div>
+              <div class="tc-name">snowy</div>
+              <div class="tc-mood">포근 · 낭만</div>
+              <div class="tc-accent"></div>
+              <div class="tc-hex">#EAF0FF · #A8C8FF</div>
+            </div>
+          </div>
+          <div class="theme-card" data-theme="dusty" data-tone="bright">
+            <div class="tc-num">04 · BRIGHT</div>
+            <div>
+              <div class="tc-name">dusty</div>
+              <div class="tc-mood">답답 · 뿌연</div>
+              <div class="tc-accent"></div>
+              <div class="tc-hex">#E5DFD3 · #B8A888</div>
+            </div>
+          </div>
+          <div class="theme-card" data-theme="cloudy" data-tone="dark">
+            <div class="tc-num">05 · MOODY</div>
+            <div>
+              <div class="tc-name">cloudy</div>
+              <div class="tc-mood">차분 · 무드</div>
+              <div class="tc-accent"></div>
+              <div class="tc-hex">#2A2E35 · #B8C5D5</div>
+            </div>
+          </div>
+          <div class="theme-card" data-theme="rainy" data-tone="dark">
+            <div class="tc-num">06 · MOODY</div>
+            <div>
+              <div class="tc-name">rainy</div>
+              <div class="tc-mood">촉촉 · 감성</div>
+              <div class="tc-accent"></div>
+              <div class="tc-hex">#1C2B3A · #4A9EFF</div>
+            </div>
+          </div>
+          <div class="theme-card" data-theme="stormy" data-tone="dark">
+            <div class="tc-num">07 · MOODY</div>
+            <div>
+              <div class="tc-name">stormy</div>
+              <div class="tc-mood">극적 · 파워</div>
+              <div class="tc-accent"></div>
+              <div class="tc-hex">#151823 · #8877F5</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="matrix-divider">
+          <div class="md-bright">
+            <strong>밝은 계열 4종</strong> &nbsp; · &nbsp; sunny / partly-cloudy
+            / snowy / dusty
+          </div>
+          <div class="md-dark">
+            <strong>무드 계열 3종</strong> &nbsp; · &nbsp; cloudy / rainy /
+            stormy
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════
+         06 · 테마 토큰 매핑
+      ═════════════════════════════════════════════ -->
+      <section class="slide" data-bg="light" data-slide="06">
+        <header class="slide-head">
+          <span class="head-key">05 · DESIGN TOKENS</span>
+          <h2 class="head-title">테마 토큰 매핑</h2>
+        </header>
+
+        <div class="token-pair">
+          <div class="token-card">
+            <div class="tk-key">tokens.css · 원시 토큰</div>
+            <h4 class="tk-title">테마별 색상 원본</h4>
+            <ul class="tk-list">
+              <li>
+                <span class="tk-swatch" style="background: #eef6ff"></span
+                ><span>--sunny-bg</span><span class="tk-meta">맑은 하늘</span>
+              </li>
+              <li>
+                <span class="tk-swatch" style="background: #ffb800"></span
+                ><span>--sunny-accent</span
+                ><span class="tk-meta">햇살 노랑</span>
+              </li>
+              <li>
+                <span class="tk-swatch" style="background: #eaf0ff"></span
+                ><span>--snowy-bg</span><span class="tk-meta">겨울 백색</span>
+              </li>
+              <li>
+                <span class="tk-swatch" style="background: #2a2e35"></span
+                ><span>--cloudy-bg</span
+                ><span class="tk-meta">차분한 회색</span>
+              </li>
+              <li>
+                <span class="tk-swatch" style="background: #1c2b3a"></span
+                ><span>--rainy-bg</span><span class="tk-meta">젖은 네이비</span>
+              </li>
+              <li>
+                <span class="tk-swatch" style="background: #4a9eff"></span
+                ><span>--rainy-accent</span
+                ><span class="tk-meta">비온 뒤 하늘</span>
+              </li>
+              <li>
+                <span class="tk-swatch" style="background: #151823"></span
+                ><span>--stormy-bg</span
+                ><span class="tk-meta">먹구름 보라</span>
+              </li>
+            </ul>
+            <p class="tk-foot">7테마 × 6변수 — 색상의 실제 값을 한곳에 보관</p>
+          </div>
+
+          <div class="preview-card">
+            <div class="tk-key">themes.css · 적용 결과</div>
+            <h4 class="tk-title">같은 컴포넌트 · 다른 테마</h4>
+            <div class="tp-grid">
+              <div class="tp-card" data-theme="sunny">
+                <span class="tp-label">.theme-sunny</span>
+                <div class="tp-mock">
+                  <span class="tp-eyebrow">TODAY · 24°</span>
+                  <h5 class="tp-title">오늘의 큐레이션</h5>
+                  <button class="tp-btn">Style 보기</button>
+                </div>
+              </div>
+              <div class="tp-card" data-theme="rainy">
+                <span class="tp-label">.theme-rainy</span>
+                <div class="tp-mock">
+                  <span class="tp-eyebrow">TODAY · 17°</span>
+                  <h5 class="tp-title">오늘의 큐레이션</h5>
+                  <button class="tp-btn">Style 보기</button>
+                </div>
+              </div>
+              <div class="tp-card" data-theme="snowy">
+                <span class="tp-label">.theme-snowy</span>
+                <div class="tp-mock">
+                  <span class="tp-eyebrow">TODAY · 4°</span>
+                  <h5 class="tp-title">오늘의 큐레이션</h5>
+                  <button class="tp-btn">Style 보기</button>
+                </div>
+              </div>
+              <div class="tp-card" data-theme="cloudy">
+                <span class="tp-label">.theme-cloudy</span>
+                <div class="tp-mock">
+                  <span class="tp-eyebrow">TODAY · 19°</span>
+                  <h5 class="tp-title">오늘의 큐레이션</h5>
+                  <button class="tp-btn">Style 보기</button>
+                </div>
+              </div>
+            </div>
+            <p class="tk-foot">
+              같은 마크업 · 코드 변경 0 — body 클래스만 갈아끼우면 색감 자동
+              적용
+            </p>
+          </div>
+        </div>
+
+        <p class="token-bridge">
+          <span class="kw">body.theme-X</span> 한 줄이 바뀌면 의미 토큰이
+          가리키는 원시 토큰이 <em>일제히 교체</em>
+        </p>
+      </section>
+
+      <!-- ═══════════════════════════════════════════
+         07 · 상태 아키텍처
+      ═════════════════════════════════════════════ -->
+      <section class="slide" data-bg="light" data-slide="07">
+        <header class="slide-head">
+          <span class="head-key">06 · STATE ARCHITECTURE</span>
+          <h2 class="head-title">WeatherContext · 단 두 줄</h2>
+        </header>
+
+        <div class="context-arch">
+          <div class="ca-provider">
+            <div class="ca-label">CONTEXT · 단일 진리</div>
+            <h3>WeatherContext</h3>
+            <div class="ca-fields">
+              <div class="ca-row">
+                <span class="ca-name">currentTheme</span
+                ><span class="ca-desc">선택된 7테마 ID · 'sunny' | 'rainy' | …</span>
+              </div>
+              <div class="ca-row derived">
+                <span class="ca-name">setTheme</span
+                ><span class="ca-desc">테마 전환 액션 · 사용자 클릭으로 호출</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="ca-stream">
+            <div class="ca-streamline"></div>
+          </div>
+
+          <div class="ca-consumers">
+            <div class="ca-page">Home<span class="cp-route">/</span></div>
+            <div class="ca-page">Daily<span class="cp-route">/daily</span></div>
+            <div class="ca-page">OOTD<span class="cp-route">/ootd</span></div>
+            <div class="ca-page">Food<span class="cp-route">/food</span></div>
+            <div class="ca-page">
+              Activity<span class="cp-route">/activity</span>
+            </div>
+            <div class="ca-page">Music<span class="cp-route">/music</span></div>
+            <div class="ca-page">About<span class="cp-route">/about</span></div>
+          </div>
+
+          <p class="ca-note">
+            <em>currentTheme</em> 한 값이 갱신되면 7개 페이지가 일제히 동기화 —
+            상태 단순함이 곧 캐스케이드의 힘
+          </p>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════
+         08 · 캐스케이드 흐름
+      ═════════════════════════════════════════════ -->
+      <section class="slide" data-bg="dark" data-slide="08">
+        <header class="slide-head">
+          <span class="head-key">07 · CASCADE FLOW</span>
+          <h2 class="head-title">클릭에서 캐스케이드까지 · 4단계</h2>
+        </header>
+
+        <div class="dataflow">
+          <div class="df-step">
+            <span class="df-num">STEP 01</span>
+            <span class="df-name">User Click</span>
+            <p class="df-detail">
+              사용자가 7테마 셀렉터 중 한 버튼을 클릭<br />
+              <code>onClick → setTheme('rainy')</code>
+            </p>
+          </div>
+
+          <div class="df-step">
+            <span class="df-num">STEP 02</span>
+            <span class="df-name">Context Update</span>
+            <p class="df-detail">
+              <code>WeatherContext</code> 의 <code>currentTheme</code> 상태 갱신<br />
+              React 가 구독자 컴포넌트 리렌더 큐에 등록
+            </p>
+          </div>
+
+          <div class="df-step">
+            <span class="df-num">STEP 03</span>
+            <span class="df-name">body.theme-X</span>
+            <p class="df-detail">
+              <code>useEffect</code> 가 <strong style="color: #fff">body 클래스 한 줄</strong> 교체<br />
+              의미 토큰 <code>var(--bg)</code> · <code>var(--accent)</code> 일제히 재해석
+            </p>
+          </div>
+
+          <div class="df-step end">
+            <span class="df-num">STEP 04</span>
+            <span class="df-name">Cascade Render</span>
+            <p class="df-detail">
+              Hero · Header · 배경 캔버스 · OOTD · Food · Activity · Music<br />
+              <strong style="color: #fff">한 프레임 안에 동시 전환</strong>
+            </p>
+          </div>
+        </div>
+
+        <p class="df-note">
+          <strong>외부 API 없음 · 키 없음 · 네트워크 없음</strong><br />
+          오롯이 <em>currentTheme</em> 한 값이 화면 전부를 결정
+        </p>
+      </section>
+
+      <!-- ═══════════════════════════════════════════
+         09 · 7테마 셀렉터
+      ═════════════════════════════════════════════ -->
+      <section class="slide" data-bg="dark" data-slide="09">
+        <header class="slide-head">
+          <span class="head-key">08 · MOOD SELECTOR</span>
+          <h2 class="head-title">7테마 셀렉터</h2>
+        </header>
+
+        <div class="daycard-layout">
+          <div>
+            <div class="daycard-row">
+              <div class="dc-mock">
+                <span class="dc-label">BRIGHT</span>
+                <span class="dc-icon">☀</span>
+                <span class="dc-day" style="font-size: 14px; letter-spacing: 0.5px;">sunny</span>
+              </div>
+              <div class="dc-mock">
+                <span class="dc-label">BRIGHT</span>
+                <span class="dc-icon">⛅</span>
+                <span class="dc-day" style="font-size: 12px; letter-spacing: 0.3px;">partly</span>
+              </div>
+              <div class="dc-mock">
+                <span class="dc-label">BRIGHT</span>
+                <span class="dc-icon">❄</span>
+                <span class="dc-day" style="font-size: 14px; letter-spacing: 0.5px;">snowy</span>
+              </div>
+              <div class="dc-mock">
+                <span class="dc-label">BRIGHT</span>
+                <span class="dc-icon">🌫</span>
+                <span class="dc-day" style="font-size: 14px; letter-spacing: 0.5px;">dusty</span>
+              </div>
+              <div class="dc-mock">
+                <span class="dc-label">MOODY</span>
+                <span class="dc-icon">☁</span>
+                <span class="dc-day" style="font-size: 14px; letter-spacing: 0.5px;">cloudy</span>
+              </div>
+              <div class="dc-mock selected">
+                <span class="dc-today-dot"></span>
+                <span class="dc-label">MOODY</span>
+                <span class="dc-icon">🌧</span>
+                <span class="dc-day" style="font-size: 14px; letter-spacing: 0.5px;">rainy</span>
+              </div>
+              <div class="dc-mock">
+                <span class="dc-label">MOODY</span>
+                <span class="dc-icon">⛈</span>
+                <span class="dc-day" style="font-size: 13px; letter-spacing: 0.3px;">stormy</span>
+              </div>
+            </div>
+            <p
+              style="
+                font-family: var(--font);
+                font-size: 13px;
+                color: var(--gov, var(--gray-soft));
+                letter-spacing: 1px;
+                text-align: center;
+                font-style: italic;
+              "
+            >
+              톤 · SVG 아이콘 · 테마명 — 7개의 무드 버튼이 곧 메인 UI
+            </p>
+          </div>
+
+          <ul class="dc-points">
+            <li>
+              <span class="dcp-num">01</span>
+              <div class="dcp-body">
+                <h4>7개의 무드 버튼</h4>
+                <p>
+                  날씨를 받아오는 것이 아니라 <em>고른다</em> — 운명이 아닌
+                  선택의 인터페이스
+                </p>
+              </div>
+            </li>
+            <li>
+              <span class="dcp-num">02</span>
+              <div class="dcp-body">
+                <h4>아이콘 + 라벨 · 기온 없음</h4>
+                <p>
+                  날짜·기온·시각 같은 데이터 군더더기 제거 — 셀렉터는
+                  <em>무드 그 자체</em>만 보여준다
+                </p>
+              </div>
+            </li>
+            <li>
+              <span class="dcp-num">03</span>
+              <div class="dcp-body">
+                <h4>선택 시 전체 페이지 동기화</h4>
+                <p>
+                  currentTheme 변경 → 헤더 · 배경 · 콘텐츠 · 음악 일제히 전환
+                </p>
+              </div>
+            </li>
+            <li>
+              <span class="dcp-num">04</span>
+              <div class="dcp-body">
+                <h4>헤더 sticky chip row</h4>
+                <p>
+                  스크롤 시 mini chip 7개가 헤더에 흡수 —
+                  <em>언제든 다른 무드로 점프</em>
+                </p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════
+         10 · 캐스케이드 — 무드 선택 → 페이지 변화
+      ═════════════════════════════════════════════ -->
+      <section class="slide" data-bg="dark" data-slide="10">
+        <header class="slide-head">
+          <span class="head-key">09 · CASCADE</span>
+          <h2 class="head-title">무드 한 번 · 7개 페이지 일제히</h2>
+        </header>
+
+        <div class="cascade-grid">
+          <div class="cg-header"></div>
+          <div class="cg-header day sunny-h">
+            <span class="cgd-tag">SCENE A · sunny</span>
+            <span class="cgd-title">밝은 무드</span>
+          </div>
+          <div class="cg-header day rainy-h">
+            <span class="cgd-tag">SCENE B · rainy</span>
+            <span class="cgd-title">촉촉한 무드</span>
+          </div>
+
+          <div class="cg-axis">Hero</div>
+          <div class="cg-cell">☀ 밝은 sky 톤 · 노란 강조 · 활기 카피</div>
+          <div class="cg-cell">🌧 짙은 navy 톤 · 푸른 강조 · 멜랑꼴리 카피</div>
+
+          <div class="cg-axis">Background</div>
+          <div class="cg-cell">태양 회전 · 따뜻한 빛 입자</div>
+          <div class="cg-cell">빗줄기 · 번개 · 잔물결</div>
+
+          <div class="cg-axis">OOTD</div>
+          <div class="cg-cell">반팔 + 선글라스 + 캡</div>
+          <div class="cg-cell">트렌치 + 우산 + 부츠</div>
+
+          <div class="cg-axis">Food</div>
+          <div class="cg-cell">샐러드 · 아이스 아메리카노 · 비빔국수</div>
+          <div class="cg-cell">파전 · 따뜻한 차 · 김치찌개</div>
+
+          <div class="cg-axis">Activity</div>
+          <div class="cg-cell">한강 피크닉 · 자전거 · 공원 산책</div>
+          <div class="cg-cell">카페 · 영화관 · 미술관</div>
+
+          <div class="cg-axis">Music</div>
+          <div class="cg-cell">산뜻한 시티팝 · 라틴</div>
+          <div class="cg-cell">Lo-fi · 재즈 · 어쿠스틱</div>
+        </div>
+
+        <p class="cg-note">
+          <strong>currentTheme</strong> 한 값이 바뀌면 콘텐츠 · 배경 · 헤더 ·
+          음악이 <em>동시에</em> 전환
+        </p>
+      </section>
+
+      <!-- ═══════════════════════════════════════════
+         11 · SVG 아이콘
+      ═════════════════════════════════════════════ -->
+      <section class="slide" data-bg="light" data-slide="11">
+        <header class="slide-head">
+          <span class="head-key">10 · WEATHER ICONS</span>
+          <h2 class="head-title">SVG 7종 · CSS 애니메이션</h2>
+        </header>
+
+        <div class="icon-grid">
+          <div class="icon-cell">
+            <svg
+              viewBox="0 0 60 60"
+              fill="none"
+              stroke="#181818"
+              stroke-width="2"
+              stroke-linecap="round"
+            >
+              <g class="sun-rays">
+                <line x1="30" y1="6" x2="30" y2="14" />
+                <line x1="30" y1="46" x2="30" y2="54" />
+                <line x1="6" y1="30" x2="14" y2="30" />
+                <line x1="46" y1="30" x2="54" y2="30" />
+                <line x1="13" y1="13" x2="18" y2="18" />
+                <line x1="42" y1="42" x2="47" y2="47" />
+                <line x1="13" y1="47" x2="18" y2="42" />
+                <line x1="42" y1="18" x2="47" y2="13" />
+              </g>
+              <circle cx="30" cy="30" r="10" />
+            </svg>
+            <div class="ic-name">sunny</div>
+            <div class="ic-anim">태양 회전</div>
+          </div>
+
+          <div class="icon-cell">
+            <svg
+              viewBox="0 0 60 60"
+              fill="none"
+              stroke="#181818"
+              stroke-width="2"
+              stroke-linecap="round"
+            >
+              <circle cx="22" cy="22" r="8" />
+              <path
+                class="cloud-1"
+                d="M 18 38 Q 14 38 14 34 Q 14 30 18 30 Q 20 26 25 26 Q 32 26 32 32 Q 36 32 36 36 Q 36 40 32 40 L 18 40 Z"
+                fill="#fff"
+              />
+            </svg>
+            <div class="ic-name">partly-cloudy</div>
+            <div class="ic-anim">구름 이동</div>
+          </div>
+
+          <div class="icon-cell">
+            <svg
+              viewBox="0 0 60 60"
+              fill="none"
+              stroke="#181818"
+              stroke-width="2"
+              stroke-linecap="round"
+            >
+              <path
+                class="cloud-1"
+                d="M 14 36 Q 10 36 10 32 Q 10 28 14 28 Q 16 22 24 22 Q 32 22 32 30 Q 38 30 38 34 Q 38 38 34 38 L 14 38 Z"
+                fill="#fff"
+              />
+              <path
+                class="cloud-2"
+                d="M 24 44 Q 22 44 22 42 Q 22 40 24 40 Q 26 36 32 36 Q 40 36 40 42 Q 44 42 44 44 Q 44 46 42 46 L 24 46 Z"
+                fill="#fff"
+                opacity="0.7"
+              />
+            </svg>
+            <div class="ic-name">cloudy</div>
+            <div class="ic-anim">2겹 흐름</div>
+          </div>
+
+          <div class="icon-cell">
+            <svg
+              viewBox="0 0 60 60"
+              fill="none"
+              stroke="#181818"
+              stroke-width="2"
+              stroke-linecap="round"
+            >
+              <path
+                d="M 14 28 Q 10 28 10 24 Q 10 20 14 20 Q 16 14 24 14 Q 32 14 32 22 Q 38 22 38 26 Q 38 30 34 30 L 14 30 Z"
+                fill="#fff"
+              />
+              <line
+                class="rain-drop"
+                x1="20"
+                y1="36"
+                x2="18"
+                y2="44"
+                stroke-width="2.5"
+              />
+              <line
+                class="rain-drop-2"
+                x1="28"
+                y1="36"
+                x2="26"
+                y2="44"
+                stroke-width="2.5"
+              />
+              <line
+                class="rain-drop-3"
+                x1="36"
+                y1="36"
+                x2="34"
+                y2="44"
+                stroke-width="2.5"
+              />
+            </svg>
+            <div class="ic-name">rainy</div>
+            <div class="ic-anim">빗방울 낙하</div>
+          </div>
+
+          <div class="icon-cell">
+            <svg
+              viewBox="0 0 60 60"
+              fill="none"
+              stroke="#181818"
+              stroke-width="2"
+              stroke-linecap="round"
+            >
+              <path
+                d="M 14 26 Q 10 26 10 22 Q 10 18 14 18 Q 16 12 24 12 Q 32 12 32 20 Q 38 20 38 24 Q 38 28 34 28 L 14 28 Z"
+                fill="#fff"
+              />
+              <polygon
+                class="lightning"
+                points="28,32 22,46 28,46 24,54 36,40 30,40 34,32"
+                fill="#DA291C"
+                stroke="#DA291C"
+              />
+            </svg>
+            <div class="ic-name">stormy</div>
+            <div class="ic-anim">번개 플래시</div>
+          </div>
+
+          <div class="icon-cell">
+            <svg
+              viewBox="0 0 60 60"
+              fill="none"
+              stroke="#181818"
+              stroke-width="2"
+              stroke-linecap="round"
+            >
+              <path
+                d="M 14 26 Q 10 26 10 22 Q 10 18 14 18 Q 16 12 24 12 Q 32 12 32 20 Q 38 20 38 24 Q 38 28 34 28 L 14 28 Z"
+                fill="#fff"
+              />
+              <g class="snow">
+                <circle cx="20" cy="40" r="2" fill="#181818" />
+                <circle cx="30" cy="44" r="2" fill="#181818" />
+                <circle cx="40" cy="38" r="2" fill="#181818" />
+              </g>
+            </svg>
+            <div class="ic-name">snowy</div>
+            <div class="ic-anim">눈송이 흩날림</div>
+          </div>
+
+          <div class="icon-cell">
+            <svg
+              viewBox="0 0 60 60"
+              fill="none"
+              stroke="#181818"
+              stroke-width="2"
+              stroke-linecap="round"
+            >
+              <circle cx="30" cy="26" r="9" opacity="0.6" />
+              <g class="dust-veil">
+                <line
+                  x1="6"
+                  y1="38"
+                  x2="54"
+                  y2="38"
+                  stroke-width="1.5"
+                  opacity="0.7"
+                />
+                <line
+                  x1="10"
+                  y1="44"
+                  x2="50"
+                  y2="44"
+                  stroke-width="1.5"
+                  opacity="0.5"
+                />
+                <line
+                  x1="14"
+                  y1="50"
+                  x2="46"
+                  y2="50"
+                  stroke-width="1.5"
+                  opacity="0.4"
+                />
+              </g>
+            </svg>
+            <div class="ic-name">dusty</div>
+            <div class="ic-anim">먼지 이펙트</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════
+         12 · Daily 페이지 — 캐스케이드의 결정체
+      ═════════════════════════════════════════════ -->
+      <section class="slide" data-bg="light" data-slide="12">
+        <header class="slide-head">
+          <span class="head-key">11 · DAILY PAGE · IDENTITY</span>
+          <h2 class="head-title">무드 한 번 · 하루 통째로</h2>
+        </header>
+
+        <!-- Daily 페이지 mockup: 3시간대 × 4카테고리 = 12 카드 매트릭스 (sunny 톤) -->
+        <div style="flex: 1; background: #EEF6FF; border-radius: 8px; padding: 28px 32px; display: flex; flex-direction: column; gap: 20px; border: 1.5px solid rgba(44,62,80,0.08);">
+
+          <!-- 무드 헤더 -->
+          <div style="display: flex; align-items: baseline; justify-content: space-between; padding-bottom: 14px; border-bottom: 1px solid rgba(44,62,80,0.12);">
+            <div>
+              <div style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 2.5px; color: #6B7A8C; text-transform: uppercase;">DAILY · 무드별 하루</div>
+              <div style="font-family: var(--font); font-size: 28px; font-weight: 800; color: #2C3E50; letter-spacing: -0.02em; margin-top: 4px;">SUNNY · 밝은 하루</div>
+            </div>
+            <div style="font-family: var(--font); font-size: 11px; font-weight: 700; letter-spacing: 1.5px; color: #FFB800; padding: 6px 12px; border: 1.5px solid #FFB800; border-radius: 999px;">12 SLOTS</div>
+          </div>
+
+          <!-- 시간대 × 카테고리 매트릭스 -->
+          <div style="display: grid; grid-template-columns: 90px repeat(4, 1fr); gap: 10px;">
+
+            <!-- 컬럼 헤더 -->
+            <div></div>
+            <div style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 1.5px; color: #6B7A8C; text-align: center; padding-bottom: 4px;">OOTD</div>
+            <div style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 1.5px; color: #6B7A8C; text-align: center; padding-bottom: 4px;">FOOD</div>
+            <div style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 1.5px; color: #6B7A8C; text-align: center; padding-bottom: 4px;">ACTIVITY</div>
+            <div style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 1.5px; color: #6B7A8C; text-align: center; padding-bottom: 4px;">MUSIC</div>
+
+            <!-- MORNING row -->
+            <div style="display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding: 4px 0;">
+              <div style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 1.5px; color: #FFB800;">01 · AM</div>
+              <div style="font-family: var(--font); font-size: 15px; font-weight: 700; color: #2C3E50; margin-top: 2px;">아침</div>
+            </div>
+            <div style="background: #FFFFFF; border-radius: 6px; padding: 12px 12px; border: 1px solid rgba(44,62,80,0.10);">
+              <div style="font-family: var(--font); font-size: 13px; font-weight: 700; color: #2C3E50; line-height: 1.3;">반팔 셔츠 + 데님</div>
+              <div style="font-family: var(--font-mono); font-size: 9.5px; color: #FFB800; letter-spacing: 1px; margin-top: 6px;">BRIGHT</div>
+            </div>
+            <div style="background: #FFFFFF; border-radius: 6px; padding: 12px 12px; border: 1px solid rgba(44,62,80,0.10);">
+              <div style="font-family: var(--font); font-size: 13px; font-weight: 700; color: #2C3E50; line-height: 1.3;">콜드브루 + 그래놀라</div>
+              <div style="font-family: var(--font-mono); font-size: 9.5px; color: #FFB800; letter-spacing: 1px; margin-top: 6px;">성수동 · 어니언</div>
+            </div>
+            <div style="background: #FFFFFF; border-radius: 6px; padding: 12px 12px; border: 1px solid rgba(44,62,80,0.10);">
+              <div style="font-family: var(--font); font-size: 13px; font-weight: 700; color: #2C3E50; line-height: 1.3;">한강 자전거</div>
+              <div style="font-family: var(--font-mono); font-size: 9.5px; color: #FFB800; letter-spacing: 1px; margin-top: 6px;">망원 · 30분</div>
+            </div>
+            <div style="background: #FFFFFF; border-radius: 6px; padding: 12px 12px; border: 1px solid rgba(44,62,80,0.10);">
+              <div style="font-family: var(--font); font-size: 13px; font-weight: 700; color: #2C3E50; line-height: 1.3;">Sunny Morning</div>
+              <div style="font-family: var(--font-mono); font-size: 9.5px; color: #FFB800; letter-spacing: 1px; margin-top: 6px;">시티팝 · 12 tracks</div>
+            </div>
+
+            <!-- AFTERNOON row -->
+            <div style="display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding: 4px 0;">
+              <div style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 1.5px; color: #FFB800;">02 · PM</div>
+              <div style="font-family: var(--font); font-size: 15px; font-weight: 700; color: #2C3E50; margin-top: 2px;">오후</div>
+            </div>
+            <div style="background: #FFFFFF; border-radius: 6px; padding: 12px 12px; border: 1px solid rgba(44,62,80,0.10);">
+              <div style="font-family: var(--font); font-size: 13px; font-weight: 700; color: #2C3E50; line-height: 1.3;">토트백 + 캡</div>
+              <div style="font-family: var(--font-mono); font-size: 9.5px; color: #FFB800; letter-spacing: 1px; margin-top: 6px;">아웃도어</div>
+            </div>
+            <div style="background: #FFFFFF; border-radius: 6px; padding: 12px 12px; border: 1px solid rgba(44,62,80,0.10);">
+              <div style="font-family: var(--font); font-size: 13px; font-weight: 700; color: #2C3E50; line-height: 1.3;">포케 보울 + 콤부차</div>
+              <div style="font-family: var(--font-mono); font-size: 9.5px; color: #FFB800; letter-spacing: 1px; margin-top: 6px;">한남동 · 슬로보울</div>
+            </div>
+            <div style="background: #FFFFFF; border-radius: 6px; padding: 12px 12px; border: 1px solid rgba(44,62,80,0.10);">
+              <div style="font-family: var(--font); font-size: 13px; font-weight: 700; color: #2C3E50; line-height: 1.3;">서울숲 피크닉</div>
+              <div style="font-family: var(--font-mono); font-size: 9.5px; color: #FFB800; letter-spacing: 1px; margin-top: 6px;">성수 · 2시간</div>
+            </div>
+            <div style="background: #FFFFFF; border-radius: 6px; padding: 12px 12px; border: 1px solid rgba(44,62,80,0.10);">
+              <div style="font-family: var(--font); font-size: 13px; font-weight: 700; color: #2C3E50; line-height: 1.3;">Sunny Afternoon</div>
+              <div style="font-family: var(--font-mono); font-size: 9.5px; color: #FFB800; letter-spacing: 1px; margin-top: 6px;">인디팝 · 18 tracks</div>
+            </div>
+
+            <!-- EVENING row -->
+            <div style="display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding: 4px 0;">
+              <div style="font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 1.5px; color: #FFB800;">03 · EVE</div>
+              <div style="font-family: var(--font); font-size: 15px; font-weight: 700; color: #2C3E50; margin-top: 2px;">저녁</div>
+            </div>
+            <div style="background: #FFFFFF; border-radius: 6px; padding: 12px 12px; border: 1px solid rgba(44,62,80,0.10);">
+              <div style="font-family: var(--font); font-size: 13px; font-weight: 700; color: #2C3E50; line-height: 1.3;">린넨 가디건</div>
+              <div style="font-family: var(--font-mono); font-size: 9.5px; color: #FFB800; letter-spacing: 1px; margin-top: 6px;">레이어드</div>
+            </div>
+            <div style="background: #FFFFFF; border-radius: 6px; padding: 12px 12px; border: 1px solid rgba(44,62,80,0.10);">
+              <div style="font-family: var(--font); font-size: 13px; font-weight: 700; color: #2C3E50; line-height: 1.3;">로제 + 카프레제</div>
+              <div style="font-family: var(--font-mono); font-size: 9.5px; color: #FFB800; letter-spacing: 1px; margin-top: 6px;">한남동 · 꽁뜨</div>
+            </div>
+            <div style="background: #FFFFFF; border-radius: 6px; padding: 12px 12px; border: 1px solid rgba(44,62,80,0.10);">
+              <div style="font-family: var(--font); font-size: 13px; font-weight: 700; color: #2C3E50; line-height: 1.3;">루프탑 영화</div>
+              <div style="font-family: var(--font-mono); font-size: 9.5px; color: #FFB800; letter-spacing: 1px; margin-top: 6px;">성수 · 2.5h</div>
+            </div>
+            <div style="background: #FFFFFF; border-radius: 6px; padding: 12px 12px; border: 1px solid rgba(44,62,80,0.10);">
+              <div style="font-family: var(--font); font-size: 13px; font-weight: 700; color: #2C3E50; line-height: 1.3;">Lazy Sunday</div>
+              <div style="font-family: var(--font-mono); font-size: 9.5px; color: #FFB800; letter-spacing: 1px; margin-top: 6px;">어쿠스틱 · 15 tracks</div>
+            </div>
+          </div>
+
+        </div>
+
+        <p style="margin-top: 18px; font-family: var(--font); font-size: 14px; line-height: 1.6; text-align: center; color: var(--near-black);">
+          <strong>currentTheme</strong> 한 값이 바뀌면 <strong>12 카드 전체가 한 프레임에 동기화</strong> —
+          <em style="color: var(--accent); font-style: italic; font-weight: 700;">캐스케이드의 결정체</em>
+        </p>
+      </section>
+
+      <!-- ═══════════════════════════════════════════
+         13 · 7 페이지 구성
+      ═════════════════════════════════════════════ -->
+      <section class="slide" data-bg="light" data-slide="13">
+        <header class="slide-head">
+          <span class="head-key">12 · PAGE STRUCTURE</span>
+          <h2 class="head-title">7 페이지 · Daily 를 중심으로</h2>
+        </header>
+
+        <div class="page-grid" style="grid-template-columns: repeat(4, 1fr);">
+          <div class="page-cell">
+            <span class="pg-key">H · /</span>
+            <h3 class="pg-name">Home</h3>
+            <p class="pg-desc">
+              7테마 셀렉터 · 무드 카피<br />OOTD/Food/Activity/Music/Daily 프리뷰
+            </p>
+          </div>
+          <div class="page-cell new">
+            <span class="pg-key">D · /daily</span>
+            <h3 class="pg-name">Daily</h3>
+            <p class="pg-desc">
+              <strong>작품 정체성 페이지</strong><br />
+              3 시간대 × 4 카테고리 = 12 카드 하루 일정
+            </p>
+          </div>
+          <div class="page-cell">
+            <span class="pg-key">O · /ootd</span>
+            <h3 class="pg-name">OOTD</h3>
+            <p class="pg-desc">
+              선택 무드의 스타일 풀<br />키워드 · 준비물 뱃지 · 카드 그리드
+            </p>
+          </div>
+          <div class="page-cell">
+            <span class="pg-key">F · /food</span>
+            <h3 class="pg-name">Food</h3>
+            <p class="pg-desc">
+              무드별 음식 풀<br />서울 지역 가게 · 사진 카드
+            </p>
+          </div>
+
+          <div class="page-cell">
+            <span class="pg-key">A · /activity</span>
+            <h3 class="pg-name">Activity</h3>
+            <p class="pg-desc">
+              실내/실외 활동 풀<br />지역 · 비용 · 소요시간 메타
+            </p>
+          </div>
+          <div class="page-cell">
+            <span class="pg-key">M · /music</span>
+            <h3 class="pg-name">Music</h3>
+            <p class="pg-desc">
+              무드별 플레이리스트 · YouTube 임베드<br />FloatingPlayer · 앨범 커버 프리패치
+            </p>
+          </div>
+          <div class="page-cell">
+            <span class="pg-key">i · /about</span>
+            <h3 class="pg-name">About</h3>
+            <p class="pg-desc">
+              프로젝트 소개 · 기술 흐름<br />디자인 시스템 데모
+            </p>
+          </div>
+          <div class="page-cell" style="background: var(--near-black); color: var(--white); border-color: var(--near-black); justify-content: center; align-items: flex-start;">
+            <span class="pg-key" style="color: var(--gray-soft);">TOTAL</span>
+            <div style="font-family: var(--font); font-size: 56px; font-weight: 700; line-height: 1; color: var(--white); letter-spacing: -0.02em;">7</div>
+            <p class="pg-desc" style="color: var(--gray-soft);">
+              하나의 Context · 하나의 currentTheme · 일곱 페이지 동시 동기화
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════
+         14 · 메시지
+      ═════════════════════════════════════════════ -->
+      <section class="slide slide-message" data-bg="dark" data-slide="14">
+        <div class="msg-block">
+          <div class="msg-key">13 · MESSAGE</div>
+          <h2 class="msg-text">
+            <span class="msg-line">날씨는 정보가 아니라,</span>
+            <span class="msg-line">하루의 <em>분위기</em></span>
+            <span class="msg-line spacer"></span>
+            <span class="msg-line accent">WeatherUp 은 그 분위기를</span>
+            <span class="msg-line accent">UI · 콘텐츠 · 음악으로 번역</span>
+            <span class="msg-line spacer"></span>
+            <span class="msg-line muted">사용자가 결정하는 단 하나</span>
+            <span class="msg-line muted em">오늘, 어느 무드에서 살까</span>
+          </h2>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════
+         15 · 감사합니다
+      ═════════════════════════════════════════════ -->
+      <section class="slide slide-end" data-bg="dark" data-slide="15">
+        <div class="end-block">
+          <div class="end-key">— FIN —</div>
+          <h1 class="end-title">WEATHERUP</h1>
+          <p class="end-sub">감사합니다</p>
+          <div class="end-line"></div>
+          <p class="end-meta">계원예술대학교 · 프론트앤드 · 2026</p>
+        </div>
+      </section>
+    </main>
+
+    <script src="nav.js"></script>
+  </body>
+</html>

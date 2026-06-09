@@ -1,0 +1,184 @@
+/* =========================================================================
+   WeatherIcons/icons.css — 7 테마 SVG 공통 스타일 + 애니메이션
+   ---------------------------------------------------------------------------
+   각 SVG 내부에 sky gradient + 동적 요소가 모두 들어가 카드 전체를 채운다.
+   day-card 의 var(--card) 배경은 SVG 가 덮어버린다.
+   ========================================================================= */
+
+.weather-icon {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: hidden;
+}
+
+/* Placeholder — 구현 안 된 테마 fallback */
+.weather-icon--placeholder .weather-icon__shape { opacity: 0.2; }
+
+/* =========================================================================
+   1) Sunny — 단색 노란 해 + bobbing
+   ========================================================================= */
+
+.weather-icon--sunny .weather-icon__sun-wrap {
+  transform-origin: center;
+  animation: sunny-bob 4s ease-in-out infinite;
+}
+.weather-icon--sunny .weather-icon__sun {
+  filter: drop-shadow(0 0 6px rgba(255, 200, 80, 0.85));
+}
+
+@keyframes sunny-bob {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-4px); }
+}
+
+/* =========================================================================
+   2) PartlyCloudy — bobbing 해 + 흐르는 구름 2개
+   ========================================================================= */
+
+.weather-icon--partly-cloudy .weather-icon__sun-wrap {
+  transform-origin: center;
+  animation: pc-bob 4s ease-in-out infinite;
+}
+.weather-icon--partly-cloudy .weather-icon__sun {
+  filter: drop-shadow(0 0 5px rgba(255, 200, 80, 0.85));
+}
+.weather-icon--partly-cloudy .weather-icon__cloud {
+  animation-name: pc-drift;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.10));
+}
+.weather-icon--partly-cloudy .weather-icon__cloud--a { animation-duration: 22s; }
+.weather-icon--partly-cloudy .weather-icon__cloud--b { animation-duration: 28s; animation-delay: -14s; }
+
+@keyframes pc-bob {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-3px); }
+}
+@keyframes pc-drift {
+  0%   { transform: translateX(-60px); }
+  100% { transform: translateX(160px); }
+}
+
+/* =========================================================================
+   3) Cloudy — 회색 구름 3개 drift
+   ========================================================================= */
+
+.weather-icon--cloudy .weather-icon__cloud-drift {
+  animation-name: cloudy-drift;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes cloudy-drift {
+  0%   { transform: translateX(-55px); }
+  100% { transform: translateX(160px); }
+}
+
+/* =========================================================================
+   4) Rainy — 14도 사선 빗줄기
+   ========================================================================= */
+
+.weather-icon--rainy .weather-icon__drop {
+  animation-name: rainy-fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes rainy-fall {
+  0%   { transform: translateY(-40px); }
+  100% { transform: translateY(120px); }
+}
+
+/* =========================================================================
+   5) Snowy — 6각 결정 회전 낙하
+   ========================================================================= */
+
+.weather-icon--snowy .weather-icon__flake {
+  opacity: 0;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-name: snowy-fall;
+}
+
+@keyframes snowy-fall {
+  0%   { transform: translate(0, -5px)     rotate(0deg);   opacity: 0; }
+  10%  { opacity: 0.95; }
+  50%  { transform: translate(8px, 55px)   rotate(180deg); }
+  90%  { opacity: 0.95; }
+  100% { transform: translate(-3px, 115px) rotate(360deg); opacity: 0; }
+}
+
+/* =========================================================================
+   6) Stormy — 사선 거센 비 + 라인 stroke 벼락 3개
+   ========================================================================= */
+
+.weather-icon--stormy .weather-icon__drop {
+  animation-name: stormy-fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+.weather-icon--stormy .weather-icon__bolt {
+  opacity: 0;
+  filter:
+    drop-shadow(0 0 2px rgba(255, 255, 255, 1))
+    drop-shadow(0 0 5px rgba(170, 200, 255, 0.95))
+    drop-shadow(0 0 9px rgba(110, 150, 255, 0.55));
+  animation-timing-function: ease-out;
+  animation-iteration-count: infinite;
+}
+.weather-icon--stormy .weather-icon__bolt--b1 { animation-name: stormy-strike; animation-duration: 4s;   animation-delay: -0.8s; }
+.weather-icon--stormy .weather-icon__bolt--b2 { animation-name: stormy-strike; animation-duration: 5.2s; animation-delay: -2.5s; }
+.weather-icon--stormy .weather-icon__bolt--b3 { animation-name: stormy-strike; animation-duration: 4.6s; animation-delay: -3.4s; }
+
+@keyframes stormy-fall {
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(140px); }
+}
+@keyframes stormy-strike {
+  0%, 82%, 100% { opacity: 0; }
+  83%           { opacity: 1; }
+  84%           { opacity: 0; }
+  85%           { opacity: 1; }
+  87%           { opacity: 0.35; }
+  89%           { opacity: 0; }
+}
+
+/* =========================================================================
+   7) Dusty — 흐릿한 태양 펄스 + 미세먼지 띠 위아래 흐름
+   ========================================================================= */
+
+.weather-icon--dusty .weather-icon__pale-sun {
+  animation: dusty-sun 4s ease-in-out infinite;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+.weather-icon--dusty .weather-icon__smog {
+  animation: dusty-smog 11s ease-in-out infinite;
+}
+
+@keyframes dusty-sun {
+  0%, 100% { opacity: 0.55; }
+  50%      { opacity: 0.95; }
+}
+@keyframes dusty-smog {
+  0%, 100% { transform: translateY(0);    opacity: 0.85; }
+  50%      { transform: translateY(-4px); opacity: 1;    }
+}
+
+/* =========================================================================
+   Reduced motion
+   ========================================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .weather-icon *,
+  .weather-icon {
+    animation: none !important;
+  }
+  .weather-icon__flake,
+  .weather-icon__drop,
+  .weather-icon__bolt {
+    opacity: 0.5;
+  }
+}

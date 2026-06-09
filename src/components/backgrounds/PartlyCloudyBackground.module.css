@@ -1,0 +1,57 @@
+.wrapper {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(180deg, #c4d6e6 0%, #eef3f8 100%);
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.sun {
+  position: absolute;
+  top: 16%;
+  right: 18%;
+  width: 160px;
+  height: 160px;
+  background: #ffd980;
+  border-radius: 50%;
+  box-shadow:
+    0 0 50px 14px rgba(255, 213, 120, 0.55),
+    0 0 130px 46px rgba(255, 213, 120, 0.30);
+  animation: pc-bob 4s ease-in-out infinite;
+  z-index: 1;
+}
+
+@keyframes pc-bob {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
+}
+
+.cloud {
+  position: absolute;
+  color: #ffffff;
+  /* 셀렉터 구름과 동일한 라디얼 그라디언트 — 정사각 요소라 형상이 그대로 재현됨 */
+  background:
+    radial-gradient(circle at 44% 49%, currentColor 0 15%, transparent 16%),
+    radial-gradient(circle at 60% 46%, currentColor 0 17%, transparent 18%),
+    radial-gradient(circle at 33% 60%, currentColor 0 15%, transparent 16%),
+    radial-gradient(circle at 51% 61%, currentColor 0 17%, transparent 18%),
+    radial-gradient(circle at 69% 60%, currentColor 0 15%, transparent 16%),
+    radial-gradient(ellipse 34% 11% at 51% 71%, rgba(90, 120, 150, 0.22) 0 60%, transparent 100%);
+  filter: drop-shadow(0 10px 16px rgba(0, 0, 0, 0.06));
+  animation-name: pc-drift;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  z-index: 2;
+}
+
+.cloudA { top: 18%; width: 300px; height: 300px; animation-duration: 38s; }
+.cloudB { top: 46%; width: 220px; height: 220px; animation-duration: 50s; animation-delay: -22s; }
+
+@keyframes pc-drift {
+  0%   { transform: translateX(-420px); }
+  100% { transform: translateX(calc(100vw + 420px)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sun, .cloud { animation: none; }
+}

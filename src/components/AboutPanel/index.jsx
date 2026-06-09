@@ -1,13 +1,19 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
-import { LuSun, LuCloud, LuCloudRain, LuSnowflake } from 'react-icons/lu';
+import {
+  LuSun, LuCloudSun, LuSnowflake, LuHaze,
+  LuCloud, LuCloudRain, LuCloudLightning,
+} from 'react-icons/lu';
 import styles from './AboutPanel.module.css';
 
-/* 테마별 라인 아이콘 — Header/Hero 토글과 동일 세트 */
+/* 테마별 라인 아이콘 — 7 테마 (Header/Hero 셀렉터와 동일 세트) */
 const ICONS = {
-  sunny: LuSun,
-  cloudy: LuCloud,
-  rainy: LuCloudRain,
-  snowy: LuSnowflake,
+  'sunny':         LuSun,
+  'partly-cloudy': LuCloudSun,
+  'snowy':         LuSnowflake,
+  'dusty':         LuHaze,
+  'cloudy':        LuCloud,
+  'rainy':         LuCloudRain,
+  'stormy':        LuCloudLightning,
 };
 
 /* ── 기술 스택 데이터 ── */
@@ -16,108 +22,96 @@ const STACK_CORE = [
     icon: 'hub',
     name: 'React 19',
     version: 'v19.2.5',
-    desc: 'App.js 단일 useState로 날씨 상태 관리 useEffect로 body 테마 클래스 동기화, useRef로 캔버스 DOM 접근',
+    desc: 'WeatherContext·MusicContext 두 Context로 전역 상태 관리, useEffect로 body 테마 클래스 동기화',
   },
   {
     icon: 'route',
     name: 'React Router',
     version: 'v7.14.1',
-    desc: '홈·OOTD·Food·Activity·Music 5개 라우트 클라이언트 사이드 전환 NavLink의 isActive로 현재 메뉴 스타일 자동 적용',
+    desc: '홈·OOTD·Food·Activity·Music·Daily·About 7개 라우트 클라이언트 전환, NavLink isActive로 현재 메뉴 자동 스타일',
   },
   {
     icon: 'style',
     name: 'CSS Modules',
     version: 'CRA 내장',
-    desc: '빌드 시 클래스명 해시화로 스코프 충돌 방지 테마 등 전역 선택자는 :global() 병용',
+    desc: '빌드 시 클래스명 해시화로 스코프 충돌 방지, 테마 등 전역 선택자는 :global() 병용',
   },
   {
     icon: 'palette',
     name: 'CSS Custom Properties',
     version: 'Native',
-    desc: 'body의 theme-{mode} 클래스 한 번 교체로 색상·그림자·배경 일괄 전환 컴포넌트는 var() 참조',
+    desc: 'tokens.css(원시)→themes.css(의미) 2레벨 구조, body의 theme-{mode} 한 줄 교체로 색·그림자·배경 일괄 전환',
   },
 ];
 
 const STACK_LIBS = [
   {
-    icon: 'view_quilt',
-    name: 'react-masonry-css',
-    version: 'v1.0.16',
-    desc: 'OOTD·Food·Activity 카드 그리드에 사용, 창 너비별 4→3→2열 반응형 적용',
+    icon: 'widgets',
+    name: 'react-icons',
+    version: 'v5.6.0',
+    desc: 'Lucide 라인 아이콘 세트, SVG currentColor로 테마 색상 자동 동기화',
   },
   {
     icon: 'font_download',
     name: 'Pretendard',
     version: 'CDN',
-    desc: '한글·영문 동일 무게 가변 폰트 index.html link 태그 CDN 연결로 전역 적용',
+    desc: '한글·영문 동일 무게 가변 폰트, 본문 전역 적용',
   },
   {
-    icon: 'widgets',
-    name: 'react-icons',
-    version: 'v5.6.0',
-    desc: 'Lucide 라인 아이콘 세트 적용 SVG currentColor로 테마 색상 자동 동기화',
+    icon: 'text_fields',
+    name: 'Manrope · Space Mono',
+    version: 'Google Fonts',
+    desc: '에디토리얼 디스플레이(Manrope)와 모노 라벨(Space Mono), 섹션 제목·eyebrow에 사용',
   },
 ];
 
-const STACK_NATIVE = [
+const STACK_ENGINE = [
   {
-    icon: 'draw',
-    name: 'Canvas API',
+    icon: 'gradient',
+    name: '순수 CSS 배경 엔진',
+    version: 'CSS',
+    desc: '맑음~번개 7종 배경을 canvas 없이 radial/linear-gradient·mask-image·@keyframes로 구현, prefers-reduced-motion 대응',
+  },
+  {
+    icon: 'play_circle',
+    name: 'YouTube IFrame API',
     version: 'Browser',
-    desc: '맑음·흐림·비·눈 4종 배경 엔진 태양, 구름 패럴랙스, 빗방울 ripple, 눈 내리는 효과 렌더링에 사용',
+    desc: 'useYouTubePlayer 훅으로 곡 재생, FloatingPlayer·NowPlayingBadge로 전역 재생 UI 제어',
+  },
+  {
+    icon: 'album',
+    name: 'iTunes Search API',
+    version: 'JSONP',
+    desc: '곡명으로 앨범 커버 자동 로딩, JSONP로 CORS 우회',
+  },
+  {
+    icon: 'database',
+    name: 'localStorage 캐시',
+    version: 'Browser',
+    desc: '받아온 커버를 영속 캐시 + 앱 시작 시 7테마 전체 프리패치(LoadingScreen 연동)',
   },
   {
     icon: 'visibility',
     name: 'IntersectionObserver',
     version: 'Browser',
-    desc: '씬 스크롤 reveal에 사용, 뷰포트 진입 시 data-visible 속성 부여',
-  },
-  {
-    icon: 'memory',
-    name: 'Float32Array',
-    version: 'Browser',
-    desc: '눈 쌓이는 효과 구현, 높이를 가로 픽셀 열마다 저장 숫자 전용 버퍼로 메모리 효율 확보 및 프레임 유지',
-  },
-  {
-    icon: 'animation',
-    name: 'requestAnimationFrame',
-    version: 'Browser',
-    desc: '캔버스 프레임 루프 엔진 useEffect 클린업에서 cancelAnimationFrame으로 루프 중단',
+    desc: '이 패널과 useScrollFade의 스크롤 reveal — 뷰포트 진입 시 data-visible 부여',
   },
 ];
 
-/* ── 날씨별 메타 (CSS vars의 실제 값과 일치) ── */
+/* ── 날씨별 메타 (themes.css 의 실제 값과 일치) ── */
 const META = {
-  sunny: {
-    emoji: '☀️',
-    label: '맑음',
-    accent: '#FFB800',
-    bg: '#EEF6FF',
-    text: '#1A2B3C',
-  },
-  cloudy: {
-    emoji: '⛅',
-    label: '흐림',
-    accent: '#8A9BB0',
-    bg: '#F0F0F0',
-    text: '#3A3A3A',
-  },
-  rainy: {
-    emoji: '🌧️',
-    label: '비',
-    accent: '#4A9EFF',
-    bg: '#1C2B3A',
-    text: '#E8F4FF',
-  },
-  snowy: {
-    emoji: '❄️',
-    label: '눈',
-    accent: '#6A9FD8',
-    bg: '#EAF0FF',
-    text: '#2A3A5A',
-  },
+  'sunny':         { emoji: '☀️', label: '맑음',   accent: '#FFB800', bg: '#EEF6FF', text: '#2C3E50' },
+  'partly-cloudy': { emoji: '⛅', label: '구름',   accent: '#9BB8D9', bg: '#E8F0F7', text: '#3A4A5C' },
+  'snowy':         { emoji: '❄️', label: '눈',     accent: '#A8C8FF', bg: '#EAF0FF', text: '#2A3A5A' },
+  'dusty':         { emoji: '🌫️', label: '황사',   accent: '#B8A888', bg: '#E5DFD3', text: '#3A3428' },
+  'cloudy':        { emoji: '☁️', label: '흐림',   accent: '#B8C5D5', bg: '#2A2E35', text: '#E5E8ED' },
+  'rainy':         { emoji: '🌧️', label: '비',     accent: '#4A9EFF', bg: '#1C2B3A', text: '#E8F4FF' },
+  'stormy':        { emoji: '⚡', label: '번개',   accent: '#8877F5', bg: '#151823', text: '#E8E5FF' },
 };
-const MODES = ['sunny', 'cloudy', 'rainy', 'snowy'];
+/* plan §4-1 표기 순서 */
+const MODES = ['sunny', 'partly-cloudy', 'snowy', 'dusty', 'cloudy', 'rainy', 'stormy'];
+/* 밝은 계열 — 상태 뱃지 텍스트를 어둡게 */
+const LIGHT_THEMES = ['sunny', 'partly-cloudy', 'snowy', 'dusty'];
 
 /* ─────────────────────────────────────────── */
 function AboutPanel({ isOpen, onClose, weatherMode, setWeatherMode }) {
@@ -218,20 +212,21 @@ function AboutPanel({ isOpen, onClose, weatherMode, setWeatherMode }) {
         aria-label="WeatherUp 구조 이야기"
       >
         {/* ════════════════════════════════════════════════════ */}
-        {/* SCENE 1 — 상태의 탄생                              */}
+        {/* SCENE 1 — 상태의 소유 (Context)                     */}
         {/* ════════════════════════════════════════════════════ */}
         <section data-scene className={styles.scene}>
           <div className={styles.sceneWrap}>
             <div className={styles.sceneText}>
               <p className={styles.sceneNum}>01</p>
-              <h2 className={styles.sceneTitle}>상태 관리</h2>
+              <h2 className={styles.sceneTitle}>상태의 소유</h2>
               <p className={styles.sceneDesc}>
                 복잡한 전역 상태 라이브러리 없이,
-                <strong> App.js 하나</strong>가 날씨 상태를 소유합니다. 이 단 한
-                줄이 앱 전체의 테마·데이터·UI를 결정합니다.
+                <strong> WeatherContext 하나</strong>가 날씨 상태를 소유하고
+                Provider로 앱 전체에 내려줍니다. 이 한 값이 테마·데이터·UI를
+                모두 결정합니다.
               </p>
               <p className={styles.sceneSub}>
-                ↓ 오른쪽의 상태 값은 실시간으로 바뀝니다
+                ↓ 오른쪽의 상태 값은 선택 즉시 바뀝니다
               </p>
             </div>
 
@@ -251,15 +246,15 @@ function AboutPanel({ isOpen, onClose, weatherMode, setWeatherMode }) {
                     style={{ background: '#28C840' }}
                     className={styles.trafficDot}
                   />
-                  <span className={styles.codeFileName}>App.js</span>
+                  <span className={styles.codeFileName}>WeatherContext.jsx</span>
                 </div>
                 <div className={styles.codeBody}>
                   <div className={styles.codeLine}>
                     <span className={styles.ckw}>const</span>
                     {' ['}
-                    <span className={styles.cvar}>weatherMode</span>
+                    <span className={styles.cvar}>currentTheme</span>
                     {', '}
-                    <span className={styles.cvar}>setWeatherMode</span>
+                    <span className={styles.cvar}>setTheme</span>
                     {']'}
                   </div>
                   <div className={styles.codeLine}>
@@ -279,21 +274,13 @@ function AboutPanel({ isOpen, onClose, weatherMode, setWeatherMode }) {
                     className={styles.stateLiveVal}
                     style={{
                       background: m.accent,
-                      color:
-                        weatherMode === 'sunny' || weatherMode === 'snowy'
-                          ? '#1A2B3C'
-                          : '#fff',
+                      color: LIGHT_THEMES.includes(weatherMode) ? '#1A2B3C' : '#fff',
                     }}
                   >
                     {m.emoji}&nbsp;&nbsp;{weatherMode}
                   </span>
                 </div>
               </div>
-
-              {/* 아래 힌트 */}
-              {/* <p className={styles.visualHint}>
-                버튼을 눌러 상태를 바꿔보세요 ↓
-              </p> */}
             </div>
           </div>
         </section>
@@ -311,7 +298,7 @@ function AboutPanel({ isOpen, onClose, weatherMode, setWeatherMode }) {
                 만드는 변화
               </h2>
               <p className={styles.sceneDesc}>
-                날씨 테마 버튼 클릭 하나가 세 가지 연쇄 반응을 일으킵니다.
+                날씨 무드 버튼 클릭 하나가 세 가지 연쇄 반응을 일으킵니다.
                 <br />
                 오른쪽 버튼을 눌러 직접 확인해보세요.
               </p>
@@ -345,27 +332,24 @@ function AboutPanel({ isOpen, onClose, weatherMode, setWeatherMode }) {
               <div className={styles.steps}>
                 <Step num="①" active={stepCount >= 1}>
                   <code>
-                    setWeatherMode(
+                    setTheme(
                     <span style={{ color: m.accent }}>'{weatherMode}'</span>)
                   </code>
                   <span className={styles.stepTag}>setter 호출</span>
                 </Step>
                 <Step num="②" active={stepCount >= 2}>
-                  <span>App.js 리렌더 →</span>
+                  <span>Context 갱신 →</span>
                   <span
                     className={styles.stepBadge}
                     style={{
                       background: m.accent,
-                      color:
-                        weatherMode === 'sunny' || weatherMode === 'snowy'
-                          ? '#1A2B3C'
-                          : '#fff',
+                      color: LIGHT_THEMES.includes(weatherMode) ? '#1A2B3C' : '#fff',
                     }}
                   >
                     <CurrentIcon size={13} strokeWidth={2.1} />
                     {weatherMode}
                   </span>
-                  <span className={styles.stepTag}>상태 갱신</span>
+                  <span className={styles.stepTag}>구독자 리렌더</span>
                 </Step>
                 <Step num="③" active={stepCount >= 3}>
                   <code>
@@ -381,24 +365,25 @@ function AboutPanel({ isOpen, onClose, weatherMode, setWeatherMode }) {
         </section>
 
         {/* ════════════════════════════════════════════════════ */}
-        {/* SCENE 3 — Props 흐름                               */}
+        {/* SCENE 3 — Context 구독 구조                         */}
         {/* ════════════════════════════════════════════════════ */}
         <section data-scene className={styles.scene}>
           <div className={styles.sceneWrap}>
             <div className={styles.sceneText}>
               <p className={styles.sceneNum}>03</p>
-              <h2 className={styles.sceneTitle}>Props 구조</h2>
+              <h2 className={styles.sceneTitle}>구독 구조</h2>
               <p className={styles.sceneDesc}>
-                상태는 <strong>단방향</strong>으로만 흐릅니다. App이 만든
-                weatherMode는 필요한 컴포넌트에만 props로 전달되고, 각
-                컴포넌트는 받은 값에 따라 렌더링합니다.
+                상태는 <strong>Context로 구독</strong>합니다. WeatherProvider가
+                소유한 currentTheme을, 필요한 컴포넌트가{' '}
+                <code className={styles.inlineCode}>useWeather()</code>로 직접
+                꺼내 씁니다.
               </p>
               <div className={styles.legendRow}>
                 <span
                   className={styles.legendDot}
                   style={{ background: m.accent }}
                 />
-                <span className={styles.legendText}>weatherMode 전달 경로</span>
+                <span className={styles.legendText}>useWeather() 구독 경로</span>
               </div>
             </div>
 
@@ -408,114 +393,89 @@ function AboutPanel({ isOpen, onClose, weatherMode, setWeatherMode }) {
                 viewBox="0 0 480 260"
                 aria-hidden="true"
               >
-                {/* ── Lines ── */}
-                {/* App → Header */}
+                {/* ── Provider → 컨텍스트 버스(정적) ── */}
+                <path
+                  d="M 240,47 L 240,84"
+                  fill="none"
+                  stroke={m.accent}
+                  strokeWidth="2"
+                />
+                <path
+                  d="M 90,84 L 392,84"
+                  fill="none"
+                  stroke={m.accent}
+                  strokeWidth="2"
+                  strokeOpacity="0.5"
+                  strokeDasharray="4 4"
+                />
+
+                {/* ── 버스 → 구독자 라인(reveal) ── */}
                 <path
                   className={`${styles.tl} ${styles.tl1}`}
-                  d="M 240,46 C 240,78 100,78 100,110"
-                  fill="none"
-                  stroke={m.accent}
-                  strokeWidth="2"
+                  d="M 90,84 L 90,108"
+                  fill="none" stroke={m.accent} strokeWidth="1.5" strokeOpacity="0.75"
                 />
-                {/* App → HomePage */}
                 <path
                   className={`${styles.tl} ${styles.tl2}`}
-                  d="M 240,46 L 240,110"
-                  fill="none"
-                  stroke={m.accent}
-                  strokeWidth="2"
+                  d="M 240,84 L 240,108"
+                  fill="none" stroke={m.accent} strokeWidth="1.5" strokeOpacity="0.75"
                 />
-                {/* App → OOTDPage */}
                 <path
                   className={`${styles.tl} ${styles.tl3}`}
-                  d="M 240,46 C 240,78 380,78 380,110"
-                  fill="none"
-                  stroke={m.accent}
-                  strokeWidth="2"
+                  d="M 392,84 L 392,108"
+                  fill="none" stroke={m.accent} strokeWidth="1.5" strokeOpacity="0.75"
                 />
-                {/* HomePage → HeroSelector */}
                 <path
                   className={`${styles.tl} ${styles.tl4}`}
-                  d="M 240,148 C 240,178 170,178 170,202"
-                  fill="none"
-                  stroke={m.accent}
-                  strokeWidth="1.5"
-                  strokeOpacity="0.7"
+                  d="M 150,84 L 150,192"
+                  fill="none" stroke={m.accent} strokeWidth="1.5" strokeOpacity="0.55"
                 />
-                {/* HomePage → OutfitCard */}
                 <path
                   className={`${styles.tl} ${styles.tl5}`}
-                  d="M 240,148 C 240,178 320,178 320,202"
-                  fill="none"
-                  stroke={m.accent}
-                  strokeWidth="1.5"
-                  strokeOpacity="0.7"
+                  d="M 330,84 L 330,192"
+                  fill="none" stroke={m.accent} strokeWidth="1.5" strokeOpacity="0.55"
                 />
 
                 {/* ── Nodes ── */}
                 <TreeNode
-                  cx={240}
-                  cy={28}
-                  w={120}
-                  accent={m.accent}
-                  label="App.js"
-                  sub="useState"
+                  cx={240} cy={28} w={208} accent={m.accent}
+                  label="WeatherProvider" sub="currentTheme · setTheme"
                   cls={`${styles.tn} ${styles.tn0}`}
                   tcls={`${styles.tt} ${styles.tt0}`}
                   scls={`${styles.ts} ${styles.ts0}`}
                 />
                 <TreeNode
-                  cx={100}
-                  cy={128}
-                  w={100}
-                  accent={m.accent}
-                  label="Header"
-                  sub="weatherMode"
+                  cx={90} cy={126} w={104} accent={m.accent}
+                  label="Header" sub="useWeather()"
                   cls={`${styles.tn} ${styles.tn1}`}
                   tcls={`${styles.tt} ${styles.tt1}`}
                   scls={`${styles.ts} ${styles.ts1}`}
                 />
                 <TreeNode
-                  cx={240}
-                  cy={128}
-                  w={116}
-                  accent={m.accent}
-                  label="HomePage"
-                  sub="+ setter"
+                  cx={240} cy={126} w={150} accent={m.accent}
+                  label="WeatherSelector" sub="get · set"
                   cls={`${styles.tn} ${styles.tn2}`}
                   tcls={`${styles.tt} ${styles.tt2}`}
                   scls={`${styles.ts} ${styles.ts2}`}
                 />
                 <TreeNode
-                  cx={380}
-                  cy={128}
-                  w={100}
-                  accent={m.accent}
-                  label="OOTDPage"
-                  sub="weatherMode"
+                  cx={392} cy={126} w={116} accent={m.accent}
+                  label="Background" sub="theme"
                   cls={`${styles.tn} ${styles.tn3}`}
                   tcls={`${styles.tt} ${styles.tt3}`}
                   scls={`${styles.ts} ${styles.ts3}`}
                 />
                 <TreeNode
-                  cx={170}
-                  cy={220}
-                  w={110}
-                  accent={m.accent}
-                  label="HeroSelector"
-                  sub="setWeatherMode"
+                  cx={150} cy={210} w={120} accent={m.accent}
+                  label="HomePage" sub="useWeather()"
                   cls={`${styles.tn} ${styles.tn4}`}
                   tcls={`${styles.tt} ${styles.tt4}`}
                   scls={`${styles.ts} ${styles.ts4}`}
                   small
                 />
                 <TreeNode
-                  cx={320}
-                  cy={220}
-                  w={106}
-                  accent={m.accent}
-                  label="OutfitCard"
-                  sub="weatherMode"
+                  cx={330} cy={210} w={150} accent={m.accent}
+                  label="OOTD · Daily …" sub="weatherMode"
                   cls={`${styles.tn} ${styles.tn5}`}
                   tcls={`${styles.tt} ${styles.tt5}`}
                   scls={`${styles.ts} ${styles.ts5}`}
@@ -527,7 +487,7 @@ function AboutPanel({ isOpen, onClose, weatherMode, setWeatherMode }) {
         </section>
 
         {/* ════════════════════════════════════════════════════ */}
-        {/* SCENE 4 — CSS 반응                                  */}
+        {/* SCENE 4 — CSS 변수 반영                             */}
         {/* ════════════════════════════════════════════════════ */}
         <section data-scene className={`${styles.scene} ${styles.sceneLast}`}>
           <div className={styles.sceneWrap}>
@@ -535,10 +495,11 @@ function AboutPanel({ isOpen, onClose, weatherMode, setWeatherMode }) {
               <p className={styles.sceneNum}>04</p>
               <h2 className={styles.sceneTitle}>CSS 변수 반영</h2>
               <p className={styles.sceneDesc}>
-                body의 <strong>theme 클래스</strong> 한 줄이 바뀌면 CSS Custom
-                Properties가 재정의됩니다.{' '}
-                <code className={styles.inlineCode}>var()</code>로 참조하는 모든
-                컴포넌트는 리렌더 없이 새 색상을 입습니다.
+                body의 <strong>theme 클래스</strong> 한 줄이 바뀌면{' '}
+                <code className={styles.inlineCode}>tokens.css</code>의 원시 색이{' '}
+                <code className={styles.inlineCode}>themes.css</code>의 의미 토큰으로
+                재매핑됩니다. <code className={styles.inlineCode}>var()</code>로
+                참조하는 모든 컴포넌트는 리렌더 없이 새 색상으로 적용됩니다.
               </p>
             </div>
 
@@ -589,9 +550,9 @@ function AboutPanel({ isOpen, onClose, weatherMode, setWeatherMode }) {
                   <div className={styles.miniCardShimmer} />
                 </div>
                 <div className={styles.miniCardBody}>
-                  <div className={styles.miniCardTitle}>오늘의 추천</div>
+                  <div className={styles.miniCardTitle}>무드 추천</div>
                   <div className={styles.miniCardSub}>
-                    날씨에 맞는 코디·음식·액티비티
+                    무드에 맞는 코디·음식·액티비티
                   </div>
                   <span
                     className={styles.miniCardTag}
@@ -610,12 +571,12 @@ function AboutPanel({ isOpen, onClose, weatherMode, setWeatherMode }) {
         </section>
 
         {/* ════════════════════════════════════════════════════ */}
-        {/* SCENE 5 — 기술 스택 & 라이브러리                  */}
+        {/* SCENE 5 — 기술 스택 & 엔진                         */}
         {/* ════════════════════════════════════════════════════ */}
         <section data-scene className={`${styles.scene} ${styles.stackScene}`}>
           <div className={styles.stackHeader}>
             <p className={styles.sceneNum}>05</p>
-            <h2 className={styles.stackTitle}>기술 스택 &amp; 라이브러리</h2>
+            <h2 className={styles.stackTitle}>기술 스택 &amp; 엔진</h2>
             <p className={styles.stackSub}>WeatherUp을 만든 기술들</p>
           </div>
 
@@ -629,9 +590,9 @@ function AboutPanel({ isOpen, onClose, weatherMode, setWeatherMode }) {
             </div>
           </div>
 
-          {/* ── 라이브러리 ── */}
+          {/* ── 라이브러리 & 폰트 ── */}
           <div className={styles.stackGroup}>
-            <p className={styles.stackGroupLabel}>Libraries</p>
+            <p className={styles.stackGroupLabel}>Libraries &amp; Fonts</p>
             <div className={styles.stackGrid}>
               {STACK_LIBS.map((item) => (
                 <StackCard key={item.name} item={item} accent={m.accent} />
@@ -639,132 +600,13 @@ function AboutPanel({ isOpen, onClose, weatherMode, setWeatherMode }) {
             </div>
           </div>
 
-          {/* ── 네이티브 API ── */}
+          {/* ── 브라우저 API & 엔진 ── */}
           <div className={styles.stackGroup}>
-            <p className={styles.stackGroupLabel}>
-              Native API &amp; Techniques
-            </p>
+            <p className={styles.stackGroupLabel}>Browser API &amp; 엔진</p>
             <div className={styles.stackGrid}>
-              {STACK_NATIVE.map((item) => (
+              {STACK_ENGINE.map((item) => (
                 <StackCard key={item.name} item={item} accent={m.accent} />
               ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ════════════════════════════════════════════════════ */}
-        {/* SCENE 6 — 로드맵                                    */}
-        {/* ════════════════════════════════════════════════════ */}
-        <section
-          data-scene
-          className={`${styles.scene} ${styles.roadmapScene}`}
-        >
-          <div className={styles.stackHeader}>
-            <p className={styles.sceneNum}>06</p>
-            <h2 className={styles.stackTitle}>개발 로드맵</h2>
-            <p className={styles.stackSub}>WeatherUp의 현재와 다음 단계</p>
-          </div>
-
-          <div className={styles.roadmapGrid}>
-            {/* Phase 1 */}
-            <div className={styles.roadmapPhase}>
-              <div className={styles.roadmapPhaseHeader}>
-                <span className={styles.roadmapBadgeDone}>Phase 1</span>
-                <span className={styles.roadmapPhaseTitle}>
-                  중간고사 · 완료
-                </span>
-              </div>
-              <ul className={styles.roadmapList}>
-                {[
-                  <>
-                    4가지 날씨 모드 버튼 (
-                    <LuSun size={13} strokeWidth={1.9} style={{ verticalAlign: '-2px' }} />
-                    {' '}
-                    <LuCloud size={13} strokeWidth={1.9} style={{ verticalAlign: '-2px' }} />
-                    {' '}
-                    <LuCloudRain size={13} strokeWidth={1.9} style={{ verticalAlign: '-2px' }} />
-                    {' '}
-                    <LuSnowflake size={13} strokeWidth={1.9} style={{ verticalAlign: '-2px' }} />
-                    )
-                  </>,
-                  '정적 데이터 기반 콘텐츠 (weatherData.js)',
-                  'CSS Custom Properties 테마 전환',
-                  '5개 페이지 라우팅 (홈·패션·음식·액티비티·음악)',
-                  'iTunes API 앨범 커버 자동 로딩',
-                  'Canvas API 날씨 배경 애니메이션',
-                  'react-masonry-css Masonry 레이아웃',
-                  'Context API 전역 상태 관리',
-                  'FloatingPlayer 음악 재생 UI',
-                ].map((item, i) => (
-                  <li key={i} className={styles.roadmapItem}>
-                    <span className={styles.roadmapDone}>✓</span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* 구분선 */}
-            <div className={styles.roadmapDivider}>
-              <div
-                className={styles.roadmapDividerLine}
-                style={{ background: m.accent }}
-              />
-              <span className={styles.roadmapArrow} style={{ color: m.accent }}>
-                →
-              </span>
-              <div
-                className={styles.roadmapDividerLine}
-                style={{ background: m.accent }}
-              />
-            </div>
-
-            {/* Phase 2 */}
-            <div className={styles.roadmapPhase}>
-              <div className={styles.roadmapPhaseHeader}>
-                <span className={styles.roadmapBadgeNext}>Phase 2</span>
-                <span className={styles.roadmapPhaseTitle}>
-                  기말고사 · 예정
-                </span>
-              </div>
-              <ul className={styles.roadmapList}>
-                {[
-                  {
-                    text: 'OpenWeatherMap API — 실시간 날씨 자동 감지',
-                    tag: 'API',
-                  },
-                  {
-                    text: 'Geolocation — 현재 위치 기반 날씨 조회',
-                    tag: 'API',
-                  },
-                  { text: '7일 날짜 버튼 — 날짜별 날씨 조회 UI', tag: 'UI' },
-                  { text: 'Kakao Maps — 위치 기반 맛집 추천', tag: 'MAP' },
-                  {
-                    text: 'Google Places — 주변 액티비티 장소 연동',
-                    tag: 'MAP',
-                  },
-                ].map(({ text, tag }) => (
-                  <li key={text} className={styles.roadmapItem}>
-                    <span
-                      className={styles.roadmapNext}
-                      style={{ color: m.accent }}
-                    >
-                      ○
-                    </span>
-                    <span className={styles.roadmapItemText}>{text}</span>
-                    <span
-                      className={styles.roadmapTag}
-                      style={{
-                        color: m.accent,
-                        borderColor: `${m.accent}55`,
-                        background: `${m.accent}14`,
-                      }}
-                    >
-                      {tag}
-                    </span>
-                  </li>
-                ))}
-              </ul>
             </div>
           </div>
         </section>

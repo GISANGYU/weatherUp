@@ -5,7 +5,8 @@
   overflow: hidden;
   transition: transform var(--transition), box-shadow var(--transition), background var(--transition), border-color var(--transition);
   cursor: pointer;
-  display: block;
+  display: flex;
+  flex-direction: column;
   text-decoration: none;
   color: inherit;
 }
@@ -70,6 +71,7 @@
   position: relative;
   aspect-ratio: 1 / 1;
   overflow: hidden;
+  flex: none;
 }
 
 .productImg {
@@ -119,6 +121,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--sp-3);
+  flex: 1 1 auto;
 }
 
 .desc {

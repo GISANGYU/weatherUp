@@ -1,0 +1,33 @@
+.wrapper {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(180deg, #1d2734 0%, #31455e 100%);
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.scene {
+  position: absolute;
+  inset: -30%;
+  transform: rotate(14deg);
+}
+
+.drop {
+  position: absolute;
+  top: -40px;
+  width: 1.5px;
+  height: 32px;
+  background: linear-gradient(transparent, rgba(185, 220, 255, 0.92));
+  animation-name: rainy-fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes rainy-fall {
+  from { transform: translateY(0); }
+  to   { transform: translateY(140vh); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drop { animation: none; opacity: 0; }
+}
