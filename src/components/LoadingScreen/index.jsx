@@ -1,14 +1,19 @@
 import { useEffect, useState } from 'react';
+import {
+  LuSun, LuCloudSun, LuSnowflake, LuHaze,
+  LuCloud, LuCloudRain, LuCloudLightning,
+} from 'react-icons/lu';
 import styles from './LoadingScreen.module.css';
 
+/* 헤더 로고·셀렉터와 동일한 7종 라인 아이콘 + 합의된 네이밍 */
 const ICONS = [
-  { icon: '☀️', label: '맑음',     colorVar: '#FFB800' },
-  { icon: '⛅', label: '구름조금', colorVar: '#9BB8D9' },
-  { icon: '❄️', label: '눈',       colorVar: '#A8C8FF' },
-  { icon: '🌫️', label: '황사',     colorVar: '#B8A888' },
-  { icon: '☁️', label: '흐림',     colorVar: '#B8C5D5' },
-  { icon: '🌧️', label: '비',       colorVar: '#4A9EFF' },
-  { icon: '⚡', label: '뇌우',     colorVar: '#8877F5' },
+  { Icon: LuSun,            label: '맑음', color: '#FFB800' },
+  { Icon: LuCloudSun,       label: '구름', color: '#9BB8D9' },
+  { Icon: LuSnowflake,      label: '눈',   color: '#A8C8FF' },
+  { Icon: LuHaze,           label: '황사', color: '#B8A888' },
+  { Icon: LuCloud,          label: '흐림', color: '#B8C5D5' },
+  { Icon: LuCloudRain,      label: '비',   color: '#4A9EFF' },
+  { Icon: LuCloudLightning, label: '번개', color: '#8877F5' },
 ];
 
 function LoadingScreen({ visible }) {
@@ -36,16 +41,18 @@ function LoadingScreen({ visible }) {
 
         {/* 아이콘 4개 행 */}
         <div className={styles.iconRow}>
-          {ICONS.map(({ icon, label, colorVar }, idx) => {
+          {ICONS.map(({ Icon, label, color }, idx) => {
             const isActive = idx === activeIdx;
             return (
               <div
                 key={label}
                 className={`${styles.iconWrap} ${isActive ? styles.iconActive : ''} ${isActive && flipping ? styles.flipping : ''}`}
-                style={isActive ? { '--glow': colorVar } : {}}
+                style={isActive ? { '--glow': color } : {}}
               >
                 <div className={styles.iconBox}>
-                  <span className={styles.emoji}>{icon}</span>
+                  <span className={styles.emoji} style={{ color }}>
+                    <Icon size={32} strokeWidth={1.9} />
+                  </span>
                 </div>
                 <span className={`${styles.label} ${isActive ? styles.labelActive : ''}`}>
                   {label}

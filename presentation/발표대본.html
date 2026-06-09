@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>WeatherUp — 발표대본 (6분)</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" />
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet" />
+<style>
+  :root{
+    --accent:#FFB800; --ink:#1d2430; --muted:#5b6675;
+    --line:#e7e9ee; --bg:#f7f8fb; --card:#ffffff; --code-bg:#11151c; --code-ink:#e6edf3;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:'Pretendard',system-ui,sans-serif; line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:860px; margin:0 auto; padding:48px 24px 96px;}
+
+  /* 헤더 */
+  .top{text-align:center; padding:32px 0 8px;}
+  .eyebrow{font:700 12px/1.5 ui-monospace,monospace; letter-spacing:.25em; text-transform:uppercase; color:var(--accent);}
+  h1{font-size:clamp(30px,5vw,46px); font-weight:800; letter-spacing:-.02em; margin:.3em 0 .15em;}
+  .sub{color:var(--muted); font-size:16px;}
+  .total{display:inline-block; margin-top:14px; padding:6px 14px; border-radius:999px;
+    background:#fff; border:1px solid var(--line); font-weight:700; font-size:13px;}
+  .total b{color:var(--accent);}
+
+  /* 진행 막대 */
+  .timeline{display:flex; gap:6px; margin:28px 0 8px;}
+  .timeline div{height:6px; border-radius:3px; background:var(--accent); opacity:.85;}
+
+  /* 파트 카드 */
+  .part{background:var(--card); border:1px solid var(--line); border-radius:18px;
+    padding:26px 28px; margin:22px 0; box-shadow:0 10px 30px rgba(20,30,50,.04);}
+  .part-head{display:flex; align-items:baseline; gap:12px; flex-wrap:wrap;
+    border-bottom:1px solid var(--line); padding-bottom:14px; margin-bottom:16px;}
+  .pnum{font:800 13px/1 ui-monospace,monospace; color:#fff; background:var(--ink);
+    padding:7px 9px; border-radius:8px;}
+  .ptitle{font-size:21px; font-weight:800; flex:1;}
+  .ptime{font:700 12px/1 ui-monospace,monospace; color:var(--accent);
+    background:#fff7e3; border:1px solid #ffe6a8; padding:6px 10px; border-radius:999px;}
+
+  .label{font:700 11px/1 ui-monospace,monospace; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--muted); margin:18px 0 8px;}
+  .script{background:#fbfcfe; border-left:3px solid var(--accent); border-radius:8px;
+    padding:14px 16px; color:#2a3340;}
+  .script p{margin:0 0 10px;} .script p:last-child{margin:0;}
+  .q{color:#8a94a3;} /* 군더더기/호흡 표시 */
+
+  ul.points{margin:10px 0 0; padding-left:0; list-style:none;}
+  ul.points li{position:relative; padding-left:22px; margin:7px 0; color:#36404e;}
+  ul.points li::before{content:"▸"; position:absolute; left:0; color:var(--accent); font-weight:800;}
+  ul.points b{color:var(--ink);}
+
+  pre{background:var(--code-bg); color:var(--code-ink); border-radius:12px;
+    padding:14px 16px; overflow:auto; font:13px/1.6 ui-monospace,'SFMono-Regular',monospace; margin:12px 0 0;}
+  .c-kw{color:#ff7b72;} .c-fn{color:#d2a8ff;} .c-str{color:#a5d6ff;} .c-com{color:#8b949e;} .c-var{color:#79c0ff;}
+  code.inline{background:#eef1f6; border:1px solid var(--line); border-radius:6px; padding:1px 6px; font:12.5px ui-monospace,monospace;}
+
+  .why{background:#fffaf0; border:1px solid #ffe6a8; border-radius:12px; padding:14px 16px; margin-top:14px;}
+  .why .label{color:#b9881f; margin-top:0;}
+  .tip{font-size:13px; color:var(--muted); margin-top:10px;}
+  .foot{text-align:center; color:var(--muted); font-size:13px; margin-top:40px;}
+  @media print{ body{background:#fff;} .part{box-shadow:none; break-inside:avoid;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="top">
+    <div class="eyebrow">Presentation Script · 발표대본</div>
+    <h1>WeatherUp</h1>
+    <p class="sub">날씨를 ‘선택하는 무드’로 쓰는 React 라이프스타일 큐레이션 서비스</p>
+    <div class="total">총 분량 <b>약 6분</b> · 6개 파트</div>
+    <div class="timeline">
+      <div style="flex:.5"></div><div style="flex:1.25"></div><div style="flex:1.25"></div>
+      <div style="flex:1.5"></div><div style="flex:1.25"></div><div style="flex:.25"></div>
+    </div>
+  </div>
+
+  <!-- PART 0 -->
+  <section class="part">
+    <div class="part-head">
+      <span class="pnum">00</span>
+      <span class="ptitle">인트로 — 무엇을 만들었나</span>
+      <span class="ptime">0:30</span>
+    </div>
+    <div class="label">대본</div>
+    <div class="script">
+      <p>안녕하세요. 저희 작품 <b>WeatherUp</b>을 소개하겠습니다. 보통 날씨 앱은 ‘오늘 날씨가 어떻다’를 <b>알려주는</b> 도구죠.
+      저희는 발상을 뒤집어서, 날씨를 사용자가 <b>직접 고르는 ‘무드(mood)’</b>로 사용했습니다.</p>
+      <p>맑음·구름·눈·황사·흐림·비·번개 <b>7가지 무드</b> 중 하나를 고르면, 페이지 전체의 색·배경·추천 콘텐츠(패션·음식·액티비티·음악)가
+      한꺼번에 그 무드로 바뀝니다. <span class="q">오늘은 이걸 ‘어떻게 구현했는지’ — 상태관리, 스크롤 애니메이션, 핵심 알고리즘, 그리고 첫 페이지 레이아웃 순서로 말씀드리겠습니다.</span></p>
+    </div>
+  </section>
+
+  <!-- PART 1 -->
+  <section class="part">
+    <div class="part-head">
+      <span class="pnum">01</span>
+      <span class="ptitle">상태 관리 — 한 값이 전부를 결정한다</span>
+      <span class="ptime">1:15</span>
+    </div>
+    <div class="label">대본</div>
+    <div class="script">
+      <p>가장 중요한 설계는 <b>상태 관리</b>입니다. 외부 상태 라이브러리(Redux 등) 없이 React의 <b>Context API</b> 하나로 끝냈습니다.</p>
+      <p><code class="inline">WeatherContext</code>가 <code class="inline">currentTheme</code>이라는 단 하나의 값을 소유하고, <code class="inline">Provider</code>로 앱 전체에 내려줍니다.
+      그리고 <code class="inline">useEffect</code>가 이 값이 바뀔 때마다 <code class="inline">&lt;body&gt;</code>의 클래스를 <code class="inline">theme-맑음</code>처럼 한 줄로 갈아끼웁니다.</p>
+      <p>각 컴포넌트는 props로 값을 ‘전달받는’ 게 아니라, 필요한 곳에서 <code class="inline">useWeather()</code>로 <b>직접 구독</b>합니다. 그래서 깊은 props 전달이 없습니다.
+      음악 재생은 별도의 <code class="inline">MusicContext</code>가 맡아서, 어느 페이지에서 곡을 눌러도 전역 플레이어가 이어서 재생합니다.</p>
+    </div>
+    <pre><span class="c-com">// WeatherContext.jsx — 상태의 소유</span>
+<span class="c-kw">const</span> [currentTheme, setTheme] = <span class="c-fn">useState</span>(<span class="c-str">'sunny'</span>);
+
+<span class="c-com">// 값이 바뀌면 body 클래스 한 줄만 교체 → 전체 테마 전환</span>
+<span class="c-fn">useEffect</span>(() => {
+  document.body.classList.remove(...ALL_THEME_CLASSES);
+  document.body.classList.add(<span class="c-str">`theme-${currentTheme}`</span>);
+}, [currentTheme]);</pre>
+    <ul class="points">
+      <li><b>단일 책임</b> — 화면 전체의 변화 트리거가 <code class="inline">currentTheme</code> 하나로 모임 → 디버깅·추적 쉬움</li>
+      <li><b>단방향 흐름</b> — Provider가 소유 → <code class="inline">useWeather()</code> 구독 → setter로만 변경</li>
+      <li><b>관심사 분리</b> — 날씨(WeatherContext) / 음악(MusicContext) 두 컨텍스트로 분리</li>
+    </ul>
+  </section>
+
+  <!-- PART 2 -->
+  <section class="part">
+    <div class="part-head">
+      <span class="pnum">02</span>
+      <span class="ptitle">스크롤 애니메이션</span>
+      <span class="ptime">1:15</span>
+    </div>
+    <div class="label">대본</div>
+    <div class="script">
+      <p>스크롤 연출에는 <b>IntersectionObserver</b>를 핵심으로 썼습니다. <code class="inline">scroll</code> 이벤트를 매 프레임 듣는 대신,
+      요소가 <b>화면에 들어오는 순간만</b> 브라우저가 알려주기 때문에 성능에 유리합니다.</p>
+      <p><code class="inline">useScrollFade</code> 훅은 요소가 보이면 <code class="inline">visible</code> 상태를 켜고 <b>바로 관찰을 해제</b>합니다 — 한 번만 페이드인하면 되니까요.
+      About 패널은 이 관찰에 <b>지연(delay)을 단계별로 줘서</b> 위에서부터 차례로 나타나는 ‘스토리텔링’ 효과를 만들었습니다.</p>
+      <p>헤더는 스크롤이 화면 높이의 <b>70%</b>를 넘으면 7무드 미니 셀렉터 띠가 스르륵 등장하고, 홈의 패션 섹션은 <b>scroll-snap</b> 가로 캐러셀에
+      오른쪽 <code class="inline">mask-image</code> 페이드를 입혀 ‘옆에 더 있다’는 느낌을 줍니다. 모든 모션은 <code class="inline">prefers-reduced-motion</code>에서 꺼집니다.</p>
+    </div>
+    <pre><span class="c-com">// useScrollFade — 한 번 보이면 관찰 해제(1회성)</span>
+<span class="c-kw">const</span> observer = <span class="c-kw">new</span> <span class="c-fn">IntersectionObserver</span>(([entry]) => {
+  <span class="c-kw">if</span> (entry.isIntersecting) {
+    <span class="c-fn">setIsVisible</span>(<span class="c-kw">true</span>);
+    observer.<span class="c-fn">unobserve</span>(el);   <span class="c-com">// 재관찰 비용 제거</span>
+  }
+}, { threshold: <span class="c-var">0.15</span> });</pre>
+    <ul class="points">
+      <li><b>왜 IO인가</b> — scroll 핸들러의 리플로우/과호출 없이 ‘진입 시점’만 콜백</li>
+      <li><b>CSS가 모션 담당</b> — JS는 <code class="inline">visible</code> 클래스만 토글, 실제 트랜지션은 CSS <code class="inline">@keyframes</code>·<code class="inline">transition</code></li>
+      <li>구름 셀렉터의 둥둥 뜨는 효과 등 장식 모션은 순수 <code class="inline">@keyframes</code> + 접근성 대응</li>
+    </ul>
+  </section>
+
+  <!-- PART 3 -->
+  <section class="part">
+    <div class="part-head">
+      <span class="pnum">03</span>
+      <span class="ptitle">핵심 스크립트 / 알고리즘</span>
+      <span class="ptime">1:30</span>
+    </div>
+    <div class="label">대본</div>
+    <div class="script">
+      <p>알고리즘적으로 신경 쓴 곳은 <b>음악 앨범 커버 로딩</b>입니다. 곡 제목으로 <b>iTunes Search API</b>를 호출하는데, 일부 응답이 CORS로 막혀서
+      <b>JSONP</b> 방식으로 우회했습니다. 받아온 커버 URL은 <code class="inline">localStorage</code>에 <b>영속 캐시</b>해서 다음 방문엔 네트워크 요청이 없습니다.</p>
+      <p>같은 곡을 동시에 여러 카드가 요청하면 낭비니까 <b>in-flight 맵</b>으로 진행 중인 요청을 공유(중복 제거)하고, 앱 시작 시 7테마 전체 커버를
+      <b>워커 풀(동시 5개 제한)</b>로 미리 받아둡니다. 한꺼번에 수십 개를 던지지 않고 5개씩 흘려보내 브라우저 연결 한도를 안 넘기게요.</p>
+      <p>로딩 화면은 <b>타이머·커버·이미지</b> 세 가지 Promise를 <code class="inline">AND</code>로 묶어, 셋 다 끝나야(그리고 최소 3초) 사라집니다.
+      Daily 페이지는 카테고리 풀에서 <b>나머지 연산(modulo)</b>으로 아침·한낮·저녁 카드를 순환 선택합니다.</p>
+    </div>
+    <pre><span class="c-com">// 프리패치 — 워커 풀로 동시 요청 5개로 제한</span>
+<span class="c-kw">const</span> CONCURRENCY = <span class="c-var">5</span>;
+<span class="c-kw">async function</span> <span class="c-fn">worker</span>() {
+  <span class="c-kw">while</span> (queue.length) <span class="c-kw">await</span> <span class="c-fn">fetchCover</span>(queue.<span class="c-fn">shift</span>());
+}
+<span class="c-kw">await</span> Promise.<span class="c-fn">all</span>(Array.<span class="c-fn">from</span>({length: CONCURRENCY}, worker));
+
+<span class="c-com">// Daily — 풀을 모듈로로 순환, 저작 데이터 있으면 우선</span>
+ootd: authored?.ootd ?? <span class="c-fn">pick</span>(pool, i % pool.length);</pre>
+    <ul class="points">
+      <li><b>JSONP</b> = CORS 우회 / <b>localStorage</b> = 영속 캐시 / <b>in-flight</b> = 중복 요청 제거</li>
+      <li><b>워커 풀</b> — 동시성 상한으로 네트워크 폭주 방지(생산자-소비자 패턴)</li>
+      <li><b>로딩 게이트</b> — <code class="inline">Promise.all</code> 3종 결합 + 최소 표시시간</li>
+    </ul>
+  </section>
+
+  <!-- PART 4 -->
+  <section class="part">
+    <div class="part-head">
+      <span class="pnum">04</span>
+      <span class="ptitle">HTML · CSS — 첫 페이지를 이렇게 구성한 이유</span>
+      <span class="ptime">1:15</span>
+    </div>
+    <div class="label">대본</div>
+    <div class="script">
+      <p>첫 화면(홈)은 위에서부터 <b>① 풀스크린 히어로 + 무드 셀렉터</b>, 그 아래 <b>② 4개의 에디토리얼 섹션</b>(패션·음식·액티비티·음악)으로 짰습니다.
+      잡지 레이아웃처럼 섹션마다 <b>형태를 다르게</b> 줬어요 — 패션은 잘리는 가로 캐러셀, 음식은 3열 그리드, 액티비티는 가운데가 큰 <b>3장 콜라주</b>, 음악은 좌우 분할.</p>
+      <p>색은 직접 칠하지 않았습니다. <b>2단계 토큰</b>으로, <code class="inline">tokens.css</code>의 원시 색을 <code class="inline">themes.css</code>가 <code class="inline">--bg·--accent·--text</code> 같은
+      <b>의미 토큰</b>으로 매핑하고, 컴포넌트는 <code class="inline">var(--accent)</code>만 참조합니다. 그래서 <code class="inline">&lt;body&gt;</code> 클래스 한 줄만 바뀌면
+      <b>리렌더 없이</b> 7테마 색이 한 번에 새로 적용됩니다.</p>
+      <p>패션 섹션은 일부러 오른쪽을 화면 끝까지 <b>full-bleed</b>로 빼고 <code class="inline">mask</code>로 흐리게 잘랐는데, 이건 ‘<b>옆으로 넘길 수 있다</b>’는 신호(어포던스)를 주기 위한 의도된 구성입니다.</p>
+    </div>
+    <pre><span class="c-com">/* themes.css — 의미 토큰 매핑(2단계 구조) */</span>
+.theme-sunny { --accent: <span class="c-kw">var</span>(--sunny-accent); --bg: <span class="c-kw">var</span>(--sunny-bg); }
+
+<span class="c-com">/* 패션 캐러셀 — 왼쪽은 컨테이너, 오른쪽만 화면 끝까지 + 페이드 */</span>
+.styleRow{
+  display:flex; overflow-x:auto; scroll-snap-type:x mandatory;
+  margin-right: <span class="c-fn">calc</span>(50% - 50vw);
+  -webkit-mask-image: <span class="c-fn">linear-gradient</span>(to right,#fff 82%,transparent);
+}</pre>
+    <div class="why">
+      <div class="label">왜 이렇게 했나</div>
+      <ul class="points">
+        <li><b>토큰 + var()</b> → 7테마 전환 비용이 사실상 0 (클래스 한 줄, 재계산 없음)</li>
+        <li><b>의미 토큰만 참조</b> → 컴포넌트는 실제 색을 모름 → 테마 추가·수정이 안전</li>
+        <li><b>섹션별 다른 형태</b> → 단조로움 제거, 잡지 같은 ‘에디토리얼’ 리듬</li>
+        <li><b>트립틱 콜라주</b> = 12칼럼 grid + <code class="inline">z-index</code> 겹침 + 세로 중앙정렬로 비대칭 강조</li>
+        <li><b>카드 호버</b> = <code class="inline">overflow:hidden</code> + <code class="inline">transform: scale</code>(GPU 가속)으로 부드러운 줌</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- PART 5 -->
+  <section class="part">
+    <div class="part-head">
+      <span class="pnum">05</span>
+      <span class="ptitle">마무리</span>
+      <span class="ptime">0:15</span>
+    </div>
+    <div class="label">대본</div>
+    <div class="script">
+      <p>정리하면, <b>Context 하나</b>가 상태를 쥐고 → <b>CSS 변수</b>가 색을 바꾸고 → <b>IntersectionObserver와 순수 CSS</b>가 움직임을 담당하는 구조입니다.
+      외부 의존을 최소화하면서도 7개의 무드를 매끄럽게 전환하는 데 집중했습니다. 감사합니다.</p>
+    </div>
+    <p class="tip">💡 발표 팁: 파트 01·04에서 실제 화면을 띄워 무드 버튼을 눌러 ‘색이 즉시 바뀌는’ 장면을 보여주면 가장 임팩트가 큽니다.</p>
+  </section>
+
+  <div class="foot">WeatherUp · 발표대본 (약 6분) — 인쇄: <code class="inline">Ctrl/Cmd + P</code></div>
+</div>
+</body>
+</html>

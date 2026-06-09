@@ -287,12 +287,43 @@
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
-  /* 오른쪽 끝으로 갈수록 점점 투명 — 넘어간 2번 카드가 부드럽게 사라지게.
+  cursor: grab;
+  user-select: none;
+  touch-action: pan-y;
+  /* 오른쪽 끝으로 갈수록 점점 투명 — 넘어간 카드가 부드럽게 사라지게.
      마스크는 #fff(보임)→transparent(사라짐) 이어야 alpha/luminance 모드 양쪽에서 안전 */
   -webkit-mask-image: linear-gradient(to right, #fff 0, #fff 82%, transparent 99%);
           mask-image: linear-gradient(to right, #fff 0, #fff 82%, transparent 99%);
 }
 .styleRow::-webkit-scrollbar { display: none; }
+.styleRow:active { cursor: grabbing; }
+
+/* 캐러셀 래퍼 + 좌우 슬라이드 버튼 */
+.styleCarousel { position: relative; }
+.navBtn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  font-size: 24px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.14);
+  transition: transform var(--transition), background var(--transition), color var(--transition);
+}
+.navBtn:hover { background: var(--accent); color: #fff; transform: translateY(-50%) scale(1.06); }
+/* 섹션 컨테이너 바깥(좌우 여백)으로 배치 */
+.navPrev { left: -40px; }
+.navNext { right: -40px; }
 
 .slide {
   display: block;
@@ -623,6 +654,8 @@
 @media (max-width: 768px) {
   .sections { gap: var(--sp-16); width: calc(100% - 2 * var(--sp-8)); }
   .slide { flex: 0 0 86%; aspect-ratio: 21 / 9; }
+  .navPrev { left: 8px; }
+  .navNext { right: 8px; }
   .cuisineGrid { grid-template-columns: 1fr; }
   .collage { display: flex; flex-direction: column; }
   .colLeft, .colCenter, .colRight { margin: 0; }

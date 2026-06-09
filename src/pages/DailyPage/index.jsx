@@ -37,7 +37,6 @@ function DailyPage({ weatherMode }) {
         {schedule.map(slot => (
           <section key={slot.key} className={styles.slot}>
             <div className={styles.slotHead}>
-              <span className={styles.slotIcon}>{slot.icon}</span>
               <div className={styles.slotLabels}>
                 <h2 className={styles.slotLabel}>{slot.label}</h2>
                 <span className={styles.slotMeta}>{slot.ko} · {slot.range}</span>

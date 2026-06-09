@@ -1,4 +1,4 @@
-import { useMemo }          from 'react';
+import { useMemo, useRef, useEffect } from 'react';
 import { Link }             from 'react-router-dom';
 import weatherData          from '../../data/weatherData';
 import { getCardVisuals }   from '../../data/cardVisuals';
@@ -45,6 +45,76 @@ function HomePage() {
 
   const playTrack = (t) => play(t.id, t.link, { title: t.title, artist: t.artist, emoji: t.emoji });
 
+  /* STYLE 캐러셀 — 카드 3벌 복제로 진짜 무한 슬라이드 + 드래그 */
+  const styleCards = ootd.slice(0, 4);
+  const rowRef = useRef(null);
+  const setWRef = useRef(0);   /* 한 벌(4카드) 너비(px) */
+  const drag = useRef({ down: false, startX: 0, startScroll: 0, moved: false });
+
+  /* 가운데 벌 [setW, 2·setW) 범위로 스크롤 위치를 보정(보이지 않는 점프) */
+  const loopNormalize = () => {
+    const el = rowRef.current;
+    const setW = setWRef.current;
+    if (!el || !setW) return;
+    if (el.scrollLeft >= 2 * setW) el.scrollLeft -= setW;
+    else if (el.scrollLeft < setW) el.scrollLeft += setW;
+  };
+
+  /* 한 벌 너비 측정 + 가운데 벌에서 시작 (테마/카드 변경·리사이즈 시 갱신) */
+  useEffect(() => {
+    const el = rowRef.current;
+    if (!el) return;
+    const measure = (reset) => {
+      const card = el.firstElementChild;
+      if (!card) return;
+      setWRef.current = (card.offsetWidth + 24 /* gap(sp-6) */) * styleCards.length;
+      if (reset) el.scrollLeft = setWRef.current;
+      else loopNormalize();
+    };
+    measure(true);
+    const onResize = () => measure(false);
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [contentTheme, styleCards.length]);
+
+  const slideBy = (dir) => {
+    const el = rowRef.current;
+    if (!el) return;
+    const card = el.firstElementChild;
+    const step = card ? card.offsetWidth + 24 : el.clientWidth * 0.6;
+    loopNormalize();                                  /* 먼저 가운데 벌로 보정 */
+    el.scrollBy({ left: dir * step, behavior: 'smooth' });
+  };
+
+  const onPointerDown = (e) => {
+    const el = rowRef.current;
+    if (!el) return;
+    drag.current = { down: true, startX: e.clientX, startScroll: el.scrollLeft, moved: false };
+    el.setPointerCapture?.(e.pointerId);
+  };
+  const onPointerMove = (e) => {
+    const el = rowRef.current;
+    if (!el || !drag.current.down) return;
+    const dx = e.clientX - drag.current.startX;
+    if (Math.abs(dx) > 4) drag.current.moved = true;
+    el.scrollLeft = drag.current.startScroll - dx;
+  };
+  const endDrag = (e) => {
+    const el = rowRef.current;
+    if (drag.current.down) el?.releasePointerCapture?.(e.pointerId);
+    drag.current.down = false;
+    loopNormalize();                                  /* 드래그 끝나면 가운데 벌로 보정 */
+  };
+  /* 드래그 직후의 클릭(Link 이동)은 취소 */
+  const onClickCapture = (e) => {
+    if (drag.current.moved) {
+      e.preventDefault();
+      e.stopPropagation();
+      drag.current.moved = false;
+    }
+  };
+
   return (
     <div>
 
@@ -68,21 +138,46 @@ function HomePage() {
         <section className={styles.section}>
           <SectionHead eyebrow="STYLE" title={messages.ootd.title} to="/ootd" />
 
-          <div className={styles.styleRow}>
-            {ootd.slice(0, 2).map((item, i) => (
-              <Link key={item.id} to="/ootd" className={styles.slide}>
-                <div className={styles.media} style={{ background: mediaBg(item, contentTheme) }} />
-                <div className={styles.slideOverlay}>
-                  <div className={styles.slideInner}>
-                    <span className={styles.slideEyebrow}>
-                      {i === 0 ? 'Featured Spread' : (item.brand || item.keywords?.[0])}
-                    </span>
-                    <h3 className={styles.slideTitle}>{item.title}</h3>
-                    <span className={styles.slideBtn}>룩 보기 →</span>
-                  </div>
-                </div>
-              </Link>
-            ))}
+          <div className={styles.styleCarousel}>
+            <div
+              ref={rowRef}
+              className={styles.styleRow}
+              onPointerDown={onPointerDown}
+              onPointerMove={onPointerMove}
+              onPointerUp={endDrag}
+              onPointerLeave={endDrag}
+              onClickCapture={onClickCapture}
+            >
+              {[0, 1, 2].map((copy) =>
+                styleCards.map((item, i) => (
+                  <Link key={`${item.id}-${copy}`} to="/ootd" className={styles.slide} draggable={false}>
+                    <div className={styles.media} style={{ background: mediaBg(item, contentTheme) }} />
+                    <div className={styles.slideOverlay}>
+                      <div className={styles.slideInner}>
+                        <span className={styles.slideEyebrow}>
+                          {i === 0 ? 'Featured Spread' : (item.brand || item.keywords?.[0])}
+                        </span>
+                        <h3 className={styles.slideTitle}>{item.title}</h3>
+                        <span className={styles.slideBtn}>룩 보기 →</span>
+                      </div>
+                    </div>
+                  </Link>
+                ))
+              )}
+            </div>
+
+            <button
+              type="button"
+              className={`${styles.navBtn} ${styles.navPrev}`}
+              onClick={() => slideBy(-1)}
+              aria-label="이전"
+            >‹</button>
+            <button
+              type="button"
+              className={`${styles.navBtn} ${styles.navNext}`}
+              onClick={() => slideBy(1)}
+              aria-label="다음"
+            >›</button>
           </div>
         </section>
 
